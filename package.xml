@@ -17,7 +17,7 @@
   <email>mike@maintainable.com</email>
   <active>yes</active>
  </lead>
- <date>2017-03-20</date>
+ <date>2017-10-17</date>
  <version>
   <release>2.3.1</release>
   <api>1.3.0</api>
@@ -32,13 +32,6 @@
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
-   <dir name="doc">
-    <dir name="Horde">
-     <dir name="Log">
-      <file name="COPYING" role="doc" />
-     </dir> <!-- /doc/Horde/Log -->
-    </dir> <!-- /doc/Horde -->
-   </dir> <!-- /doc -->
    <dir name="lib">
     <dir name="Horde">
      <dir name="Log">
@@ -99,6 +92,7 @@
      </dir> <!-- /test/Horde/Log -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
+   <file name="LICENSE" role="doc" />
   </dir> <!-- / -->
  </contents>
  <dependencies>
@@ -162,17 +156,15 @@
  </dependencies>
  <phprelease>
   <filelist>
-   <install as="COPYING" name="doc/Horde/Log/COPYING" />
    <install as="Horde/Log.php" name="lib/Horde/Log.php" />
    <install as="Horde/Log/Exception.php" name="lib/Horde/Log/Exception.php" />
    <install as="Horde/Log/Filter.php" name="lib/Horde/Log/Filter.php" />
-   <install as="Horde/Log/Formatter.php" name="lib/Horde/Log/Formatter.php" />
-   <install as="Horde/Log/Logger.php" name="lib/Horde/Log/Logger.php" />
    <install as="Horde/Log/Filter/Constraint.php" name="lib/Horde/Log/Filter/Constraint.php" />
    <install as="Horde/Log/Filter/ExactLevel.php" name="lib/Horde/Log/Filter/ExactLevel.php" />
    <install as="Horde/Log/Filter/Level.php" name="lib/Horde/Log/Filter/Level.php" />
    <install as="Horde/Log/Filter/Message.php" name="lib/Horde/Log/Filter/Message.php" />
    <install as="Horde/Log/Filter/Suppress.php" name="lib/Horde/Log/Filter/Suppress.php" />
+   <install as="Horde/Log/Formatter.php" name="lib/Horde/Log/Formatter.php" />
    <install as="Horde/Log/Formatter/Cli.php" name="lib/Horde/Log/Formatter/Cli.php" />
    <install as="Horde/Log/Formatter/Simple.php" name="lib/Horde/Log/Formatter/Simple.php" />
    <install as="Horde/Log/Formatter/Xml.php" name="lib/Horde/Log/Formatter/Xml.php" />
@@ -184,10 +176,10 @@
    <install as="Horde/Log/Handler/Scribe.php" name="lib/Horde/Log/Handler/Scribe.php" />
    <install as="Horde/Log/Handler/Stream.php" name="lib/Horde/Log/Handler/Stream.php" />
    <install as="Horde/Log/Handler/Syslog.php" name="lib/Horde/Log/Handler/Syslog.php" />
+   <install as="Horde/Log/Logger.php" name="lib/Horde/Log/Logger.php" />
+   <install as="LICENSE" name="LICENSE" />
    <install as="Horde/Log/AllTests.php" name="test/Horde/Log/AllTests.php" />
    <install as="Horde/Log/bootstrap.php" name="test/Horde/Log/bootstrap.php" />
-   <install as="Horde/Log/LogTest.php" name="test/Horde/Log/LogTest.php" />
-   <install as="Horde/Log/phpunit.xml" name="test/Horde/Log/phpunit.xml" />
    <install as="Horde/Log/Filter/ChainingTest.php" name="test/Horde/Log/Filter/ChainingTest.php" />
    <install as="Horde/Log/Filter/ConstraintTest.php" name="test/Horde/Log/Filter/ConstraintTest.php" />
    <install as="Horde/Log/Filter/ExactLevelTest.php" name="test/Horde/Log/Filter/ExactLevelTest.php" />
@@ -199,6 +191,8 @@
    <install as="Horde/Log/Handler/FirebugTest.php" name="test/Horde/Log/Handler/FirebugTest.php" />
    <install as="Horde/Log/Handler/NullTest.php" name="test/Horde/Log/Handler/NullTest.php" />
    <install as="Horde/Log/Handler/StreamTest.php" name="test/Horde/Log/Handler/StreamTest.php" />
+   <install as="Horde/Log/LogTest.php" name="test/Horde/Log/LogTest.php" />
+   <install as="Horde/Log/phpunit.xml" name="test/Horde/Log/phpunit.xml" />
   </filelist>
  </phprelease>
  <changelog>
@@ -455,7 +449,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-03-20</date>
+   <date>2017-10-17</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
 * 
