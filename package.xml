@@ -17,7 +17,7 @@
   <email>mike@maintainable.com</email>
   <active>yes</active>
  </lead>
- <date>2017-03-20</date>
+ <date>2017-10-30</date>
  <version>
   <release>2.3.1</release>
   <api>1.3.0</api>
@@ -35,6 +35,7 @@
    <dir name="doc">
     <dir name="Horde">
      <dir name="Log">
+      <file name="CHANGES" role="doc" />
       <file name="COPYING" role="doc" />
      </dir> <!-- /doc/Horde/Log -->
     </dir> <!-- /doc/Horde -->
@@ -162,6 +163,7 @@
  </dependencies>
  <phprelease>
   <filelist>
+   <install as="CHANGES" name="doc/Horde/Log/CHANGES" />
    <install as="COPYING" name="doc/Horde/Log/COPYING" />
    <install as="Horde/Log.php" name="lib/Horde/Log.php" />
    <install as="Horde/Log/Exception.php" name="lib/Horde/Log/Exception.php" />
@@ -455,7 +457,7 @@
    <stability>
     <release>stable</release>
     <api>stable</api></stability>
-   <date>2017-03-20</date>
+   <date>2017-10-30</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
 * 
