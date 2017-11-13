@@ -8,16 +8,16 @@ type: library
 homepage: https://www.horde.org/libraries/Horde_Log
 authors:
   -
-    name: Chuck Hagenbuch
-    user: chuck
-    email: chuck@horde.org
-    active: true
-    role: lead
-  -
     name: Mike Naberezny
     user: mnaberez
     email: mike@maintainable.com
     active: true
+    role: lead
+  -
+    name: Chuck Hagenbuch
+    user: chuck
+    email: chuck@horde.org
+    active: false
     role: lead
 version:
   release: 2.3.1
