@@ -96,7 +96,6 @@
       <file name="AllTests.php" role="test" />
       <file name="bootstrap.php" role="test" />
       <file name="LogTest.php" role="test" />
-      <file name="phpunit.xml" role="test" />
      </dir> <!-- /test/Horde/Log -->
     </dir> <!-- /test/Horde -->
    </dir> <!-- /test -->
@@ -189,7 +188,6 @@
    <install as="Horde/Log/AllTests.php" name="test/Horde/Log/AllTests.php" />
    <install as="Horde/Log/bootstrap.php" name="test/Horde/Log/bootstrap.php" />
    <install as="Horde/Log/LogTest.php" name="test/Horde/Log/LogTest.php" />
-   <install as="Horde/Log/phpunit.xml" name="test/Horde/Log/phpunit.xml" />
    <install as="Horde/Log/Filter/ChainingTest.php" name="test/Horde/Log/Filter/ChainingTest.php" />
    <install as="Horde/Log/Filter/ConstraintTest.php" name="test/Horde/Log/Filter/ConstraintTest.php" />
    <install as="Horde/Log/Filter/ExactLevelTest.php" name="test/Horde/Log/Filter/ExactLevelTest.php" />
