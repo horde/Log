@@ -1,23 +1,23 @@
 {
     "name": "horde/log",
-    "description": "Horde Logging library",
+    "description": "Logging library",
     "type": "library",
-    "homepage": "https://pear.horde.org",
+    "homepage": "https://www.horde.org/libraries/Horde_Log",
     "license": "BSD-2-Clause",
     "authors": [
-        {
-            "name": "Chuck Hagenbuch",
-            "email": "chuck@horde.org",
-            "role": "lead"
-        },
         {
             "name": "Mike Naberezny",
             "email": "mike@maintainable.com",
             "role": "lead"
+        },
+        {
+            "name": "Chuck Hagenbuch",
+            "email": "chuck@horde.org",
+            "role": "lead"
         }
     ],
     "version": "2.3.1",
-    "time": "2017-03-20",
+    "time": "2017-11-14",
     "repositories": [
         {
             "type": "pear",
