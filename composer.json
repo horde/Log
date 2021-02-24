@@ -1,48 +1,48 @@
 {
     "name": "horde/log",
     "description": "Logging library",
-    "type": "library",
+    "type": "horde-library",
     "homepage": "https://www.horde.org/libraries/Horde_Log",
     "license": "BSD-2-Clause",
     "authors": [
         {
-            "name": "Chuck Hagenbuch",
-            "email": "chuck@horde.org",
-            "role": "lead"
-        },
-        {
             "name": "Mike Naberezny",
             "email": "mike@maintainable.com",
             "role": "lead"
+        },
+        {
+            "name": "Chuck Hagenbuch",
+            "email": "chuck@horde.org",
+            "role": "lead"
         }
     ],
-    "version": "2.3.1",
-    "time": "2017-11-11",
+    "version": "3.0.0alpha1",
+    "time": "2021-02-24",
     "repositories": [
         {
-            "type": "pear",
-            "url": "https://pear.horde.org"
+            "type": "composer",
+            "url": "https://horde-satis.maintaina.com/"
         }
     ],
     "require": {
+        "horde/horde-installer-plugin": "*",
         "php": "^5.3 || ^7",
-        "pear-pear.horde.org/Horde_Constraint": "^2",
-        "pear-pear.horde.org/Horde_Exception": "^2",
-        "pear-pear.horde.org/Horde_Util": "^2"
+        "horde/constraint": "^2",
+        "horde/exception": "^2",
+        "horde/util": "^2"
     },
     "suggest": {
-        "pear-pear.horde.org/Horde_Cli": "^2",
-        "pear-pear.horde.org/Horde_Scribe": "^2",
-        "pear-pear.horde.org/Horde_Test": "^2.1",
+        "horde/cli": "^2",
+        "horde/scribe": "^2",
+        "horde/test": "^2.1",
         "ext-dom": "*"
-    },
-    "replace": {
-        "pear-pear.horde.org/Horde_Log": "2.*",
-        "pear-horde/Horde_Log": "2.*"
     },
     "autoload": {
         "psr-0": {
             "Horde_Log": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Log\\": "src/"
         }
     }
 }
