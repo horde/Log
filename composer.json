@@ -26,15 +26,15 @@
     ],
     "require": {
         "horde/horde-installer-plugin": "*",
-        "php": "^5.3 || ^7",
-        "horde/constraint": "^2",
-        "horde/exception": "^2",
-        "horde/util": "^2"
+        "php": "^7",
+        "horde/constraint": "^3",
+        "horde/exception": "^3",
+        "horde/util": "^3"
     },
     "suggest": {
-        "horde/cli": "^2",
-        "horde/scribe": "^2",
-        "horde/test": "^2.1",
+        "horde/cli": "^3",
+        "horde/scribe": "^3",
+        "horde/test": "^3",
         "ext-dom": "*"
     },
     "autoload": {
