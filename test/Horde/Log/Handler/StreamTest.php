@@ -13,6 +13,10 @@
  * @package    Log
  * @subpackage UnitTests
  */
+namespace Horde\Log\Handler;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log_Handler_Stream;
+use \Horde_Log;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,23 +26,18 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Handler_StreamTest extends PHPUnit_Framework_TestCase
+class StreamTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
     }
 
     public function testConstructorThrowsWhenResourceIsNotStream()
     {
+        $this->expectException('Horde_Log_Exception');
         $resource = xml_parser_create();
-        try {
-            new Horde_Log_Handler_Stream($resource);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/not a stream/i', $e->getMessage());
-        }
+        new Horde_Log_Handler_Stream($resource);
         xml_parser_free($resource);
     }
 
@@ -55,37 +54,22 @@ class Horde_Log_Handler_StreamTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsWhenModeSpecifiedForExistingStream()
     {
+        $this->expectException('Horde_Log_Exception');
         $stream = fopen('php://memory', 'a');
-        try {
-            new Horde_Log_Handler_Stream($stream, 'w');
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/existing stream/i', $e->getMessage());
-        }
+        new Horde_Log_Handler_Stream($stream, 'w');
     }
 
     public function testConstructorThrowsWhenStreamCannotBeOpened()
     {
-        try {
-            new Horde_Log_Handler_Stream('');
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/cannot be opened/i', $e->getMessage());
-        }
+        $this->expectException('Horde_Log_Exception');
+        new Horde_Log_Handler_Stream('');
     }
 
     public function testSettingBadOptionThrows()
     {
-        try {
-            $handler = new Horde_Log_Handler_Stream('php://memory');
-            $handler->setOption('foo', 42);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/unknown option/i', $e->getMessage());
-        }
+        $this->expectException('Horde_Log_Exception');
+        $handler = new Horde_Log_Handler_Stream('php://memory');
+        $handler->setOption('foo', 42);
     }
 
     public function testWrite()
@@ -104,22 +88,16 @@ class Horde_Log_Handler_StreamTest extends PHPUnit_Framework_TestCase
 
         $date = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}-\d{2}:\d{2}';
 
-        $this->assertRegExp("/$date $levelName: $message/", $contents);
+        $this->assertMatchesRegularExpression("/$date $levelName: $message/", $contents);
     }
 
     public function testWriteThrowsWhenStreamWriteFails()
     {
+        $this->expectException('Horde_Log_Exception');
         $stream = fopen('php://memory', 'a');
         $handler = new Horde_Log_Handler_Stream($stream);
         fclose($stream);
-
-        try {
-            $handler->write(array('message' => 'foo', 'level' => 1));
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/unable to write/i', $e->getMessage());
-        }
+        $handler->write(array('message' => 'foo', 'level' => 1));
     }
 
 }

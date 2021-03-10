@@ -13,6 +13,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
+namespace Horde\Log\Handler;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log_Handler_Null;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,7 +25,7 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Handler_NullTest extends PHPUnit_Framework_TestCase
+class NullTest extends TestCase
 {
     public function testWrite()
     {
