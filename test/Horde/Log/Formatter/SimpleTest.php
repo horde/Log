@@ -13,6 +13,10 @@
  * @package    Log
  * @subpackage UnitTests
  */
+namespace Horde\Log;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log;
+use \Horde_Log_Formatter_Simple;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,17 +26,12 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
+class SimpleTest extends TestCase
 {
     public function testConstructorThrowsOnBadFormatString()
     {
-        try {
-            new Horde_Log_Formatter_Simple(1);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('InvalidArgumentException', $e);
-            $this->assertRegExp('/must be a string/i', $e->getMessage());
-        }
+        $this->expectException('InvalidArgumentException');    
+        new Horde_Log_Formatter_Simple(1);
     }
 
     public function testDefaultFormat()
@@ -42,7 +41,7 @@ class Horde_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
                                  'level' => $level = Horde_Log::ALERT,
                                  'levelName' => $levelName = 'ALERT'));
 
-        $this->assertContains($message, $line);
-        $this->assertContains($levelName, $line);
+        $this->assertStringContainsString($message, $line);
+        $this->assertStringContainsString($levelName, $line);
     }
 }

@@ -13,6 +13,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
+namespace Horde\Log\Filter;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log_Filter_Message;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,17 +25,13 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
+class MessageTest extends TestCase
 {
 
     public function testMessageFilterRecognizesInvalidRegularExpression()
     {
-        try {
-            $filter = new Horde_Log_Filter_Message('invalid regexp');
-            $this->fail();
-        } catch (InvalidArgumentException $e) {
-            $this->assertRegexp('/invalid reg/i', $e->getMessage());
-        }
+        $this->expectException('InvalidArgumentException');
+        new Horde_Log_Filter_Message('invalid regexp');
     }
 
     public function testMessageFilter()
