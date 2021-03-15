@@ -45,11 +45,13 @@ class StreamTest extends TestCase
     {
         $stream = fopen('php://memory', 'a');
         new Horde_Log_Handler_Stream($stream);
+        $this->markTestSkipped('No Exception expected.');
     }
 
     public function testConstructorWithValidUrl()
     {
         new Horde_Log_Handler_Stream('php://memory');
+        $this->markTestSkipped('No Exception expected.');
     }
 
     public function testConstructorThrowsWhenModeSpecifiedForExistingStream()
