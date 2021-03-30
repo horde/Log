@@ -13,6 +13,11 @@
  * @package    Log
  * @subpackage UnitTests
  */
+namespace Horde\Log;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log_Handler_Stream;
+use \Horde_Log;
+use \Horde_Log_Logger;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +27,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
+class LogTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
 
@@ -40,7 +45,7 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger->log($message = 'message-to-long', Horde_Log::INFO);
 
         rewind($this->log);
-        $this->assertContains($message, stream_get_contents($this->log));
+        $this->assertStringContainsString($message, stream_get_contents($this->log));
     }
 
     public function testaddHandler()
@@ -50,7 +55,7 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger->log($message = 'message-to-log', Horde_Log::INFO);
 
         rewind($this->log);
-        $this->assertContains($message, stream_get_contents($this->log));
+        $this->assertStringContainsString($message, stream_get_contents($this->log));
     }
 
     public function testaddHandlerAddsMultipleHandlers()
@@ -72,9 +77,9 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
 
         // verify both handlers were called by the logger
         rewind($log1);
-        $this->assertContains($message, stream_get_contents($log1));
+        $this->assertStringContainsString($message, stream_get_contents($log1));
         rewind($log2);
-        $this->assertContains($message, stream_get_contents($log2));
+        $this->assertStringContainsString($message, stream_get_contents($log2));
 
         // prove the two memory streams are different
         // and both handlers were indeed called
@@ -84,52 +89,32 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
 
     public function testLoggerThrowsWhenNoHandlers()
     {
+        $this->expectException('Horde_Log_Exception');
         $logger = new Horde_Log_Logger();
-        try {
-            $logger->log('message', Horde_Log::INFO);
-            $this->fail();
-        } catch (Horde_Log_Exception $e) {
-            $this->assertRegexp('/no handler/i', $e->getMessage());
-        }
+        $logger->log('message', Horde_Log::INFO);
     }
 
     // Levels
 
     public function testLogThrowsOnBadLogLevel()
     {
+        $this->expectException('Horde_Log_Exception');
         $logger = new Horde_Log_Logger($this->handler);
-        try {
-            $logger->log('foo', 42);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/bad log level/i', $e->getMessage());
-        }
+        $logger->log('foo', 42);
     }
 
     public function testLogThrough__callThrowsOnBadLogLevel()
     {
+        $this->expectException('Horde_Log_Exception');
         $logger = new Horde_Log_Logger($this->handler);
-        try {
-            $logger->nonexistantLevel('');
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/bad log level/i', $e->getMessage());
-        }
+        $logger->nonexistantLevel('');
     }
 
     public function testAddingLevelThrowsWhenOverridingBuiltinLogLevel()
     {
-        try {
-            $logger = new Horde_Log_Logger($this->handler);
-            $logger->addLevel('WARN', 99);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/existing log level/i', $e->getMessage());
-        }
-
+        $this->expectException('Horde_Log_Exception');
+        $logger = new Horde_Log_Logger($this->handler);
+        $logger->addLevel('WARN', 99);
     }
 
     public function testAddLogLevel()
@@ -141,7 +126,7 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
-        $this->assertContains($levelName, $logdata);
-        $this->assertContains($message, $logdata);
+        $this->assertStringContainsString($levelName, $logdata);
+        $this->assertStringContainsString($message, $logdata);
     }
 }

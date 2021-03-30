@@ -13,6 +13,11 @@
  * @package    Log
  * @subpackage UnitTests
  */
+namespace Horde\Log\Handler;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log;
+use \Horde_Log_Handler_Stream;
+use \Horde_Log_Handler_Firebug;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,23 +27,18 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Handler_FirebugTest extends PHPUnit_Framework_TestCase
+class FirebugTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
     }
 
     public function testSettingBadOptionThrows()
     {
-        try {
-            $handler = new Horde_Log_Handler_Stream('php://memory');
-            $handler->setOption('foo', 42);
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/unknown option/i', $e->getMessage());
-        }
+        $this->expectException('Horde_Log_Exception');
+        $handler = new Horde_Log_Handler_Stream('php://memory');
+        $handler->setOption('foo', 42);
     }
 
     public function testWrite()
@@ -55,7 +55,7 @@ class Horde_Log_Handler_FirebugTest extends PHPUnit_Framework_TestCase
 
         $date = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}-\d{2}:\d{2}';
 
-        $this->assertRegExp("/console.error\(\"$date $levelName: $message\"\);/", $contents);
+        $this->assertMatchesRegularExpression("/console.error\(\"$date $levelName: $message\"\);/", $contents);
     }
 
 }

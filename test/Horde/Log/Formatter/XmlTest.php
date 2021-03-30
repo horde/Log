@@ -12,6 +12,9 @@
  * @license  http://www.horde.org/licenses/bsd BSD
  * @package  Log
  */
+namespace Horde\Log\Formatter;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log_Formatter_Xml;
 
 /**
  * @author   Mike Naberezny <mike@maintainable.com>
@@ -20,9 +23,9 @@
  * @license  http://www.horde.org/licenses/bsd BSD
  * @package  Log
  */
-class Horde_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
+class XmlTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
     }
@@ -32,8 +35,8 @@ class Horde_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
         $f = new Horde_Log_Formatter_Xml();
         $line = $f->format(array('message' => $message = 'message', 'level' => $level = 1));
 
-        $this->assertContains($message, $line);
-        $this->assertContains((string)$level, $line);
+        $this->assertStringContainsString($message, $line);
+        $this->assertStringContainsString((string)$level, $line);
     }
 
     public function testXmlDeclarationIsStripped()
@@ -41,7 +44,7 @@ class Horde_Log_Formatter_XmlTest extends PHPUnit_Framework_TestCase
         $f = new Horde_Log_Formatter_Xml();
         $line = $f->format(array('message' => $message = 'message', 'level' => $level = 1));
 
-        $this->assertNotContains('<\?xml version=', $line);
+        $this->assertStringNotContainsString('<\?xml version=', $line);
     }
 
     public function testXmlValidates()

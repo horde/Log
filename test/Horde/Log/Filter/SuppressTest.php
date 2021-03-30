@@ -13,6 +13,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
+namespace Horde\Log\Filter;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log_Filter_Suppress;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +25,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Filter_SuppressTest extends PHPUnit_Framework_TestCase
+class SuppressTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->filter = new Horde_Log_Filter_Suppress();
     }

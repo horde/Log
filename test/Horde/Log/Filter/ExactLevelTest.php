@@ -13,6 +13,11 @@
  * @package    Log
  * @subpackage UnitTests
  */
+namespace Horde\Log;
+use \Filter;
+use \PHPUnit\Framework\TestCase;
+use \Horde_Log_Filter_Level;
+use \Horde_Log_Filter_ExactLevel;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -22,9 +27,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Filter_ExactLevelTest extends PHPUnit_Framework_TestCase
+class ExactLevelTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         // accept at and only at level 2
         $this->filter = new Horde_Log_Filter_ExactLevel(2);
@@ -43,12 +48,7 @@ class Horde_Log_Filter_ExactLevelTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorThrowsOnInvalidLevel()
     {
-        try {
-            new Horde_Log_Filter_Level('foo');
-            $this->fail();
-        } catch (Exception $e) {
-            $this->assertInstanceOf('InvalidArgumentException', $e);
-            $this->assertRegExp('/must be an integer/i', $e->getMessage());
-        }
+        $this->expectException('InvalidArgumentException');
+        new Horde_Log_Filter_Level('foo');
     }
 }
