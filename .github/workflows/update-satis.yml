@@ -55,7 +55,7 @@ jobs:
         php satis/bin/satis build -vvv  maintaina-com.github.io/satis.json maintaina-com.github.io/ horde/log
         cd maintaina-com.github.io
         git add include/ index.html p2/ packages.json
-        git commit -m "Update for horde/log"
+        git commit -m "Update for horde/util"
         git push
 
 

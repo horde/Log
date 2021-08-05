@@ -13,7 +13,7 @@
  * @package    Log
  * @subpackage UnitTests
  */
-namespace Horde\Log;
+namespace Horde\Log\Test;
 use \PHPUnit\Framework\TestCase;
 use \Horde_Log_Handler_Stream;
 use \Horde_Log;
