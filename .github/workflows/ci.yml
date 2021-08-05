@@ -27,8 +27,8 @@ jobs:
     strategy:
       matrix:
         operating-system: ['ubuntu-20.04']
-        php-versions: ['7.4']
-        phpunit-versions: ['latest', '9.5', '9.0']
+        php-versions: ['7.4', '8.0']
+        phpunit-versions: ['latest', '9.5']
     steps:
     - name: Setup github ssh key
       run:  mkdir -p ~/.ssh/ && ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts
@@ -39,7 +39,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ matrix.php-versions }}
-        extensions: bcmath, ctype, curl, dom, gd, gettext, iconv, imagick, json, ldap, mbstring, mysql, opcache, openssl, pcntl, pdo, posix, redis, soap, sockets, sqlite, tokenizer, xmlwriter
+        extensions: bcmath, ctype, curl, dom, gd, gettext, iconv, imagick, json, ldap, mbstring, mysql, intl, opcache, openssl, pcntl, pdo, posix, redis, soap, sockets, sqlite, tokenizer, xmlwriter
         ini-values: post_max_size=512M, max_execution_time=360
         coverage: xdebug
         tools: php-cs-fixer, phpunit:${{ matrix.phpunit-versions }}, composer:v2
@@ -48,7 +48,8 @@ jobs:
     - name: Install horde/test dependency and other dependencies
       run: |
         ## For unclear reasons, github action fails randomly if we do not install before we require.
+        COMPOSER_ROOT_VERSION=dev-FRAMEWORK_6_0 composer config minimum-stability dev
         COMPOSER_ROOT_VERSION=dev-FRAMEWORK_6_0 composer install
         COMPOSER_ROOT_VERSION=dev-FRAMEWORK_6_0 composer require --dev horde/test dev-FRAMEWORK_6_0
     - name: run phpunit
-      run: phpunit --bootstrap test/Horde/Log/bootstrap.php test/Horde/Log/
+      run: phpunit -v --bootstrap test/bootstrap.php

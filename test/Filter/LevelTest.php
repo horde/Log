@@ -13,7 +13,7 @@
  * @package    Log
  * @subpackage UnitTests
  */
-namespace Horde\Log\Filter;
+namespace Horde\Log\Test\Filter;
 use \PHPUnit\Framework\TestCase;
 use \Horde_Log_Filter_Level;
 

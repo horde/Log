@@ -13,8 +13,7 @@
  * @package    Log
  * @subpackage UnitTests
  */
-namespace Horde\Log;
-use \Filter;
+namespace Horde\Log\Test\Filter;
 use \PHPUnit\Framework\TestCase;
 use \Horde_Log;
 use \Horde_Log_Logger;

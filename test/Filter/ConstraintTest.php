@@ -8,8 +8,7 @@
  * @package    Log
  * @subpackage UnitTests
  */
-namespace Horde\Log;
-use \Filter;
+namespace Horde\Log\Test\Filter;
 Use \Horde_Test_Case;
 use \Horde_Log_Filter_Constraint;
 use \Horde_Constraint_AlwaysFalse;
