@@ -17,6 +17,12 @@
   <email>chuck@horde.org</email>
   <active>no</active>
  </lead>
+ <maintainer>
+  <name>Ralf Lang</name>
+  <user>lang</user>
+  <email>lang@b1-systems.de</email>
+  <active>yes</active>
+ </maintainer>
  <date>2021-03-13</date>
  <version>
   <release>3.0.0alpha4</release>
@@ -104,9 +110,9 @@
  <dependencies>
   <required>
    <php>
-    <min>7.0.0</min>
-    <max>8.0.0alpha1</max>
-    <exclude>8.0.0alpha1</exclude>
+    <min>7.4.0</min>
+    <max>9.0.0alpha1</max>
+    <exclude>9.0.0alpha1</exclude>
    </php>
    <pearinstaller>
     <min>1.7.0</min>
