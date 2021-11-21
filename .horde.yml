@@ -38,7 +38,6 @@ dependencies:
   required:
     php: ^7.4 || ^8
     composer:
-      ## Remove when moving constraint to php 8
       php-extended/polyfill-php80-stringable: ^1
       psr/log: ^1
       horde/constraint: ^3

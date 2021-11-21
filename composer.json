@@ -14,9 +14,14 @@
             "name": "Chuck Hagenbuch",
             "email": "chuck@horde.org",
             "role": "lead"
+        },
+        {
+            "name": "Ralf Lang",
+            "email": "lang@b1-systems.de",
+            "role": "maintainer"
         }
     ],
-    "time": "2021-08-05",
+    "time": "2021-11-21",
     "repositories": [
         {
             "type": "composer",
@@ -24,21 +29,30 @@
         }
     ],
     "require": {
-        "php": "^7 || ^8",
-        "horde/constraint": "^3 || dev-FRAMEWORK_6_0",
-        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
-        "horde/util": "^3 || dev-FRAMEWORK_6_0"
+        "php": "^7.4 || ^8",
+        "php-extended/polyfill-php80-stringable": "^1",
+        "psr/log": "^1",
+        "horde/constraint": "^3",
+        "horde/exception": "^3",
+        "horde/util": "^3"
     },
-    "require-dev": {},
+    "require-dev": {
+        "horde/test": "^3",
+        "horde/cli": "^3",
+        "horde/scribe": "^3"
+    },
     "suggest": {
-        "horde/cli": "^3 || dev-FRAMEWORK_6_0",
-        "horde/scribe": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
+        "horde/cli": "^3",
+        "horde/scribe": "^3",
+        "horde/test": "^3",
         "ext-dom": "*"
     },
     "autoload": {
         "psr-0": {
             "Horde_Log": "lib/"
+        },
+        "psr-4": {
+            "Horde\\Log\\": "src/"
         }
     },
     "autoload-dev": {
