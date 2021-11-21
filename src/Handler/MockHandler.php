@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,7 +14,9 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Handler;
+
 use Horde\Log\LogFilter;
 use Horde\Log\LogHandler;
 use Horde\Log\LogMessage;
@@ -35,7 +37,7 @@ class MockHandler extends BaseHandler
      *
      * @var LogMessage[]
      */
-    public $events = array();
+    public $events = [];
 
     /**
      * Was shutdown called?
@@ -56,11 +58,10 @@ class MockHandler extends BaseHandler
     }
 
     /**
-     * Record shutdown
+     * Record shutdown.
      */
     public function shutdown(): void
     {
         $this->shutdown = true;
     }
-
 }

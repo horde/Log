@@ -7,7 +7,9 @@
  * @subpackage Filters
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Filter;
+
 use Horde\Log\LogFilter;
 use Horde\Log\LogMessage;
 use Horde_Constraint_Coupler;
@@ -16,6 +18,7 @@ use Horde_Constraint_And;
 use Horde_Constraint_Not;
 use Horde_Constraint_Null;
 use Horde_Constraint;
+
 /**
  * Filters log events using defined constraints on one or more fields of the
  * $event array.
@@ -36,7 +39,7 @@ class ConstraintFilter implements LogFilter
      *
      * @var Horde_Constraint_Coupler[]
      */
-    protected $constraints = array();
+    protected $constraints = [];
 
     /**
      * Default constraint coupler.
@@ -47,7 +50,7 @@ class ConstraintFilter implements LogFilter
     protected $coupler;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Horde_Constraint_Coupler $coupler  The default kind of
      *                                           constraint to use to couple
@@ -62,7 +65,7 @@ class ConstraintFilter implements LogFilter
     }
 
     /**
-     * Add a constraint to the filter
+     * Add a constraint to the filter.
      *
      * @param string $field                 The field to apply the constraint
      *                                      to.
@@ -82,7 +85,7 @@ class ConstraintFilter implements LogFilter
     }
 
     /**
-     * Add a regular expression to filter by
+     * Add a regular expression to filter by.
      *
      * Takes a field name and a regex, if the regex does not match then the
      * event is filtered.
@@ -99,7 +102,7 @@ class ConstraintFilter implements LogFilter
     }
 
     /**
-     * Add a required field to the filter
+     * Add a required field to the filter.
      *
      * If the field does not exist on the event, then it is filtered.
      *
@@ -115,7 +118,7 @@ class ConstraintFilter implements LogFilter
     }
 
     /**
-     * Adds all arguments passed as required fields
+     * Adds all arguments passed as required fields.
      *
      * @return ConstraintFilter  A reference to $this to allow
      *                                      method chaining.
@@ -137,11 +140,11 @@ class ConstraintFilter implements LogFilter
      *
      * @return bool  accepted?
      */
-    public function accept(LogMessage $event):bool
+    public function accept(LogMessage $event): bool
     {
         $eventArr = array_merge(['message' => $event->message(), 'loglevel' => $event->level()->criticality()], $event->context());
         foreach ($this->constraints as $field => $constraint) {
-            $value = isset($eventArr[$field]) ? $eventArr[$field] : null;
+            $value = $eventArr[$field] ?? null;
             if (!$constraint->evaluate($value)) {
                 return LogFilter::IGNORE;
             }

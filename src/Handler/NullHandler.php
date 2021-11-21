@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,7 +14,9 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Handler;
+
 use Horde\Log\Filter;
 use Horde\Log\LogHandler;
 use Horde\Log\LogMessage;

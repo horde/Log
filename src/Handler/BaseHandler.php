@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,12 +14,15 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Handler;
+
 use Horde\Log\LogFilter;
 use Horde\Log\LogHandler;
 use Horde\Log\LogFormatter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogException;
+
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -35,19 +38,19 @@ abstract class BaseHandler implements LogHandler
      *
      * @var mixed[]
      */
-    protected $options = array(
-        'ident' => ''
-    );
+    protected $options = [
+        'ident' => '',
+    ];
 
     /**
      * List of filters relevant only to this handler.
      *
      * @var LogFilter[]
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
-     * Formatters for this handler
+     * Formatters for this handler.
      *
      * @var LogFormatter[]
      */
@@ -55,7 +58,7 @@ abstract class BaseHandler implements LogHandler
 
     /**
      * Add a filter specific to this handler.
-     * 
+     *
      * Handlers cannot undo the filtering at logger level
      *
      * @param LogFilter $filter  Filter to add.
@@ -67,7 +70,7 @@ abstract class BaseHandler implements LogHandler
 
     /**
      * Log a message to this handler.
-     * 
+     *
      * Check all filters and expand it before delegating to the write method
      *
      * @param LogMessage $event  Log event.
@@ -110,5 +113,4 @@ abstract class BaseHandler implements LogHandler
      * @param LogMessage $event  Log event.
      */
     abstract public function write(LogMessage $event): bool;
-
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -13,6 +13,7 @@
  * @package  Log
  */
 declare(strict_types=1);
+
 namespace Horde\Log;
 
 use Horde\Util\HordeString;
@@ -26,12 +27,11 @@ use Stringable;
  * @category Horde
  * @license  http://www.horde.org/licenses/bsd BSD
  * @package  Log
- *
  */
 class Logger implements LoggerInterface
 {
     /* Serialize version. */
-    const VERSION = 1;
+    public const VERSION = 1;
 
     /**
      * Log levels where the keys are the level priorities and the values are
@@ -46,19 +46,19 @@ class Logger implements LoggerInterface
      *
      * @var LogHandler[]
      */
-    protected $handlers = array();
+    protected $handlers = [];
 
     /**
      * Horde_Log_Filter objects.
      *
      * @var LogFilter[]
      */
-    protected $filters = array();
+    protected $filters = [];
 
     /**
      * Constructor.
      *
-     * @param LogHandler[] $handlers The list of handlers. 
+     * @param LogHandler[] $handlers The list of handlers.
      *                  TODO: Is defaulting to the null handler any better than defaulting to no handler?
      * @param LogLevels|null $levels A list of log levels to operate on. Null initializes with the RFC loglevels
      * @param LogFilter[]  $filters A list of global filters to apply before any log handler. Log handlers may have their own filters
@@ -85,11 +85,11 @@ class Logger implements LoggerInterface
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             self::VERSION,
             $this->filters,
-            $this->handlers
-        ));
+            $this->handlers,
+        ]);
     }
 
     /**
@@ -118,17 +118,17 @@ class Logger implements LoggerInterface
      * $log->levelName('message');
      *   instead of
      * $log->log('message', Horde_Log_LEVELNAME);
-     * </pre>
+     * </pre>.
      *
      * @param string $method  Log level name.
      * @param string|object|stringable $params  Message to log.
      * @param array  $context The context for the message.
      */
-/*    public function __call($method, $params)
-    {
-        TODO: Do we really want to support that mess?
-        We already support the canonic names
-    }*/
+    /*    public function __call($method, $params)
+        {
+            TODO: Do we really want to support that mess?
+            We already support the canonic names
+        }*/
 
     /*
       The Logger methods.
@@ -143,7 +143,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function emergency($message, array $context = array()): void
+    public function emergency($message, array $context = []): void
     {
         $this->log(LogLevel::EMERGENCY, $message, $context);
     }
@@ -159,7 +159,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function alert($message, array $context = array()): void
+    public function alert($message, array $context = []): void
     {
         $this->log(LogLevel::ALERT, $message, $context);
     }
@@ -174,7 +174,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function critical($message, array $context = array()): void
+    public function critical($message, array $context = []): void
     {
         $this->log(LogLevel::CRITICAL, $message, $context);
     }
@@ -188,7 +188,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function error($message, array $context = array()): void
+    public function error($message, array $context = []): void
     {
         $this->log(LogLevel::ERROR, $message, $context);
     }
@@ -204,7 +204,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function warning($message, array $context = array()): void
+    public function warning($message, array $context = []): void
     {
         $this->log(LogLevel::WARNING, $message, $context);
     }
@@ -217,7 +217,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function notice($message, array $context = array()): void
+    public function notice($message, array $context = []): void
     {
         $this->log(LogLevel::NOTICE, $message, $context);
     }
@@ -232,7 +232,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function info($message, array $context = array()): void
+    public function info($message, array $context = []): void
     {
         $this->log(LogLevel::INFO, $message, $context);
     }
@@ -245,7 +245,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function debug($message, array $context = array()): void
+    public function debug($message, array $context = []): void
     {
         $this->log(LogLevel::DEBUG, $message, $context);
     }
@@ -260,7 +260,7 @@ class Logger implements LoggerInterface
      *
      * @throws \Psr\Log\InvalidArgumentException
      */
-    public function log($level, $message, array $context = array()): void
+    public function log($level, $message, array $context = []): void
     {
         $loglevel = null;
         // Error if the requested level is not present
@@ -268,11 +268,9 @@ class Logger implements LoggerInterface
             $this->levels->getByCriticality($level->criticality());
             $this->levels->getByLevelName($level->name());
             $loglevel = $level;
-        }
-        elseif (is_int($level)) {
+        } elseif (is_int($level)) {
             $loglevel = $this->levels->getByCriticality($level);
-        }
-        elseif (is_string($level)) {
+        } elseif (is_string($level)) {
             $loglevel = $this->levels->getByLevelName($level);
         }
         if (is_null($loglevel)) {
@@ -288,16 +286,14 @@ class Logger implements LoggerInterface
         }
 
         // Apply any global prefilters, may reject the message
-        foreach ($this->filters as $filter)
-        {
+        foreach ($this->filters as $filter) {
             if (!$filter->accept($logMessage)) {
                 return;
             }
         }
 
         // Delegate to all registered handlers
-        foreach ($this->handlers as $handler)
-        {
+        foreach ($this->handlers as $handler) {
             // Any processing and interpolation is up to the log handler
             $handler->log($logMessage);
         }

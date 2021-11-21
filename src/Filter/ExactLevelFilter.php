@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * @author     Bryan Alves <bryanalves@gmail.com>
  * @category   Horde
@@ -9,7 +9,9 @@
  * @subpackage Filters
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Filter;
+
 use Horde\Log\LogFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
@@ -60,7 +62,7 @@ class ExactLevelFilter implements LogFilter
     public function accept(LogMessage $event): bool
     {
         $loglevel = $event->level();
-        if ($this->name && ($this->name != $loglevel->name() )) {
+        if ($this->name && ($this->name != $loglevel->name())) {
             return false;
         }
         return $loglevel->criticality() == $this->level;

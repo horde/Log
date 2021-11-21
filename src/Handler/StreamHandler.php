@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,7 +14,9 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Handler;
+
 use Horde\Log\Filter;
 use Horde\Log\Formatter\SimpleFormatter;
 use Horde\Log\LogFormatter;
@@ -32,7 +34,6 @@ use Horde\Log\LogException;
  */
 class StreamHandler extends BaseHandler
 {
-
     /**
      * Holds the PHP stream to log to.
      *
@@ -55,7 +56,7 @@ class StreamHandler extends BaseHandler
     protected $streamOrUrl;
 
     /**
-     * Class Constructor
+     * Class Constructor.
      *
      * @param mixed $streamOrUrl              Stream or URL to open as a
      *                                        stream.
@@ -65,10 +66,12 @@ class StreamHandler extends BaseHandler
      *
      * @throws LogException
      */
-    public function __construct($streamOrUrl, $mode = 'a+',
-                                array $formatters = null)
-    {
-        $this->formatters = $formatters ?? array(new SimpleFormatter());
+    public function __construct(
+        $streamOrUrl,
+        $mode = 'a+',
+        array $formatters = null
+    ) {
+        $this->formatters = $formatters ?? [new SimpleFormatter()];
         $this->mode = $mode;
         $this->streamOrUrl = $streamOrUrl;
 
@@ -94,7 +97,6 @@ class StreamHandler extends BaseHandler
      */
     public function __wakeup()
     {
-        
         if (!($stream = @fopen($this->streamOrUrl, $this->mode, false))) {
             throw new LogException(__CLASS__ . ': "' . $this->streamOrUrl . '" cannot be opened with mode "' . $this->mode . '"');
         }
@@ -125,5 +127,4 @@ class StreamHandler extends BaseHandler
 
         return true;
     }
-
 }

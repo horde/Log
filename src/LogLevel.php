@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -12,12 +12,15 @@
  * @license  http://www.horde.org/licenses/bsd BSD
  */
 declare(strict_types=1);
+
 namespace Horde\Log;
+
 use Horde\Util\HordeString;
 use Psr\Log\LogLevel as PsrLogLevel;
+
 /**
- * Represents a single log level
- * 
+ * Represents a single log level.
+ *
  * @category Horde
  * @package  Log
  * @author  Ralf Lang <lang@b1-systems.de>

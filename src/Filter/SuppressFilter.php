@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,7 +14,9 @@
  * @subpackage Filters
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Filter;
+
 use Horde\Log\LogFilter;
 use Horde\Log\LogMessage;
 
@@ -47,8 +49,8 @@ class SuppressFilter implements LogFilter
     }
 
     /**
-     * Decide if we accept messages
-     * 
+     * Decide if we accept messages.
+     *
      * Returns Horde\Log\Filter::ACCEPT to accept the message,
      * Horde_Log_Filter::IGNORE to ignore it.
      *

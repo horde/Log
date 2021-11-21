@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -10,7 +10,9 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Handler;
+
 use Horde\Log\LogFilter;
 use Horde\Log\LogFormatter;
 use Horde\Log\LogHandler;
@@ -34,24 +36,24 @@ class FirebugHandler extends BaseHandler
      *
      * @var mixed[]
      */
-    protected $options = array(
+    protected $options = [
         'buffering' => false,
-        'ident' => ''
-    );
+        'ident' => '',
+    ];
 
     /**
      * Array of buffered output.
      *
      * @var array[]
      */
-    protected $buffer = array();
+    protected $buffer = [];
 
     /**
      * Mapping of log priorities to Firebug methods.
      *
      * @var string[]
      */
-    protected static $methods = array(
+    protected static $methods = [
         Horde_Log::EMERG   => 'error',
         Horde_Log::ALERT   => 'error',
         Horde_Log::CRIT    => 'error',
@@ -60,10 +62,10 @@ class FirebugHandler extends BaseHandler
         Horde_Log::NOTICE  => 'info',
         Horde_Log::INFO    => 'info',
         Horde_Log::DEBUG   => 'debug',
-    );
+    ];
 
     /**
-     * Class Constructor
+     * Class Constructor.
      *
      * @param LogFormatter[] $formatters  Log formatter.
      */
@@ -110,7 +112,7 @@ class FirebugHandler extends BaseHandler
             return true;
         }
 
-        $output = array();
+        $output = [];
         foreach ($this->buffer as $event) {
             $line = trim($event['message']);
 
@@ -124,9 +126,8 @@ class FirebugHandler extends BaseHandler
             $line = str_replace('"', '\\"', $line);
 
             // Firebug call.
-            $method = isset(self::$methods[$event['level']])
-                ? self::$methods[$event['level']]
-                : 'log';
+            $method = self::$methods[$event['level']]
+                ?? 'log';
             $output[] = 'console.' . $method . '("' . $line . '");';
         }
 
@@ -136,8 +137,7 @@ class FirebugHandler extends BaseHandler
             . "}\n"
             . "</script>\n";
 
-        $this->buffer = array();
+        $this->buffer = [];
         return true;
     }
-
 }

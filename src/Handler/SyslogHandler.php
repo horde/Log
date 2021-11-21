@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -10,7 +10,9 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Handler;
+
 use Horde\Log\Filter;
 use Horde\Log\LogHandler;
 use Horde\Log\LogMessage;
@@ -32,12 +34,12 @@ class SyslogHandler extends BaseHandler
      *
      * @var mixed[]
      */
-    protected $options = array(
+    protected $options = [
         'defaultPriority'  => LOG_ERR,
         'facility'         => LOG_USER,
         'ident'            => false,
-        'openlogOptions'   => false
-    );
+        'openlogOptions'   => false,
+    ];
 
     /**
      * Last ident set by a syslog-handler instance.
@@ -89,5 +91,4 @@ class SyslogHandler extends BaseHandler
             throw new LogException('Unable to open syslog');
         }
     }
-
 }

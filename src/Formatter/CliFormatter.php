@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2013-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2013-2017 Horde LLC (http://www.horde.org/).
  *
  * @author     Jan Schneider <jan@horde.org>
  * @category   Horde
@@ -9,7 +9,9 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Formatter;
+
 use Horde\Log\LogFormatter;
 use Horde\Log\LogMessage;
 use Horde_Cli;
@@ -82,5 +84,4 @@ class CliFormatter implements LogFormatter
 
         return $type_message . $event->message();
     }
-
 }

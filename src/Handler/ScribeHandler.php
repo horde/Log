@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -10,7 +10,9 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Handler;
+
 use Horde\Log\Filter;
 use Horde\Log\Formatter\SimpleFormatter;
 use Horde\Log\LogHandler;
@@ -41,11 +43,11 @@ class ScribeHandler extends BaseHandler
      *
      * @var mixed[]
      */
-    protected $options = array(
+    protected $options = [
         'addNewline' => false,
         'category'   => 'default',
-        'ident' => ''
-    );
+        'ident' => '',
+    ];
 
     /**
      * Constructor.
@@ -53,9 +55,10 @@ class ScribeHandler extends BaseHandler
      * @param Horde_Scribe_Client $scribe     Scribe client.
      * @param LogFormatter[] $formatters  Log formatter.
      */
-    public function __construct(Horde_Scribe_Client $scribe,
-                                array $formatters = null)
-    {
+    public function __construct(
+        Horde_Scribe_Client $scribe,
+        array $formatters = null
+    ) {
         $this->formatters = is_null($formatters)
             ? [new SimpleFormatter()]
             : $formatters;
@@ -78,9 +81,8 @@ class ScribeHandler extends BaseHandler
             $message = $this->options['ident'] . ' ' . $message;
         }
 
-        $category = isset($context['category'])
-            ? $context['category']
-            : $this->options['category'];
+        $category = $context['category']
+            ?? $this->options['category'];
 
         if (!$this->options['addNewline']) {
             $message = rtrim($message);
@@ -88,5 +90,4 @@ class ScribeHandler extends BaseHandler
         $this->scribe->log($category, $message);
         return true;
     }
-
 }
