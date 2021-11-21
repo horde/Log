@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -13,8 +13,11 @@
  * @package  Log
  */
 declare(strict_types=1);
+
 namespace Horde\Log;
+
 use Horde\Exception\Wrapped;
+
 /**
  * @author   Mike Naberezny <mike@maintainable.com>
  * @author   Chuck Hagenbuch <chuck@horde.org>

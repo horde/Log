@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2013-2017 Horde LLC (http://www.horde.org/)
+ * Copyright 2013-2017 Horde LLC (http://www.horde.org/).
  *
  * @author     Jan Schneider <jan@horde.org>
  * @category   Horde
@@ -9,7 +9,9 @@
  * @subpackage Handlers
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Handler;
+
 use Horde\Log\LogFilter;
 use Horde\Log\LogFormatter;
 use Horde\Log\LogHandler;
@@ -37,7 +39,7 @@ class CliHandler extends StreamHandler
     protected $cli;
 
     /**
-     * Class Constructor
+     * Class Constructor.
      *
      * @param LogFormatter[]|null $formatters  Log formatters.
      * @param Horde_Cli|null $cli CLI Output object.

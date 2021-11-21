@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,7 +14,9 @@
  * @subpackage Filters
  */
 declare(strict_types=1);
+
 namespace Horde\Log;
+
 /**
  * @category   Horde
  * @subpackage Filters
@@ -27,14 +29,14 @@ namespace Horde\Log;
 interface LogFilter
 {
     /**
-     * Accept a message
+     * Accept a message.
      */
-    const ACCEPT = true;
+    public const ACCEPT = true;
 
     /**
-     * Filter out a message
+     * Filter out a message.
      */
-    const IGNORE = false;
+    public const IGNORE = false;
 
     /**
      * Returns Horde_Log_Filter::ACCEPT to accept the message,
@@ -45,5 +47,4 @@ interface LogFilter
      * @return bool  Accepted?
      */
     public function accept(LogMessage $event): bool;
-
 }

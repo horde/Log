@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -12,13 +12,15 @@
  * @license  http://www.horde.org/licenses/bsd BSD
  */
 declare(strict_types=1);
+
 namespace Horde\Log;
+
 use Horde\Util\HordeString;
 use Stringable;
 
 /**
- * Represents a single log message
- * 
+ * Represents a single log message.
+ *
  * @category Horde
  * @package  Log
  * @author  Ralf Lang <lang@b1-systems.de>
@@ -29,7 +31,7 @@ class LogMessage implements Stringable
     private string $message;
     private LogLevel $level;
     /**
-     * Context may be a hash of anything, but only primitives and Stringables are expanded
+     * Context may be a hash of anything, but only primitives and Stringables are expanded.
      *
      * @var mixed[]
      */
@@ -37,7 +39,7 @@ class LogMessage implements Stringable
     private string $formattedMessage;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param LogLevel $level
      * @param string $message
@@ -55,10 +57,10 @@ class LogMessage implements Stringable
     }
 
     /**
-     * Merge an additional context with the current context
+     * Merge an additional context with the current context.
      *
      * On existing key, last write wins.
-     * 
+     *
      * @param mixed[] $context
      * @return void
      */
@@ -68,7 +70,7 @@ class LogMessage implements Stringable
     }
 
     /**
-     * Expose context
+     * Expose context.
      *
      * @return mixed[]
      */
@@ -83,11 +85,11 @@ class LogMessage implements Stringable
     }
 
     /**
-     * The formatted message
-     * 
+     * The formatted message.
+     *
      * As each handler may have its own formatters, calling into this method
      * should be left to handlers and formatters.
-
+     *
      * @internal The (preliminary) formatting result
      *
      * @return string
@@ -98,7 +100,7 @@ class LogMessage implements Stringable
     }
 
     /**
-     * Apply formatters to the message;
+     * Apply formatters to the message;.
      *
      * @param LogFormatter[] $formatters
      * @return string

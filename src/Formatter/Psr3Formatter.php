@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,7 +14,9 @@
  * @subpackage Formatters
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Formatter;
+
 use Horde\Log\LogFormatter;
 use Horde\Log\LogMessage;
 use InvalidArgumentException;
@@ -40,7 +42,7 @@ class Psr3Formatter implements LogFormatter
      * Constructor.
      *
      * @param string[]|Stringable[]|int[]|float[] $defaultContext Defaults hash for missing context values. Key will be the placeholder, value will be the filled in data. Actual context overwrites defaults
-     * 
+     *
      *
      * @throws InvalidArgumentException
      */
@@ -60,8 +62,7 @@ class Psr3Formatter implements LogFormatter
     {
         $context = array_merge($this->defaultContext, $event->context());
         $placeholders = [];
-        foreach ($context as $key => $value)
-        {
+        foreach ($context as $key => $value) {
             // Filter out incompatible objects, arrays etc
             if ($value instanceof Stringable || is_string($value) || is_numeric($value)) {
                 $placeholders['{' . $key . '}'] = (string) $value;

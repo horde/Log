@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -12,13 +12,15 @@
  * @license  http://www.horde.org/licenses/bsd BSD
  */
 declare(strict_types=1);
+
 namespace Horde\Log;
+
 use Horde\Util\HordeString;
 use Psr\Log\InvalidArgumentException;
 
 /**
- * A list of log levels to be recognized
- * 
+ * A list of log levels to be recognized.
+ *
  * @category Horde
  * @package  Log
  * @author  Ralf Lang <lang@b1-systems.de>
@@ -27,7 +29,7 @@ use Psr\Log\InvalidArgumentException;
 class LogLevels
 {
     /**
-     * The configured levels
+     * The configured levels.
      *
      * @var LogLevel[]
      */
@@ -36,7 +38,7 @@ class LogLevels
     public function register(LogLevel $level): void
     {
         /**
-         * TODO: Sanity checks, prevent registering the same name twice
+         * TODO: Sanity checks, prevent registering the same name twice.
          */
         $this->levels[] = $level;
     }
@@ -52,13 +54,13 @@ class LogLevels
                 new LogLevel(4, 'warning'),
                 new LogLevel(5, 'notice'),
                 new LogLevel(6, 'info'),
-                new LogLevel(7, 'debug')
+                new LogLevel(7, 'debug'),
             ]
         );
     }
 
     /**
-     * Register the canonical log levels and their popular aliases
+     * Register the canonical log levels and their popular aliases.
      */
     public static function initWithAliasLevels(): self
     {
@@ -77,58 +79,54 @@ class LogLevels
                 new LogLevel(6, 'info'),
                 new LogLevel(6, 'information'),
                 new LogLevel(6, 'informational'),
-                new LogLevel(7, 'debug')
+                new LogLevel(7, 'debug'),
             ]
         );
     }
- 
+
     /**
-     * Get a registered log level by criticality
+     * Get a registered log level by criticality.
      *
      * First match wins. No match throws exception.
-     * 
+     *
      * @param int $criticality
      * @return LogLevel
      * @throws InvalidArgumentException
      */
     public function getByCriticality(int $criticality): LogLevel
     {
-        foreach ($this->levels as $level)
-        {
-            if ($criticality === $level->criticality())
-            {
+        foreach ($this->levels as $level) {
+            if ($criticality === $level->criticality()) {
                 return $level;
             }
         }
-        throw new InvalidArgumentException('Tried to get unregistered LogLevel by criticality: ' . $criticality );
-
+        throw new InvalidArgumentException('Tried to get unregistered LogLevel by criticality: ' . $criticality);
     }
 
     /**
-     * Get a registered log level by name or throw an exception
+     * Get a registered log level by name or throw an exception.
      *
      * Matching is case insensitive.
      * No Match throws exception;
-     * 
+     *
      * @param string $name
      * @return LogLevel
      * @throws InvalidArgumentException
      */
     public function getByLevelName(string $name): LogLevel
     {
-        foreach ($this->levels as $level)
-        {
+        foreach ($this->levels as $level) {
             if (HordeString::lower($name) == $level->name()) {
                 return $level;
             }
         }
-        throw new InvalidArgumentException('Tried to get unregistered LogLevel by name: ' . $name );
+        throw new InvalidArgumentException('Tried to get unregistered LogLevel by name: ' . $name);
     }
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param LogLevel[] $levels Setup with these levels. 
+     * @param LogLevel[] $levels Setup with these levels.
      *                          Circumvents any sanity checks of register
      */
     public function __construct(array $levels = [])

@@ -1,11 +1,15 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Horde\Log;
+
 use Psr\Log\LoggerInterface as PsrLoggerInterface;
+
 /**
  * Horde's Logger Interface includes PsrLoggerInterface but extends by
- * horde-specific setup and manipulation methods
- * 
+ * horde-specific setup and manipulation methods.
+ *
  * Describes a logger instance.
  *
  * The message MUST be a string or object implementing __toString().
@@ -26,7 +30,7 @@ interface LoggerInterface extends PsrLoggerInterface
 {
     /**
      * Add a filter that will be applied before all log handlers.
-     * 
+     *
      * Before a message will be received by any of the handlers, it
      * must be accepted by all filters added with this method.
      *

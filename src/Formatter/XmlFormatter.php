@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,7 +14,9 @@
  * @subpackage Formatters
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Formatter;
+
 use Horde\Log\LogFormatter;
 use Horde\Log\LogMessage;
 use DOMDocument;
@@ -36,20 +38,20 @@ class XmlFormatter implements LogFormatter
      *
      * @var string[]
      */
-    protected $options = array(
+    protected $options = [
         'elementEntry'     => 'log',
         'elementTimestamp' => 'timestamp',
         'elementMessage'   => 'message',
         'elementLevel'     => 'level',
-        'lineEnding'       => PHP_EOL
-    );
+        'lineEnding'       => PHP_EOL,
+    ];
 
     /**
      * Constructor.
      *
      * @param string[] $options Config Options See $options property
      */
-    public function __construct(array $options = array())
+    public function __construct(array $options = [])
     {
         $this->options = array_merge($this->options, $options);
     }
@@ -78,5 +80,4 @@ class XmlFormatter implements LogFormatter
         }
         return preg_replace('/<\?xml version="1.0"( encoding="[^\"]*")?\?>\n/u', '', $xmlString) . $this->options['lineEnding'];
     }
-
 }

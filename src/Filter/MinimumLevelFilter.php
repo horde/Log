@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package
+ * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -14,10 +14,13 @@
  * @subpackage Filters
  */
 declare(strict_types=1);
+
 namespace Horde\Log\Filter;
+
 use Horde\Log\LogFilter;
 use Horde\Log\LogMessage;
 use Psr\Log\InvalidArgumentException;
+
 /**
  * @author     Ralf Lang <lang@b1-systems.de>
  * @category   Horde
@@ -63,5 +66,4 @@ class MinimumLevelFilter implements LogFilter
     {
         return ($event->level()->criticality() >= $this->level);
     }
-
 }
