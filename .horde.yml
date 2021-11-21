@@ -19,6 +19,12 @@ authors:
     email: chuck@horde.org
     active: false
     role: lead
+  -
+    name: Ralf Lang
+    user: lang
+    email: lang@b1-systems.de
+    active: true
+    role: maintainer
 version:
   release: 3.0.0alpha4
   api: 3.0.0alpha1
@@ -30,11 +36,19 @@ license:
   uri: http://www.horde.org/licenses/bsd
 dependencies:
   required:
-    php: ^7 || ^8
+    php: ^7.4 || ^8
     composer:
+      ## Remove when moving constraint to php 8
+      php-extended/polyfill-php80-stringable: ^1
+      psr/log: ^1
       horde/constraint: ^3
       horde/exception: ^3
       horde/util: ^3
+  dev:
+    composer:
+      horde/test: ^3
+      horde/cli: ^3
+      horde/scribe: ^3
   optional:
     composer:
       horde/cli: ^3
