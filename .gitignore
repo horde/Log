@@ -29,5 +29,7 @@ run-tests.log
 
 vendor/
 web/
+.php-cs-fixer.cache
 .phpunit.cache
+.phpdoc
 composer.lock
