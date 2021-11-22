@@ -44,9 +44,9 @@ class FirebugHandler extends BaseHandler
     /**
      * Array of buffered output.
      *
-     * @var array[]
+     * @var mixed[]
      */
-    protected $buffer = [];
+    protected array $buffer = [];
 
     /**
      * Mapping of log priorities to Firebug methods.
