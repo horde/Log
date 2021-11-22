@@ -42,15 +42,9 @@ class MaximumLevelFilter implements LogFilter
      * Filter out any log messages greater than $level.
      *
      * @param integer $level  Maximum log level to pass through the filter.
-     *
-     * @throws InvalidArgumentException
      */
     public function __construct(int $level)
     {
-        if (!is_integer($level)) {
-            throw new InvalidArgumentException('Level must be an integer');
-        }
-
         $this->level = $level;
     }
 
