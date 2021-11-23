@@ -40,10 +40,6 @@ class ExactLevelFilter implements LogFilter
      */
     public function __construct(int $level, string $name = null)
     {
-        if (!is_integer($level)) {
-            throw new LogException('Level must be an integer');
-        }
-
         $this->level = $level;
         $this->name = $name;
     }
