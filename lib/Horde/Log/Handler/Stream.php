@@ -94,7 +94,12 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
      */
     public function __wakeup()
     {
-        if (!($this->_stream = @fopen($this->_streamOrUrl, $this->_mode, false))) {
+        try {
+            $res = $this->_stream = @fopen($this->_streamOrUrl, $this->_mode, false); 
+        } catch (Throwable $e) {
+            throw new Horde_Log_Exception(__CLASS__ . ': "' . (string) $this->_streamOrUrl . '" cannot be opened with mode "' . $this->_mode . '"' . $e->getMessage());
+        }
+        if (!$res) {
             throw new Horde_Log_Exception(__CLASS__ . ': "' . $this->_streamOrUrl . '" cannot be opened with mode "' . $this->_mode . '"');
         }
     }
@@ -114,10 +119,14 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
         }
         $line = $this->_formatter->format($event);
 
-        if (!@fwrite($this->_stream, $line)) {
+        try {
+            $res = @fwrite($this->_stream, $line);
+        } catch (Throwable $e) {
+                throw new Horde_Log_Exception(__CLASS__ . ': Unable to write to stream: ' . $this->_mode . '"' . $e->getMessage());
+        }
+        if (!$res) {
             throw new Horde_Log_Exception(__CLASS__ . ': Unable to write to stream');
         }
-
         return true;
     }
 
