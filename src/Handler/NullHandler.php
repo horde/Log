@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package.
+ * Horde Log package
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -32,6 +32,14 @@ use Horde\Log\LogException;
  */
 class NullHandler extends BaseHandler
 {
+    use SetOptionsTrait;
+    private Options $options;
+
+    public function __construct(Options $options = null)
+    {
+        $this->options = $options ?? new Options();
+    }
+
     /**
      * Write a message to the log buffer.
      *

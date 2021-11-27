@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright 2013-2017 Horde LLC (http://www.horde.org/).
+ * Copyright 2013-2017 Horde LLC (http://www.horde.org/)
  *
  * @author     Jan Schneider <jan@horde.org>
  * @category   Horde
@@ -31,21 +31,29 @@ use Horde_Cli;
  */
 class CliHandler extends StreamHandler
 {
+    use SetOptionsTrait;
     /**
      * A CLI handler.
      *
      * @var Horde_Cli
      */
     protected $cli;
+    /**
+     * Options.
+     *
+     * @var Options
+     */
+    protected Options $options;
 
     /**
-     * Class Constructor.
+     * Class Constructor
      *
      * @param LogFormatter[]|null $formatters  Log formatters.
      * @param Horde_Cli|null $cli CLI Output object.
      */
-    public function __construct(array $formatters = null, Horde_Cli $cli = null)
+    public function __construct(array $formatters = null, Horde_Cli $cli = null, Options $options = null)
     {
+        $this->options = $options ?? new Options();
         $this->cli = $cli ?? new Horde_Cli();
         $this->formatters = is_null($formatters)
             ? [new CliFormatter($this->cli)]

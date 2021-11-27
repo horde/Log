@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package.
+ * Horde Log package
  *
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -31,22 +31,14 @@ use Horde_Log;
  */
 class FirebugHandler extends BaseHandler
 {
-    /**
-     * Options to be set by setOption().
-     *
-     * @var mixed[]
-     */
-    protected $options = [
-        'buffering' => false,
-        'ident' => '',
-    ];
-
+    use SetOptionsTrait;
+    private FirebugOptions $options;
     /**
      * Array of buffered output.
      *
-     * @var mixed[]
+     * @var array[]
      */
-    protected array $buffer = [];
+    protected $buffer = [];
 
     /**
      * Mapping of log priorities to Firebug methods.
@@ -65,12 +57,13 @@ class FirebugHandler extends BaseHandler
     ];
 
     /**
-     * Class Constructor.
+     * Class Constructor
      *
      * @param LogFormatter[] $formatters  Log formatter.
      */
-    public function __construct(array $formatters = null)
+    public function __construct(FirebugOptions $options, array $formatters = null)
     {
+        $this->options = $options ?? new FirebugOptions();
         $this->formatters = is_null($formatters)
             ? [new SimpleFormatter()]
             : $formatters;
@@ -90,13 +83,13 @@ class FirebugHandler extends BaseHandler
     public function write(LogMessage $event): bool
     {
         $message = $event->formattedMessage();
-        if (!empty($this->options['ident'])) {
-            $message = $this->options['ident'] . ' ' . $message;
+        if (!empty($this->options->ident)) {
+            $message = $this->options->ident . ' ' . $message;
         }
 
         $this->buffer[] = ['message' => $message, 'level' => $event->level()->criticality()];
 
-        if (empty($this->options['buffering'])) {
+        if (empty($this->options->buffering)) {
             $this->flush();
         }
 

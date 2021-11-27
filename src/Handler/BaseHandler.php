@@ -1,6 +1,6 @@
 <?php
 /**
- * Horde Log package.
+ * Horde Log package
  *
  * This package is based on Zend_Log from the Zend Framework
  * (http://framework.zend.com).  Both that package and this
@@ -34,15 +34,6 @@ use Horde\Log\LogException;
 abstract class BaseHandler implements LogHandler
 {
     /**
-     * Options.
-     *
-     * @var mixed[]
-     */
-    protected $options = [
-        'ident' => '',
-    ];
-
-    /**
      * List of filters relevant only to this handler.
      *
      * @var LogFilter[]
@@ -50,7 +41,7 @@ abstract class BaseHandler implements LogHandler
     protected $filters = [];
 
     /**
-     * Formatters for this handler.
+     * Formatters for this handler
      *
      * @var LogFormatter[]
      */
@@ -85,26 +76,6 @@ abstract class BaseHandler implements LogHandler
         }
         $event->formatMessage($this->formatters);
         $this->write($event);
-    }
-
-    /**
-     * Sets an option specific to the implementation of the log handler.
-     *
-     * @param string $optionKey   Key name for the option to be changed.  Keys
-     *                            are handler-specific.
-     * @param mixed $optionValue  New value to assign to the option
-     *
-     * @return bool  True.
-     * @throws LogException
-     */
-    public function setOption($optionKey, $optionValue): bool
-    {
-        if (!isset($this->options[$optionKey])) {
-            throw new LogException('Unknown option "' . $optionKey . '".');
-        }
-        $this->options[$optionKey] = $optionValue;
-
-        return true;
     }
 
     /**
