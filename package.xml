@@ -11,6 +11,12 @@
   <email>lang@b1-systems.de</email>
   <active>yes</active>
  </maintainer>
+ <maintainer>
+  <name>Ralf Lang</name>
+  <user>lang</user>
+  <email>lang@b1-systems.de</email>
+  <active>yes</active>
+ </maintainer>
  <lead>
   <name>Mike Naberezny</name>
   <user>mnaberez</user>
