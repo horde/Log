@@ -17,6 +17,12 @@
   <email>lang@b1-systems.de</email>
   <active>yes</active>
  </maintainer>
+ <maintainer>
+  <name>Ralf Lang</name>
+  <user>lang</user>
+  <email>lang@b1-systems.de</email>
+  <active>yes</active>
+ </maintainer>
  <lead>
   <name>Mike Naberezny</name>
   <user>mnaberez</user>
@@ -37,7 +43,7 @@
  </maintainer>
  <date>2021-03-13</date>
  <version>
-  <release>3.0.0alpha5</release>
+  <release>3.0.0alpha6</release>
   <api>3.0.0alpha1</api>
  </version>
  <stability>
@@ -514,6 +520,22 @@
   <release>
    <version>
     <release>3.0.0alpha5</release>
+    <api>3.0.0alpha1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2021-03-13</date>
+   <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
+   <notes>
+* [rla] Turned LogHandler options into classes.
+* |+
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>3.0.0alpha6</release>
     <api>3.0.0alpha1</api>
    </version>
    <stability>

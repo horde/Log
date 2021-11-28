@@ -1,4 +1,5 @@
 {
+    "minimum-stability": "dev",
     "name": "horde/log",
     "description": "Logging library",
     "type": "library",
@@ -32,19 +33,19 @@
         "php": "^7.4 || ^8",
         "php-extended/polyfill-php80-stringable": "^1",
         "psr/log": "^1",
-        "horde/constraint": "^3",
-        "horde/exception": "^3",
-        "horde/util": "^3"
+        "horde/constraint": "^3 || dev-FRAMEWORK_6_0",
+        "horde/exception": "^3 || dev-FRAMEWORK_6_0",
+        "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "require-dev": {
-        "horde/test": "^3",
-        "horde/cli": "^3",
-        "horde/scribe": "^3"
+        "horde/test": "^3 || dev-FRAMEWORK_6_0",
+        "horde/cli": "^3 || dev-FRAMEWORK_6_0",
+        "horde/scribe": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
-        "horde/cli": "^3",
-        "horde/scribe": "^3",
-        "horde/test": "^3",
+        "horde/cli": "^3 || dev-FRAMEWORK_6_0",
+        "horde/scribe": "^3 || dev-FRAMEWORK_6_0",
+        "horde/test": "^3 || dev-FRAMEWORK_6_0",
         "ext-dom": "*"
     },
     "autoload": {
