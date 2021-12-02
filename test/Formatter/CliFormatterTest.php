@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -12,7 +13,7 @@
  * @package  Log
  */
 
-namespace Horde\Log\Formatter\Test;
+namespace Horde\Log\Test\Formatter;
 
 use PHPUnit\Framework\TestCase;
 
@@ -67,7 +68,7 @@ class CliFormatterTest extends TestCase
             $loglevel = $value->level();
             $name = $loglevel->name();
             $logmessage = $value->message();
-            $flag = '['. str_pad($name, 7, ' ', STR_PAD_BOTH) . '] ';
+            $flag = '[' . str_pad($name, 7, ' ', STR_PAD_BOTH) . '] ';
 
             switch ($name) {
                 case 'emergency':
