@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -12,9 +13,11 @@
  * @license  http://www.horde.org/licenses/bsd BSD
  * @package  Log
  */
-namespace Horde\Log\Formatter\Test;
-use \PHPUnit\Framework\TestCase;
-use \Horde_Log_Formatter_Xml;
+
+namespace Horde\Log\Test\Formatter;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Log_Formatter_Xml;
 
 /**
  * @author   Mike Naberezny <mike@maintainable.com>
