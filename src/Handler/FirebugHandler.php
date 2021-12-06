@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -9,6 +10,7 @@
  * @package    Log
  * @subpackage Handlers
  */
+
 declare(strict_types=1);
 
 namespace Horde\Log\Handler;
@@ -36,7 +38,7 @@ class FirebugHandler extends BaseHandler
     /**
      * Array of buffered output.
      *
-     * @var array[]
+     * @var mixed[][]
      */
     protected $buffer = [];
 
@@ -59,9 +61,10 @@ class FirebugHandler extends BaseHandler
     /**
      * Class Constructor
      *
-     * @param LogFormatter[] $formatters  Log formatter.
+     * @param null|FirebugOptions $options  Log options.
+     * @param LogFormatter[]      $formatters  Log formatter.
      */
-    public function __construct(FirebugOptions $options, array $formatters = null)
+    public function __construct(?FirebugOptions $options = null, array $formatters = null)
     {
         $this->options = $options ?? new FirebugOptions();
         $this->formatters = is_null($formatters)
