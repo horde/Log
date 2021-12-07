@@ -81,6 +81,14 @@ class StreamHandler extends BaseHandler
         $this->mode = $mode;
         $this->streamOrUrl = $streamOrUrl;
 
+        if (is_a($streamOrUrl, 'XMLParser')) {
+            throw new LogException(__CLASS__ . ': As of php8 XMLparser returns and Object and not a string. Please adapt your stream to the correct string.');
+        }
+
+        if (is_string($streamOrUrl) && (strlen($streamOrUrl) === 0)) {
+            throw new LogException(__CLASS__ . ': Path cannot be empty.');
+        }
+
         if (is_resource($streamOrUrl)) {
             if (get_resource_type($streamOrUrl) != 'stream') {
                 throw new LogException(__CLASS__ . ': Resource is not a stream');
@@ -89,6 +97,7 @@ class StreamHandler extends BaseHandler
             if ($mode && $mode != 'a+') {
                 throw new LogException(__CLASS__ . ': Mode cannot be changed on existing streams');
             }
+
 
             $this->stream = $streamOrUrl;
         } else {
