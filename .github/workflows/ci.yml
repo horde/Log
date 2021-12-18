@@ -28,7 +28,7 @@ jobs:
       matrix:
         operating-system: ['ubuntu-20.04']
         php-versions: ['7.4', '8.0', 'latest']
-        # phpunit-versions: ['latest', '9.5', '9.0'] # We use assertMatchesRegularExpression, this is not available in 9.0
+        # phpunit-versions: ['latest', '9.5']
         phpunit-versions: ['latest', '9.5']
     steps:
     - name: Setup github ssh key
