@@ -65,10 +65,10 @@ class Logger implements LoggerInterface
      */
     public function __construct(array $handlers = [], LogLevels $levels = null, array $filters = [])
     {
-        if ($levels) {
+        if (isset($levels)) {
             $this->levels = $levels;
         } else {
-            $levels = LogLevels::initWithCanonicalLevels();
+            $this->levels = LogLevels::initWithCanonicalLevels();
         }
         foreach ($handlers as $handler) {
             $this->addHandler($handler);
@@ -101,6 +101,10 @@ class Logger implements LoggerInterface
      */
     public function unserialize($data): void
     {
+        if (!is_string($data)) {
+            throw new LogException('Serialized data should be a string. Please serialze data correctly.');
+        }
+
         $data = @unserialize($data);
         if (!is_array($data) ||
             !isset($data[0]) ||
@@ -273,6 +277,7 @@ class Logger implements LoggerInterface
         } elseif (is_string($level)) {
             $loglevel = $this->levels->getByLevelName($level);
         }
+
         if (is_null($loglevel)) {
             throw new InvalidArgumentException('Unsupported log level type, try string or numeric');
         }
