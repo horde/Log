@@ -26,7 +26,7 @@ authors:
     active: true
     role: maintainer
 version:
-  release: 3.0.0alpha6
+  release: 3.0.0alpha7
   api: 3.0.0alpha1
 state:
   release: alpha
