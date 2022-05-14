@@ -72,7 +72,7 @@ class Horde_Log_Logger implements Serializable
     }
 
     /**
-     * Serialize.
+     * Serialize, Pre PHP 8
      *
      * @return string  Serialized representation of this object.
      */
@@ -86,7 +86,21 @@ class Horde_Log_Logger implements Serializable
     }
 
     /**
-     * Unserialize.
+     * Serialize, PHP 8+
+     *
+     * @return array  Hash representation of this object.
+     */
+    public function __serialize(): array
+    {
+        return [
+            self::VERSION,
+            $this->_filters,
+            $this->_handlers
+        ];
+    }
+
+    /**
+     * Unserialize, pre PHP 8
      *
      * @param string $data  Serialized data.
      *
@@ -95,6 +109,27 @@ class Horde_Log_Logger implements Serializable
     public function unserialize($data)
     {
         $data = @unserialize($data);
+        if (!is_array($data) ||
+            !isset($data[0]) ||
+            ($data[0] != self::VERSION)) {
+            throw new Exception('Cache version change');
+        }
+
+        $this->_filters = $data[1];
+        $this->_handlers = $data[2];
+
+        $this->_init();
+    }
+
+    /**
+     * Unserialize, PHP 8+
+     *
+     * @param array $data Hash of Serialized data.
+     *
+     * @throws Exception
+     */
+    public function __unserialize(array $data): void
+    {
         if (!is_array($data) ||
             !isset($data[0]) ||
             ($data[0] != self::VERSION)) {
