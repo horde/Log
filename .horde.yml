@@ -39,7 +39,7 @@ dependencies:
     php: ^7.4 || ^8
     composer:
       php-extended/polyfill-php80-stringable: ^1
-      psr/log: ^1
+      psr/log: ^1 || ^2 || ^3
       horde/constraint: ^3
       horde/exception: ^3
       horde/util: ^3
