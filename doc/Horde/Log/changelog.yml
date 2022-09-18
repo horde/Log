@@ -4,12 +4,13 @@
   state:
     release: alpha
     api: alpha
-  date: 2022-03-01
+  date: 2022-09-18
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-    
+  notes: |
+    [rla] PHP 8.1 compatibility improvements: Serialization etc.
+    |+
 3.0.0alpha6:
   api: 3.0.0alpha1
   state:

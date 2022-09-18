@@ -47,6 +47,24 @@
   <email>lang@b1-systems.de</email>
   <active>yes</active>
  </maintainer>
+ <maintainer>
+  <name>Ralf Lang</name>
+  <user>lang</user>
+  <email>lang@b1-systems.de</email>
+  <active>yes</active>
+ </maintainer>
+ <maintainer>
+  <name>Ralf Lang</name>
+  <user>lang</user>
+  <email>lang@b1-systems.de</email>
+  <active>yes</active>
+ </maintainer>
+ <maintainer>
+  <name>Ralf Lang</name>
+  <user>lang</user>
+  <email>lang@b1-systems.de</email>
+  <active>yes</active>
+ </maintainer>
  <lead>
   <name>Mike Naberezny</name>
   <user>mnaberez</user>
@@ -65,7 +83,7 @@
   <email>lang@b1-systems.de</email>
   <active>yes</active>
  </maintainer>
- <date>2022-03-01</date>
+ <date>2022-09-18</date>
  <version>
   <release>3.0.0alpha7</release>
   <api>3.0.0alpha1</api>
@@ -76,7 +94,8 @@
  </stability>
  <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
  <notes>
-* 
+* [rla] PHP 8.1 compatibility improvements: Serialization etc.
+* |+
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -207,6 +226,7 @@
     <file name="AllTests.php" role="test" />
     <file name="bootstrap.php" role="test" />
     <file name="LoggerTest.php" role="test" />
+    <file name="LogLevelsTest.php" role="test" />
     <file name="LogTest.php" role="test" />
    </dir> <!-- /test -->
    <file name="LICENSE" role="doc" />
@@ -322,34 +342,11 @@
    <install as="Handler/StreamTest.php" name="test/Handler/StreamTest.php" />
    <install as="Handler/SyslogHandlerTest.php" name="test/Handler/SyslogHandlerTest.php" />
    <install as="LoggerTest.php" name="test/LoggerTest.php" />
+   <install as="LogLevelsTest.php" name="test/LogLevelsTest.php" />
    <install as="LogTest.php" name="test/LogTest.php" />
   </filelist>
  </phprelease>
  <changelog>
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
   <release>
    <version>
     <release>1.0.0alpha1</release>
@@ -726,7 +723,8 @@
    <date>2022-03-01</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
-* 
+* [rla] PHP 8.1 compatibility improvements: Serialization etc.
+* |+
    </notes>
   </release>
  </changelog>
