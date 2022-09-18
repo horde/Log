@@ -65,6 +65,12 @@
   <email>lang@b1-systems.de</email>
   <active>yes</active>
  </maintainer>
+ <maintainer>
+  <name>Ralf Lang</name>
+  <user>lang</user>
+  <email>lang@b1-systems.de</email>
+  <active>yes</active>
+ </maintainer>
  <lead>
   <name>Mike Naberezny</name>
   <user>mnaberez</user>
@@ -85,7 +91,7 @@
  </maintainer>
  <date>2022-09-18</date>
  <version>
-  <release>3.0.0alpha7</release>
+  <release>3.0.0alpha8</release>
   <api>3.0.0alpha1</api>
  </version>
  <stability>
@@ -94,8 +100,7 @@
  </stability>
  <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
  <notes>
-* [rla] PHP 8.1 compatibility improvements: Serialization etc.
-* |+
+* 
  </notes>
  <contents>
   <dir baseinstalldir="/" name="/">
@@ -347,6 +352,31 @@
   </filelist>
  </phprelease>
  <changelog>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   <release>
    <version>
     <release>1.0.0alpha1</release>
@@ -720,11 +750,26 @@
     <release>alpha</release>
     <api>alpha</api>
    </stability>
-   <date>2022-03-01</date>
+   <date>2022-09-18</date>
    <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
    <notes>
 * [rla] PHP 8.1 compatibility improvements: Serialization etc.
 * |+
+   </notes>
+  </release>
+  <release>
+   <version>
+    <release>3.0.0alpha8</release>
+    <api>3.0.0alpha1</api>
+   </version>
+   <stability>
+    <release>alpha</release>
+    <api>alpha</api>
+   </stability>
+   <date>2022-09-18</date>
+   <license uri="http://www.horde.org/licenses/bsd">BSD-2-Clause</license>
+   <notes>
+* 
    </notes>
   </release>
  </changelog>
