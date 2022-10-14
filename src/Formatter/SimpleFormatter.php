@@ -78,7 +78,7 @@ class SimpleFormatter implements LogFormatter
         $context = $event->context();
         $context['message'] = $event->formattedMessage();
         foreach ($context as $name => $value) {
-            $output = str_replace("%$name%", $value, $output);
+            $output = str_replace("%$name%", (string) $value, $output);
         }
         return $output;
     }
