@@ -31,7 +31,7 @@ class Horde_Log_Formatter_SimpleTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('InvalidArgumentException', $e);
-            $this->assertRegExp('/must be a string/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/must be a string/i', $e->getMessage());
         }
     }
 

@@ -89,7 +89,7 @@ class Horde_Log_LogTest extends Horde_Test_Case
             $logger->log('message', Horde_Log::INFO);
             $this->fail();
         } catch (Horde_Log_Exception $e) {
-            $this->assertRegexp('/no handler/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/no handler/i', $e->getMessage());
         }
     }
 
@@ -103,7 +103,7 @@ class Horde_Log_LogTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/bad log level/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/bad log level/i', $e->getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ class Horde_Log_LogTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/bad log level/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/bad log level/i', $e->getMessage());
         }
     }
 
@@ -127,7 +127,7 @@ class Horde_Log_LogTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/existing log level/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/existing log level/i', $e->getMessage());
         }
 
     }

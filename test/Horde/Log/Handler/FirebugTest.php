@@ -37,7 +37,7 @@ class Horde_Log_Handler_FirebugTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/unknown option/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/unknown option/i', $e->getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ class Horde_Log_Handler_FirebugTest extends Horde_Test_Case
 
         $date = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}-\d{2}:\d{2}';
 
-        $this->assertRegExp("/console.error\(\"$date $levelName: $message\"\);/", $contents);
+        $this->assertMatchesRegularExpression("/console.error\(\"$date $levelName: $message\"\);/", $contents);
     }
 
 }

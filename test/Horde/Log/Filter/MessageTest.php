@@ -31,7 +31,7 @@ class Horde_Log_Filter_MessageTest extends Horde_Test_Case
             $filter = new Horde_Log_Filter_Message('invalid regexp');
             $this->fail();
         } catch (InvalidArgumentException $e) {
-            $this->assertRegexp('/invalid reg/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/invalid reg/i', $e->getMessage());
         }
     }
 

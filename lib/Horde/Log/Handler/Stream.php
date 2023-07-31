@@ -72,8 +72,8 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
         $this->_mode = $mode;
         $this->_streamOrUrl = $streamOrUrl;
 
-        if (is_resource($streamOrUrl)) {
-            if (get_resource_type($streamOrUrl) != 'stream') {
+        if (($streamOrUrl !== false) && (!is_string($streamOrUrl))) {
+            if (!is_resource($streamOrUrl) || (is_resource($streamOrUrl) && get_resource_type($streamOrUrl) != 'stream')) {
                 throw new Horde_Log_Exception(__CLASS__ . ': Resource is not a stream');
             }
 
@@ -94,7 +94,7 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
      */
     public function __wakeup()
     {
-        if (!($this->_stream = @fopen($this->_streamOrUrl, $this->_mode, false))) {
+        if (($this->_streamOrUrl === '') || (!($this->_stream = @fopen($this->_streamOrUrl, $this->_mode, false)))) {
             throw new Horde_Log_Exception(__CLASS__ . ': "' . $this->_streamOrUrl . '" cannot be opened with mode "' . $this->_mode . '"');
         }
     }
@@ -114,7 +114,12 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
         }
         $line = $this->_formatter->format($event);
 
-        if (!@fwrite($this->_stream, $line)) {
+        /* other reasons for write failure */
+        try {
+            if (!@fwrite($this->_stream, $line)) {
+                throw new Horde_Log_Exception(__CLASS__ . ': Unable to write to stream');
+            }
+        } catch (TypeError) {
             throw new Horde_Log_Exception(__CLASS__ . ': Unable to write to stream');
         }
 

@@ -37,7 +37,7 @@ class Horde_Log_Handler_StreamTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/not a stream/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/not a stream/i', $e->getMessage());
         }
         xml_parser_free($resource);
     }
@@ -63,7 +63,7 @@ class Horde_Log_Handler_StreamTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/existing stream/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/existing stream/i', $e->getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ class Horde_Log_Handler_StreamTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/cannot be opened/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/cannot be opened/i', $e->getMessage());
         }
     }
 
@@ -86,7 +86,7 @@ class Horde_Log_Handler_StreamTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/unknown option/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/unknown option/i', $e->getMessage());
         }
     }
 
@@ -106,7 +106,7 @@ class Horde_Log_Handler_StreamTest extends Horde_Test_Case
 
         $date = '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}-\d{2}:\d{2}';
 
-        $this->assertRegExp("/$date $levelName: $message/", $contents);
+        $this->assertMatchesRegularExpression("/$date $levelName: $message/", $contents);
     }
 
     public function testWriteThrowsWhenStreamWriteFails()
@@ -120,7 +120,7 @@ class Horde_Log_Handler_StreamTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('Horde_Log_Exception', $e);
-            $this->assertRegExp('/unable to write/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/unable to write/i', $e->getMessage());
         }
     }
 

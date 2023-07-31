@@ -85,6 +85,15 @@ class Horde_Log_Logger implements Serializable
         ));
     }
 
+    public function __serialize()
+    {
+        return array(
+            self::VERSION,
+            $this->_filters,
+            $this->_handlers
+	);
+    }
+
     /**
      * Unserialize.
      *
@@ -95,6 +104,20 @@ class Horde_Log_Logger implements Serializable
     public function unserialize($data)
     {
         $data = @unserialize($data);
+        if (!is_array($data) ||
+            !isset($data[0]) ||
+            ($data[0] != self::VERSION)) {
+            throw new Exception('Cache version change');
+        }
+
+        $this->_filters = $data[1];
+        $this->_handlers = $data[2];
+
+        $this->_init();
+    }
+
+    public function __unserialize($data)
+    {
         if (!is_array($data) ||
             !isset($data[0]) ||
             ($data[0] != self::VERSION)) {

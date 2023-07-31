@@ -48,7 +48,7 @@ class Horde_Log_Filter_ExactLevelTest extends Horde_Test_Case
             $this->fail();
         } catch (Exception $e) {
             $this->assertInstanceOf('InvalidArgumentException', $e);
-            $this->assertRegExp('/must be an integer/i', $e->getMessage());
+            $this->assertMatchesRegularExpression('/must be an integer/i', $e->getMessage());
         }
     }
 }
