@@ -22,9 +22,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
+class Horde_Log_Filter_ChainingTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
 
@@ -33,7 +33,7 @@ class Horde_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
         $this->logger->addHandler(new Horde_Log_Handler_Stream($this->log));
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         fclose($this->log);
     }
@@ -49,8 +49,8 @@ class Horde_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
 
-        $this->assertNotContains($ignored, $logdata);
-        $this->assertContains($logged, $logdata);
+        $this->assertStringNotContainsString($ignored, $logdata);
+        $this->assertStringContainsString($logged, $logdata);
     }
 
 
@@ -67,13 +67,13 @@ class Horde_Log_Filter_ChainingTest extends PHPUnit_Framework_TestCase
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
-        $this->assertContains($warn, $logdata);
-        $this->assertContains($err, $logdata);
+        $this->assertStringContainsString($warn, $logdata);
+        $this->assertStringContainsString($err, $logdata);
 
         rewind($log2);
         $logdata = stream_get_contents($log2);
-        $this->assertContains($err, $logdata);
-        $this->assertNotContains($warn, $logdata);
+        $this->assertStringContainsString($err, $logdata);
+        $this->assertStringNotContainsString($warn, $logdata);
     }
 
 }

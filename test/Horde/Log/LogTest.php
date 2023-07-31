@@ -22,9 +22,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
+class Horde_Log_LogTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
 
@@ -40,7 +40,7 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger->log($message = 'message-to-long', Horde_Log::INFO);
 
         rewind($this->log);
-        $this->assertContains($message, stream_get_contents($this->log));
+        $this->assertStringContainsString($message, stream_get_contents($this->log));
     }
 
     public function testaddHandler()
@@ -50,7 +50,7 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
         $logger->log($message = 'message-to-log', Horde_Log::INFO);
 
         rewind($this->log);
-        $this->assertContains($message, stream_get_contents($this->log));
+        $this->assertStringContainsString($message, stream_get_contents($this->log));
     }
 
     public function testaddHandlerAddsMultipleHandlers()
@@ -72,9 +72,9 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
 
         // verify both handlers were called by the logger
         rewind($log1);
-        $this->assertContains($message, stream_get_contents($log1));
+        $this->assertStringContainsString($message, stream_get_contents($log1));
         rewind($log2);
-        $this->assertContains($message, stream_get_contents($log2));
+        $this->assertStringContainsString($message, stream_get_contents($log2));
 
         // prove the two memory streams are different
         // and both handlers were indeed called
@@ -141,7 +141,7 @@ class Horde_Log_LogTest extends PHPUnit_Framework_TestCase
 
         rewind($this->log);
         $logdata = stream_get_contents($this->log);
-        $this->assertContains($levelName, $logdata);
-        $this->assertContains($message, $logdata);
+        $this->assertStringContainsString($levelName, $logdata);
+        $this->assertStringContainsString($message, $logdata);
     }
 }

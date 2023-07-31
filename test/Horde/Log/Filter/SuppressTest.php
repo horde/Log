@@ -22,9 +22,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Filter_SuppressTest extends PHPUnit_Framework_TestCase
+class Horde_Log_Filter_SuppressTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         $this->filter = new Horde_Log_Filter_Suppress();
     }

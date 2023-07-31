@@ -22,9 +22,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Filter_ExactLevelTest extends PHPUnit_Framework_TestCase
+class Horde_Log_Filter_ExactLevelTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         // accept at and only at level 2
         $this->filter = new Horde_Log_Filter_ExactLevel(2);

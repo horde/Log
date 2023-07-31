@@ -22,7 +22,7 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
+class Horde_Log_Formatter_SimpleTest extends Horde_Test_Case
 {
     public function testConstructorThrowsOnBadFormatString()
     {
@@ -42,7 +42,7 @@ class Horde_Log_Formatter_SimpleTest extends PHPUnit_Framework_TestCase
                                  'level' => $level = Horde_Log::ALERT,
                                  'levelName' => $levelName = 'ALERT'));
 
-        $this->assertContains($message, $line);
-        $this->assertContains($levelName, $line);
+        $this->assertStringContainsString($message, $line);
+        $this->assertStringContainsString($levelName, $line);
     }
 }

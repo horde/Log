@@ -22,9 +22,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Handler_StreamTest extends PHPUnit_Framework_TestCase
+class Horde_Log_Handler_StreamTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
     }
@@ -44,12 +44,14 @@ class Horde_Log_Handler_StreamTest extends PHPUnit_Framework_TestCase
 
     public function testConstructorWithValidStream()
     {
+        $this->expectNotToPerformAssertions();
         $stream = fopen('php://memory', 'a');
         new Horde_Log_Handler_Stream($stream);
     }
 
     public function testConstructorWithValidUrl()
     {
+        $this->expectNotToPerformAssertions();
         new Horde_Log_Handler_Stream('php://memory');
     }
 

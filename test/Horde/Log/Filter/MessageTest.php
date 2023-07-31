@@ -22,7 +22,7 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Filter_MessageTest extends PHPUnit_Framework_TestCase
+class Horde_Log_Filter_MessageTest extends Horde_Test_Case
 {
 
     public function testMessageFilterRecognizesInvalidRegularExpression()

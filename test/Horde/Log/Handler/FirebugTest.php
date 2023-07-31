@@ -22,9 +22,9 @@
  * @package    Log
  * @subpackage UnitTests
  */
-class Horde_Log_Handler_FirebugTest extends PHPUnit_Framework_TestCase
+class Horde_Log_Handler_FirebugTest extends Horde_Test_Case
 {
-    public function setUp()
+    public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
     }
