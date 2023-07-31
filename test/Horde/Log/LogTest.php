@@ -22,6 +22,7 @@
  * @package    Log
  * @subpackage UnitTests
  */
+#[\AllowDynamicProperties]
 class Horde_Log_LogTest extends Horde_Test_Case
 {
     public function setUp(): void
