@@ -22,16 +22,9 @@
             "role": "maintainer"
         }
     ],
-    "time": "2022-11-16",
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://horde-satis.maintaina.com"
-        }
-    ],
+    "time": "2025-04-30",
     "require": {
-        "php": "^7.4 || ^8",
-        "php-extended/polyfill-php80-stringable": "^1",
+        "php": "^8",
         "psr/log": "^1 || ^2 || ^3",
         "horde/constraint": "^3 || dev-FRAMEWORK_6_0",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
