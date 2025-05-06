@@ -52,7 +52,7 @@ class Horde_Log_Handler_Scribe extends Horde_Log_Handler_Base
      * @param Horde_Log_Formatter $formatter  Log formatter.
      */
     public function __construct(Horde_Scribe_Client $scribe,
-                                Horde_Log_Formatter $formatter = null)
+                                ?Horde_Log_Formatter $formatter = null)
     {
         $this->_formatter = is_null($formatter)
             ? new Horde_Log_Formatter_Simple()

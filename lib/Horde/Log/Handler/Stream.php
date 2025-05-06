@@ -64,7 +64,7 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
      * @throws Horde_Log_Exception
      */
     public function __construct($streamOrUrl, $mode = 'a+',
-                                Horde_Log_Formatter $formatter = null)
+                                ?Horde_Log_Formatter $formatter = null)
     {
         $this->_formatter = is_null($formatter)
             ? new Horde_Log_Formatter_Simple()

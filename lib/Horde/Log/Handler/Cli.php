@@ -32,7 +32,7 @@ class Horde_Log_Handler_Cli extends Horde_Log_Handler_Stream
      *
      * @param Horde_Log_Formatter $formatter  Log formatter.
      */
-    public function __construct(Horde_Log_Formatter $formatter = null)
+    public function __construct(?Horde_Log_Formatter $formatter = null)
     {
         $this->_cli = new Horde_Cli();
         $this->_formatter = is_null($formatter)
