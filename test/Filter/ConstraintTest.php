@@ -22,8 +22,10 @@ use PHPUnit\Framework\TestCase;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- * @coversNothing
- */
+*/ 
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class ConstraintTest extends TestCase
 {
     public function testFilterDoesNotAcceptWhenRequiredFieldIsMissing()

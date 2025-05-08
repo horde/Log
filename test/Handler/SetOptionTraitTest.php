@@ -28,9 +28,9 @@ class SetOptionsTraitImplementation
     use SetOptionsTrait;
 }
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class SetOptionTraitTest extends TestCase
 {
     public function setUp(): void

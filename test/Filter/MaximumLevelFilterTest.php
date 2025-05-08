@@ -23,9 +23,9 @@ use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use TypeError;
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class MaximumLevelFilterTest extends TestCase
 {
     public function setUp(): void

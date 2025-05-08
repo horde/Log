@@ -24,9 +24,9 @@ use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class StreamHandlerTest extends TestCase
 {
     public function setUp(): void

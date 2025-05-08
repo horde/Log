@@ -27,8 +27,10 @@ use Horde_Log_Filter_Level;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- * @coversNothing
- */
+*/ 
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class LevelTest extends TestCase
 {
     public function setUp(): void

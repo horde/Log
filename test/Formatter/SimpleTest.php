@@ -28,8 +28,10 @@ use Horde_Log_Formatter_Simple;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- * @coversNothing
- */
+*/ 
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class SimpleTest extends TestCase
 {
     public function testConstructorThrowsOnBadFormatString()

@@ -31,8 +31,10 @@ use TypeError;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- * @coversNothing
- */
+*/ 
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class ExactLevelFilterTest extends TestCase
 {
     public function setUp(): void

@@ -25,9 +25,9 @@ use Horde\Log\LogLevels;
 use InvalidArgumentException;
 use Horde_Log;
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class LoggerInterfaceHandlerTest extends TestCase
 {
     public function setUp(): void

@@ -19,9 +19,9 @@ use Horde\Log\LogLevel;
 use Horde\Log\LogMessage;
 use TypeError;
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class Psr3FormatterTest extends TestCase
 {
     public function SetUp(): void

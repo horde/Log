@@ -25,8 +25,10 @@ use Horde_Log_Formatter_Xml;
  * @category Horde
  * @license  http://www.horde.org/licenses/bsd BSD
  * @package  Log
- * @coversNothing
- */
+*/ 
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class XmlTest extends TestCase
 {
     public function setUp(): void

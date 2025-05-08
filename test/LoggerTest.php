@@ -32,10 +32,9 @@ use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde\Log\LogLevels;
+use PHPUnit\Framework\Attributes\CoversNothing;
 
-/**
- * @coversNothing
- */
+#[coversnothing]
 class LoggerTest extends TestCase
 {
     public function setUp(): void

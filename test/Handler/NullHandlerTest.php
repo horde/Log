@@ -23,9 +23,9 @@ use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class NullHandlerTest extends TestCase
 {
     public function testWrite()

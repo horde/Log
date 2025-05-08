@@ -21,7 +21,7 @@ use PHPUnit\Framework\TestCase;
 use Horde_Log;
 use Horde_Log_Logger;
 use Horde_Log_Handler_Stream;
-
+use PHPUnit\Framework\Attributes\CoversNothing;
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -29,8 +29,8 @@ use Horde_Log_Handler_Stream;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- * @coversNothing
  */
+#[CoversNothing]
 class ChainingTest extends TestCase
 {
     public function setUp(): void

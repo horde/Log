@@ -29,8 +29,10 @@ use Horde_Log_Handler_Firebug;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- * @coversNothing
- */
+*/ 
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class FirebugTest extends TestCase
 {
     public function setUp(): void

@@ -18,9 +18,9 @@ use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde_Constraint_AlwaysFalse;
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class ConstraintFilterTest extends TestCase
 {
     public function setUp(): void

@@ -21,9 +21,9 @@ use Horde\Log\Filter\SuppressFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class SuppressFilterTest extends TestCase
 {
     public function setUp(): void

@@ -27,8 +27,10 @@ use Horde_Log_Filter_Message;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- * @coversNothing
- */
+*/ 
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class MessageTest extends TestCase
 {
     public function testMessageFilterRecognizesInvalidRegularExpression()

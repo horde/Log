@@ -20,9 +20,9 @@ use Psr\Log\LoggerInterface;
 use Horde\Log\LogLevels;
 use Horde_Log;
 
-/**
- * @coversNothing
- */
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class LogLevelsTest extends TestCase
 {
     public function setUp(): void
