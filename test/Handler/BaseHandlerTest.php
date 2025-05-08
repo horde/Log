@@ -16,20 +16,35 @@
 namespace Horde\Log\Test\Handler;
 
 use Horde\Log\Handler\BaseHandler;
+// To test systems which interact with a handler
 use Horde\Log\Handler\MockHandler;
 use PHPUnit\Framework\TestCase;
-use Horde_Log;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde\Log\Filter\ConstraintFilter;
 use Horde\Log\Filter\MessageFilter;
+
+// Test Helper for cases in which the BaseHandler is the UUT
+class BaseHandlerImplementation extends BaseHandler
+{
+    public function write(LogMessage $event): bool
+    {
+        return true;
+    }
+
+    public function setOption($optionKey, $optionValue): bool 
+    {
+        return true;
+    }
+}
 
 class BaseHandlerTest extends TestCase
 {
     public function setUp(): void
     {
         # Bult in Mock for abstract classes (in phpunit)
-        $this->baseHandlerMock = $this->getMockForAbstractClass(BaseHandler::class);
+        $this->baseHandlerMock = $this->createMock(BaseHandler::class);
 
         # Own Mock class for testing the base class
         $this->mockhandler = new MockHandler();
@@ -40,9 +55,19 @@ class BaseHandlerTest extends TestCase
         $this->constraintFilter = new ConstraintFilter();
     }
 
+    // This test breaks in phpunit 12 and is not trivial to fix without further work
     public function testWriteFunctionIsExecutedByLog(): void
     {
-        $baseHandlerMock = $this->baseHandlerMock;
+        // Traditionally we used a mock created by getMockForAbstractClass() which is deprecated
+        // We cannot use the BaseHandlerMock here because we really want to test the BaseHandler
+        // We can use the NullHandler as it does not implement/override log()
+        // As opposed to the MockHandler which does override log() :D
+
+        $baseHandlerMock = $this->getMockBuilder(BaseHandlerImplementation::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['write'])
+            ->getMock();
+        // We need to set the log level to a higher level than the one we are testing
         $baseHandlerMock->expects($this->once())->method('write');
         $baseHandlerMock->log($this->logMessage1);
     }
@@ -53,9 +78,7 @@ class BaseHandlerTest extends TestCase
         $this->assertFalse($this->baseHandlerMock->write($this->logMessage1));
     }
 
-    /**
-     * @doesNotPerformAssertions
-     */
+    #[DoesNotPerformAssertions]
     public function testFilterMethodExistsAndDoesNotFail(): void
     {
         $this->baseHandlerMock->addFilter($this->constraintFilter);

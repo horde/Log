@@ -87,7 +87,7 @@ class ConstraintFilterTest extends TestCase
         $const = $this->getMockBuilder('Horde_Constraint', array('evaluate'))->getMock();
         $const->expects($this->once())
             ->method('evaluate')
-            ->will($this->returnValue($returnVal));
+            ->willReturn($returnVal);
         return $const;
     }
 

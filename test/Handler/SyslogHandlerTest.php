@@ -81,10 +81,4 @@ class SyslogHandlerTest extends TestCase
         $this->syshandler->setOption('openlogOptions', 'this should be a log constant or at least an integer');
         $this->syshandler->write($this->logMessage1);
     }
-
-    # I have not found a way to make the function syslog() throw errors (it is located within the if-satement of the write()-method...). That would be needed to test the errormessages
-    public function testSysLogErrorThrows()
-    {
-        $this->markTestSkipped('should be revisited?');
-    }
 }

@@ -21,11 +21,17 @@ use Horde\Log\LogException;
 use Horde\Log\Handler\Options;
 use Horde\Log\Handler\SetOptionsTrait;
 
+// Test Helper for cases in which the SetOptionsTrait is the UUT
+class SetOptionsTraitImplementation
+{
+    use SetOptionsTrait;
+}
+
 class SetOptionTraitTest extends TestCase
 {
     public function setUp(): void
     {
-        $this->setOptionsTrait = $this->getMockForTrait(SetOptionsTrait::class);
+        $this->setOptionsTrait = new SetOptionsTraitImplementation();
     }
 
     // Testing if new Options is set (without mockhandler)
