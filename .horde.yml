@@ -26,7 +26,7 @@ authors:
     active: true
     role: maintainer
 version:
-  release: 3.0.0alpha9
+  release: 3.0.0-alpha9
   api: 3.0.0alpha1
 state:
   release: alpha
@@ -43,7 +43,6 @@ dependencies:
       horde/exception: ^3
       horde/util: ^3
   dev:
-    composer:
     composer:
       phpunit/phpunit: ^12
       friendsofphp/php-cs-fixer: ^3

@@ -1,5 +1,25 @@
 ---
-3.0.0alpha9:
+3.0.0-alpha9:
+  api: 3.0.0-alpha1
+  state:
+    release: true
+    api: true
+  date: 2025-05-08
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    fix: Apply CS fixer once again
+    ci: Don't run phpstan on test dir in the mandatory step but only in the allowed-to-fail step
+    style: Turn annotations into attributes
+    fix: Removed guards no longer necessary due to signatures or new PHP behaviour >= 8.2
+    fix: Implicitly nullable parameters are not explicitly nullable
+    style: Apply php-cs-fixer
+    fix: Made tests compatible with PHPUnit 12. Removed one test which was an unconditional skip for multiple years
+    feat: Drop dependency on horde/test and use PHPUnit 11 directly.
+    fix: Multiple implicit nullables
+    fix!: Start requiring PHP 8.0 or higher, drop outdated Stringable polyfill
+3.0.0-alpha8:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -8,19 +28,10 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-    
-3.0.0alpha8:
-  api: 3.0.0alpha1
-  state:
-    release: alpha
-    api: alpha
-  date: 2022-11-16
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |+
-3.0.0alpha7:
+  notes: |-
+    Original version string was 3.0.0alpha8
+    |+
+3.0.0-alpha7:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -30,9 +41,10 @@
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
   notes: |
+    Original version string was 3.0.0alpha7
     [rla] PHP 8.1 compatibility improvements: Serialization etc.
     |+
-3.0.0alpha6:
+3.0.0-alpha6:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -41,8 +53,10 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-3.0.0alpha5:
+  notes: |-
+    Original version string was 3.0.0alpha6
+    |+
+3.0.0-alpha5:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -52,9 +66,10 @@
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
   notes: |
+    Original version string was 3.0.0alpha5
     [rla] Turned LogHandler options into classes.
     |+
-3.0.0alpha4:
+3.0.0-alpha4:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -64,9 +79,10 @@
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
   notes: |
+    Original version string was 3.0.0alpha4
     [rla] Add Namespaced, PSR-3 compatible new logger design.
     |+
-3.0.0alpha3:
+3.0.0-alpha3:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -75,8 +91,10 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-3.0.0alpha2:
+  notes: |-
+    Original version string was 3.0.0alpha3
+    |+
+3.0.0-alpha2:
   api: 3.0.0alpha1
   state:
     release: alpha
@@ -85,8 +103,10 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: |+
-3.0.0alpha1:
+  notes: |-
+    Original version string was 3.0.0alpha2
+    |+
+3.0.0-alpha1:
   api: 3.0.0alpha1
   state:
     release: stable
@@ -95,7 +115,8 @@
   license:
     identifier: BSD-2-Clause
     uri: http://www.horde.org/licenses/bsd
-  notes: ~
+  notes: |
+    Original version string was 3.0.0alpha1
 2.3.0:
   api: 1.3.0
   state:
@@ -174,6 +195,30 @@
     uri: http://www.horde.org/licenses/bsd
   notes: |
     [mms] Use new Horde_Test layout.
+2.0.0-beta1:
+  api: 1.1.0
+  state:
+    release: beta
+    api: stable
+  date: 2012-07-19
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 2.0.0beta1
+    First beta release for Horde 5.
+2.0.0-alpha1:
+  api: 1.1.0
+  state:
+    release: alpha
+    api: stable
+  date: 2012-07-05
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 2.0.0alpha1
+    First alpha release for Horde 5.
 2.0.0:
   api: 1.1.0
   state:
@@ -185,28 +230,6 @@
     uri: http://www.horde.org/licenses/bsd
   notes: |
     First stable release for Horde 5.
-2.0.0beta1:
-  api: 1.1.0
-  state:
-    release: beta
-    api: stable
-  date: 2012-07-19
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First beta release for Horde 5.
-2.0.0alpha1:
-  api: 1.1.0
-  state:
-    release: alpha
-    api: stable
-  date: 2012-07-05
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First alpha release for Horde 5.
 1.1.2:
   api: 1.1.0
   state:
@@ -240,6 +263,55 @@
     uri: http://www.horde.org/licenses/bsd
   notes: |
     [cjh] New log filter for exact level matching (Bryan Alves <bryanalves@gmail.com>)
+1.0.0-beta1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-16
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 1.0.0beta1
+    First beta release for Horde 4.
+1.0.0-alpha1:
+  api: 1.0.0
+  state:
+    release: alpha
+    api: alpha
+  date: 2011-03-08
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 1.0.0alpha1
+    First alpha release for Horde 4.
+    Added Horde_Log_Filter_Constraint, for flexible filtering per-field by the Horde_Constraint package.
+1.0.0-RC2:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-29
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 1.0.0RC2
+    Second release candidate for Horde 4.
+1.0.0-RC1:
+  api: 1.0.0
+  state:
+    release: beta
+    api: beta
+  date: 2011-03-22
+  license:
+    identifier: BSD-2-Clause
+    uri: http://www.horde.org/licenses/bsd
+  notes: |
+    Original version string was 1.0.0RC1
+    First release candidate for Horde 4.
 1.0.0:
   api: 1.0.0
   state:
@@ -251,48 +323,3 @@
     uri: http://www.horde.org/licenses/bsd
   notes: |
     First stable release for Horde 4.
-1.0.0RC2:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-29
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    Second release candidate for Horde 4.
-1.0.0RC1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-22
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First release candidate for Horde 4.
-1.0.0beta1:
-  api: 1.0.0
-  state:
-    release: beta
-    api: beta
-  date: 2011-03-16
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First beta release for Horde 4.
-1.0.0alpha1:
-  api: 1.0.0
-  state:
-    release: alpha
-    api: alpha
-  date: 2011-03-08
-  license:
-    identifier: BSD-2-Clause
-    uri: http://www.horde.org/licenses/bsd
-  notes: |
-    First alpha release for Horde 4.
-    Added Horde_Log_Filter_Constraint, for flexible filtering per-field by the Horde_Constraint package.
