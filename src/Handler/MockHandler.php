@@ -42,7 +42,7 @@ class MockHandler extends BaseHandler
     */
     public $check;
 
-    public function __construct(Options $options = null)
+    public function __construct(?Options $options = null)
     {
         $this->options = $options ?? new Options();
     }

@@ -36,7 +36,7 @@ class NullHandler extends BaseHandler
     use SetOptionsTrait;
     private Options $options;
 
-    public function __construct(Options $options = null)
+    public function __construct(?Options $options = null)
     {
         $this->options = $options ?? new Options();
     }

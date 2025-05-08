@@ -46,7 +46,7 @@ class Horde_Log_Filter_Constraint implements Horde_Log_Filter
      *                                           multiple constraints.
      *                                           Defaults to And.
      */
-    public function __construct(Horde_Constraint_Coupler $coupler = null)
+    public function __construct(?Horde_Constraint_Coupler $coupler = null)
     {
         $this->_coupler = is_null($coupler)
             ? new Horde_Constraint_And()

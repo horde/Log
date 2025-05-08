@@ -20,7 +20,7 @@ class LoggerBuilder
     private LogLevels $loglevels;
     private Logger $logger;
 
-    public function __construct(LogLevels $loglevels = null)
+    public function __construct(?LogLevels $loglevels = null)
     {
         $this->reset($loglevels);
     }
@@ -28,7 +28,7 @@ class LoggerBuilder
      * Create an all-new logger instance without any handler or filter
      *
      */
-    public function reset(LogLevels $loglevels = null): self
+    public function reset(?LogLevels $loglevels = null): self
     {
         $this->loglevels = $loglevels ?? LogLevels::initWithCanonicalLevels();
         $this->logger = new Logger([], $loglevels);

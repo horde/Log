@@ -64,7 +64,7 @@ class Logger implements LoggerInterface
      * @param LogLevels|null $levels A list of log levels to operate on. Null initializes with the RFC loglevels
      * @param LogFilter[]  $filters A list of global filters to apply before any log handler. Log handlers may have their own filters
      */
-    public function __construct(array $handlers = [], LogLevels $levels = null, array $filters = [])
+    public function __construct(array $handlers = [], ?LogLevels $levels = null, array $filters = [])
     {
         if (isset($levels)) {
             $this->levels = $levels;

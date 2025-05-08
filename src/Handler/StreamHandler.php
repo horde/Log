@@ -73,8 +73,8 @@ class StreamHandler extends BaseHandler
     public function __construct(
         $streamOrUrl,
         $mode = 'a+',
-        Options $options = null,
-        array $formatters = null
+        ?Options $options = null,
+        ?array $formatters = null
     ) {
         $this->options = $options ?? new Options();
         $this->formatters = $formatters ?? [new SimpleFormatter()];

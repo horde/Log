@@ -48,10 +48,6 @@ class MinimumLevelFilter implements LogFilter
      */
     public function __construct(int $level)
     {
-        if (!is_integer($level)) {
-            throw new InvalidArgumentException('Level must be an integer');
-        }
-
         $this->level = $level;
     }
 
