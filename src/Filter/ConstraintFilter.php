@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     James Pepin <james@jamespepin.com>
  * @category   Horde

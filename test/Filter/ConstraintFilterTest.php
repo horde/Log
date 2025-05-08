@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -12,12 +13,14 @@
 namespace Horde\Log\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
-
 use Horde\Log\Filter\ConstraintFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde_Constraint_AlwaysFalse;
 
+/**
+ * @coversNothing
+ */
 class ConstraintFilterTest extends TestCase
 {
     public function setUp(): void
@@ -84,7 +87,7 @@ class ConstraintFilterTest extends TestCase
 
     private function getConstraintMock($returnVal)
     {
-        $const = $this->getMockBuilder('Horde_Constraint', array('evaluate'))->getMock();
+        $const = $this->getMockBuilder('Horde_Constraint', ['evaluate'])->getMock();
         $const->expects($this->once())
             ->method('evaluate')
             ->willReturn($returnVal);
@@ -109,7 +112,7 @@ class ConstraintFilterTest extends TestCase
         $filterator->addConstraint('fieldname', $this->getConstraintMock(true));
         $filterator->addConstraint('fieldname', new Horde_Constraint_AlwaysFalse());
 
-        $const = $this->getMockBuilder('Horde_Constraint', array('evaluate'))->getMock();
+        $const = $this->getMockBuilder('Horde_Constraint', ['evaluate'])->getMock();
         $const->expects($this->never())
             ->method('evaluate');
         $filterator->addConstraint('fieldname', $const);
@@ -119,7 +122,7 @@ class ConstraintFilterTest extends TestCase
     public function testFilterAcceptCallsConstraintOnNullWhenFieldDoesnotExist()
     {
         $filterator = new ConstraintFilter();
-        $const = $this->getMockBuilder('Horde_Constraint', array('evaluate'))->getMock();
+        $const = $this->getMockBuilder('Horde_Constraint', ['evaluate'])->getMock();
         $const->expects($this->once())
             ->method('evaluate')
             ->with(null);

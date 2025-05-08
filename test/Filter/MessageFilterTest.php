@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -12,20 +13,19 @@
  * @package    Log
  * @subpackage UnitTests
  */
+
 namespace Horde\Log\Test\Filter;
 
-
-use \PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use Horde\Log\Filter\MessageFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 
-
-
-
+/**
+ * @coversNothing
+ */
 class MessageFilterTest extends TestCase
 {
-
     public function setUp(): void
     {
         $this->level1 = new LogLevel(1, 'testName1');
@@ -36,7 +36,8 @@ class MessageFilterTest extends TestCase
         $this->logMessage2 = new LogMessage($this->level2, $this->message2);
     }
 
-    public function testMessageFilterRecognizesInvalidRegularExpression(){
+    public function testMessageFilterRecognizesInvalidRegularExpression()
+    {
         $this->expectException('InvalidArgumentException');
         new MessageFilter('invalid regexp');
     }

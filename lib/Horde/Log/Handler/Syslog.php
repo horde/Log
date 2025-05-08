@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -26,12 +27,12 @@ class Horde_Log_Handler_Syslog extends Horde_Log_Handler_Base
      *
      * @var array
      */
-    protected $_options = array(
+    protected $_options = [
         'defaultPriority'  => LOG_ERR,
         'facility'         => LOG_USER,
         'ident'            => false,
-        'openlogOptions'   => false
-    );
+        'openlogOptions'   => false,
+    ];
 
     /**
      * Last ident set by a syslog-handler instance.
@@ -52,7 +53,7 @@ class Horde_Log_Handler_Syslog extends Horde_Log_Handler_Base
      *
      * @var array
      */
-    protected $_priorities = array(
+    protected $_priorities = [
         Horde_Log::EMERG   => LOG_EMERG,
         Horde_Log::ALERT   => LOG_ALERT,
         Horde_Log::CRIT    => LOG_CRIT,
@@ -61,7 +62,7 @@ class Horde_Log_Handler_Syslog extends Horde_Log_Handler_Base
         Horde_Log::NOTICE  => LOG_NOTICE,
         Horde_Log::INFO    => LOG_INFO,
         Horde_Log::DEBUG   => LOG_DEBUG,
-    );
+    ];
 
     /**
      * Write a message to the log.
@@ -95,9 +96,8 @@ class Horde_Log_Handler_Syslog extends Horde_Log_Handler_Base
      */
     protected function _toSyslog($level)
     {
-        return isset($this->_priorities[$level])
-            ? $this->_priorities[$level]
-            : $this->_options['defaultPriority'];
+        return $this->_priorities[$level]
+            ?? $this->_options['defaultPriority'];
     }
 
     /**

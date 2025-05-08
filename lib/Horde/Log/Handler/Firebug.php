@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -32,24 +33,24 @@ class Horde_Log_Handler_Firebug extends Horde_Log_Handler_Base
      *
      * @var array
      */
-    protected $_options = array(
+    protected $_options = [
         'buffering' => false,
-        'ident' => ''
-    );
+        'ident' => '',
+    ];
 
     /**
      * Array of buffered output.
      *
      * @var string
      */
-    protected $_buffer = array();
+    protected $_buffer = [];
 
     /**
      * Mapping of log priorities to Firebug methods.
      *
      * @var array
      */
-    protected static $_methods = array(
+    protected static $_methods = [
         Horde_Log::EMERG   => 'error',
         Horde_Log::ALERT   => 'error',
         Horde_Log::CRIT    => 'error',
@@ -58,7 +59,7 @@ class Horde_Log_Handler_Firebug extends Horde_Log_Handler_Base
         Horde_Log::NOTICE  => 'info',
         Horde_Log::INFO    => 'info',
         Horde_Log::DEBUG   => 'debug',
-    );
+    ];
 
     /**
      * Class Constructor
@@ -107,7 +108,7 @@ class Horde_Log_Handler_Firebug extends Horde_Log_Handler_Base
             return true;
         }
 
-        $output = array();
+        $output = [];
         foreach ($this->_buffer as $event) {
             $line = trim($this->_formatter->format($event));
 
@@ -121,9 +122,8 @@ class Horde_Log_Handler_Firebug extends Horde_Log_Handler_Base
             $line = str_replace('"', '\\"', $line);
 
             // Firebug call.
-            $method = isset(self::$_methods[$event['level']])
-                ? self::$_methods[$event['level']]
-                : 'log';
+            $method = self::$_methods[$event['level']]
+                ?? 'log';
             $output[] = 'console.' . $method . '("' . $line . '");';
         }
 
@@ -133,7 +133,7 @@ class Horde_Log_Handler_Firebug extends Horde_Log_Handler_Base
             . "}\n"
             . "</script>\n";
 
-        $this->_buffer = array();
+        $this->_buffer = [];
     }
 
 }

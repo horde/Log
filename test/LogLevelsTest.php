@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests for the LogLevels
  *
@@ -19,6 +20,9 @@ use Psr\Log\LoggerInterface;
 use Horde\Log\LogLevels;
 use Horde_Log;
 
+/**
+ * @coversNothing
+ */
 class LogLevelsTest extends TestCase
 {
     public function setUp(): void
@@ -79,7 +83,7 @@ class LogLevelsTest extends TestCase
             4 => 'warning',
             5 => 'notice',
             6 => 'info',
-            7 => 'debug'
+            7 => 'debug',
         ];
 
         $levelNamesAliases = [
@@ -88,7 +92,7 @@ class LogLevelsTest extends TestCase
             3 => 'err',
             4 =>  'warn',
             5 => 'information',
-            6 => 'informational'
+            6 => 'informational',
         ];
 
         // testing cannonical names and levels
@@ -115,7 +119,7 @@ class LogLevelsTest extends TestCase
             } else {
                 $this->assertStringContainsString($bynameAlias->name(), $bycriticalityAlias->name());
             }
-            $count ++;
+            $count++;
         }
 
         // checking that all the aliases are passed through the function

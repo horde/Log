@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Tests for the Logger Interface Handler
  *
@@ -24,6 +25,9 @@ use Horde\Log\LogLevels;
 use InvalidArgumentException;
 use Horde_Log;
 
+/**
+ * @coversNothing
+ */
 class LoggerInterfaceHandlerTest extends TestCase
 {
     public function setUp(): void

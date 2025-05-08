@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -13,11 +14,13 @@
  * @package    Log
  * @subpackage UnitTests
  */
+
 namespace Horde\Log\Test\Filter;
-use \PHPUnit\Framework\TestCase;
-use \Horde_Log;
-use \Horde_Log_Logger;
-use \Horde_Log_Handler_Stream;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Log;
+use Horde_Log_Logger;
+use Horde_Log_Handler_Stream;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -26,6 +29,7 @@ use \Horde_Log_Handler_Stream;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
+ * @coversNothing
  */
 class ChainingTest extends TestCase
 {

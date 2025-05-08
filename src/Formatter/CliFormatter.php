@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2013-2017 Horde LLC (http://www.horde.org/).
  *
@@ -55,31 +56,31 @@ class CliFormatter implements LogFormatter
     public function format(LogMessage $event): string
     {
         $loglevel = $event->level();
-        $flag = '['. str_pad($loglevel->name(), 7, ' ', STR_PAD_BOTH) . '] ';
+        $flag = '[' . str_pad($loglevel->name(), 7, ' ', STR_PAD_BOTH) . '] ';
 
         switch ($loglevel->name()) {
-        case 'emergency':
-        case 'alert':
-        case 'critical':
-        case 'crit':
-        case 'error':
-        case 'err':
-            $type_message = $this->cli->color('red', $flag);
-            break;
+            case 'emergency':
+            case 'alert':
+            case 'critical':
+            case 'crit':
+            case 'error':
+            case 'err':
+                $type_message = $this->cli->color('red', $flag);
+                break;
 
-        case 'warn':
-        case 'warning':
-        case 'notice':
-            $type_message = $this->cli->color('yellow', $flag);
-            break;
+            case 'warn':
+            case 'warning':
+            case 'notice':
+                $type_message = $this->cli->color('yellow', $flag);
+                break;
 
-        case 'info':
-        case 'debug':
-            $type_message = $this->cli->color('blue', $flag);
-            break;
+            case 'info':
+            case 'debug':
+                $type_message = $this->cli->color('blue', $flag);
+                break;
 
-        default:
-            $type_message = $flag;
+            default:
+                $type_message = $flag;
         }
 
         return $type_message . $event->message();

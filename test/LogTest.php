@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -13,11 +14,13 @@
  * @package    Log
  * @subpackage UnitTests
  */
+
 namespace Horde\Log\Test;
-use \PHPUnit\Framework\TestCase;
-use \Horde_Log_Handler_Stream;
-use \Horde_Log;
-use \Horde_Log_Logger;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Log_Handler_Stream;
+use Horde_Log;
+use Horde_Log_Logger;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -26,6 +29,7 @@ use \Horde_Log_Logger;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
+ * @coversNothing
  */
 class LogTest extends TestCase
 {

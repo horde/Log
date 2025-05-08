@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package.
  *
@@ -17,18 +18,14 @@ namespace Horde\Log\Test;
 
 use Horde\Log\Logger;
 use PHPUnit\Framework\TestCase;
-
 use Psr\Log\LoggerInterface;
-
 use Horde\Util\HordeString;
 use Psr\Log\InvalidArgumentException;
 use Stringable;
-
 use Horde\Log\Filter\MessageFilter;
 use Horde\Log\Handler\MockHandler;
 use Horde\Log\Handler\SyslogHandler;
 use ReflectionClass;
-
 use Horde\Log\LogHandler;
 use Horde\Log\LogException;
 use Horde_Log;
@@ -36,6 +33,9 @@ use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde\Log\LogLevels;
 
+/**
+ * @coversNothing
+ */
 class LoggerTest extends TestCase
 {
     public function setUp(): void

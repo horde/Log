@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -13,9 +14,11 @@
  * @package    Log
  * @subpackage UnitTests
  */
+
 namespace Horde\Log\Test\Filter;
-use \PHPUnit\Framework\TestCase;
-use \Horde_Log_Filter_Message;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Log_Filter_Message;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -24,10 +27,10 @@ use \Horde_Log_Filter_Message;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
+ * @coversNothing
  */
 class MessageTest extends TestCase
 {
-
     public function testMessageFilterRecognizesInvalidRegularExpression()
     {
         $this->expectException('InvalidArgumentException');
@@ -37,8 +40,8 @@ class MessageTest extends TestCase
     public function testMessageFilter()
     {
         $filter = new Horde_Log_Filter_Message('/accept/');
-        $this->assertTrue($filter->accept(array('message' => 'foo accept bar', 'level' => 0)));
-        $this->assertFalse($filter->accept(array('message' => 'foo reject bar', 'level' => 0)));
+        $this->assertTrue($filter->accept(['message' => 'foo accept bar', 'level' => 0]));
+        $this->assertFalse($filter->accept(['message' => 'foo reject bar', 'level' => 0]));
     }
 
 }

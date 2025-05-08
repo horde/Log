@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -50,8 +51,7 @@ class ScribeHandler extends BaseHandler
         Horde_Scribe_Client $scribe,
         array $formatters = null,
         ScribeOptions $options = null
-    )
-    {
+    ) {
         $this->formatters = is_null($formatters)
             ? [new SimpleFormatter()]
             : $formatters;

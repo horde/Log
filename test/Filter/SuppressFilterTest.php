@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -12,16 +13,17 @@
  * @package    Log
  * @subpackage UnitTests
  */
+
 namespace Horde\Log\Test\Filter;
 
-use \PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\TestCase;
 use Horde\Log\Filter\SuppressFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 
-
-
-
+/**
+ * @coversNothing
+ */
 class SuppressFilterTest extends TestCase
 {
     public function setUp(): void
@@ -38,7 +40,7 @@ class SuppressFilterTest extends TestCase
         $this->logMessage3 = new LogMessage($this->level3, $this->message3);
     }
 
-    
+
     public function testSuppressIsInitiallyOff()
     {
         $this->assertTrue($this->filter->accept($this->logMessage1));
@@ -47,7 +49,7 @@ class SuppressFilterTest extends TestCase
 
     public function testSuppressOn()
     {
-       
+
         $this->filter->suppress(true);
         $this->assertFalse($this->filter->accept($this->logMessage1));
         $this->assertFalse($this->filter->accept($this->logMessage2));

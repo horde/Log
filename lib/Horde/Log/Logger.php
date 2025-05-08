@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -33,7 +34,7 @@
 class Horde_Log_Logger implements Serializable
 {
     /* Serialize version. */
-    const VERSION = 1;
+    public const VERSION = 1;
 
     /**
      * Log levels where the keys are the level priorities and the values are
@@ -41,21 +42,21 @@ class Horde_Log_Logger implements Serializable
      *
      * @var array
      */
-    protected $_levels = array();
+    protected $_levels = [];
 
     /**
      * Horde_Log_Handler_Base objects.
      *
      * @var array
      */
-    protected $_handlers = array();
+    protected $_handlers = [];
 
     /**
      * Horde_Log_Filter objects.
      *
      * @var array
      */
-    protected $_filters = array();
+    protected $_filters = [];
 
     /**
      * Constructor.
@@ -78,11 +79,11 @@ class Horde_Log_Logger implements Serializable
      */
     public function serialize()
     {
-        return serialize(array(
+        return serialize([
             self::VERSION,
             $this->_filters,
-            $this->_handlers
-        ));
+            $this->_handlers,
+        ]);
     }
 
     /**
@@ -95,7 +96,7 @@ class Horde_Log_Logger implements Serializable
         return [
             self::VERSION,
             $this->_filters,
-            $this->_handlers
+            $this->_handlers,
         ];
     }
 
@@ -201,7 +202,7 @@ class Horde_Log_Logger implements Serializable
         } else {
             // Create an event array from the message and level
             // arguments.
-            $event = array('message' => $event, 'level' => $level);
+            $event = ['message' => $event, 'level' => $level];
         }
 
         if (($level = array_search($event['level'], $this->_levels)) === false) {

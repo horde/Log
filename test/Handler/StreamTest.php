@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -13,10 +14,12 @@
  * @package    Log
  * @subpackage UnitTests
  */
+
 namespace Horde\Log\Test\Handler;
-use \PHPUnit\Framework\TestCase;
-use \Horde_Log_Handler_Stream;
-use \Horde_Log;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Log_Handler_Stream;
+use Horde_Log;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -25,6 +28,7 @@ use \Horde_Log;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
+ * @coversNothing
  */
 class StreamTest extends TestCase
 {
@@ -83,10 +87,10 @@ class StreamTest extends TestCase
         $stream = fopen('php://memory', 'a');
 
         $handler = new Horde_Log_Handler_Stream($stream);
-        $handler->write(array('message' => $message = 'message-to-log',
-                              'level' => $level = Horde_Log::ALERT,
-                              'levelName' => $levelName = 'ALERT',
-                              'timestamp' => date('c')));
+        $handler->write(['message' => $message = 'message-to-log',
+            'level' => $level = Horde_Log::ALERT,
+            'levelName' => $levelName = 'ALERT',
+            'timestamp' => date('c')]);
 
         rewind($stream);
         $contents = stream_get_contents($stream);
@@ -103,7 +107,7 @@ class StreamTest extends TestCase
         $stream = fopen('php://memory', 'a');
         $handler = new Horde_Log_Handler_Stream($stream);
         fclose($stream);
-        $handler->write(array('message' => 'foo', 'level' => 1));
+        $handler->write(['message' => 'foo', 'level' => 1]);
     }
 
 }

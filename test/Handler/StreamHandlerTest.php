@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -23,6 +24,9 @@ use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 
+/**
+ * @coversNothing
+ */
 class StreamHandlerTest extends TestCase
 {
     public function setUp(): void

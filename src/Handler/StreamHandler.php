@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -74,8 +75,7 @@ class StreamHandler extends BaseHandler
         $mode = 'a+',
         Options $options = null,
         array $formatters = null
-    )
-    {
+    ) {
         $this->options = $options ?? new Options();
         $this->formatters = $formatters ?? [new SimpleFormatter()];
         $this->mode = $mode;

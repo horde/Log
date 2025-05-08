@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     James Pepin <james@jamespepin.com>
  * @category   Horde
@@ -27,7 +28,7 @@ class Horde_Log_Filter_Constraint implements Horde_Log_Filter
      *
      * @var array
      */
-    protected $_constraints = array();
+    protected $_constraints = [];
 
     /**
      * Default constraint coupler.
@@ -131,7 +132,7 @@ class Horde_Log_Filter_Constraint implements Horde_Log_Filter
     public function accept($event)
     {
         foreach ($this->_constraints as $field => $constraint) {
-            $value = isset($event[$field]) ? $event[$field] : null;
+            $value = $event[$field] ?? null;
             if (!$constraint->evaluate($value)) {
                 return Horde_Log_Filter::IGNORE;
             }

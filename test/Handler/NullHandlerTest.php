@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -22,6 +23,9 @@ use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 
+/**
+ * @coversNothing
+ */
 class NullHandlerTest extends TestCase
 {
     public function testWrite()

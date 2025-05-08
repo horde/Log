@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wrap any PSR-3 logger as a Handler for the Horde Logger
  *

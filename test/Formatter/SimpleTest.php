@@ -28,6 +28,7 @@ use Horde_Log_Formatter_Simple;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
+ * @coversNothing
  */
 class SimpleTest extends TestCase
 {
@@ -40,11 +41,11 @@ class SimpleTest extends TestCase
     public function testDefaultFormat()
     {
         $f = new Horde_Log_Formatter_Simple();
-        $line = $f->format(array(
+        $line = $f->format([
             'message' => $message = 'message',
             'level' => $level = Horde_Log::ALERT,
-            'levelName' => $levelName = 'ALERT'
-        ));
+            'levelName' => $levelName = 'ALERT',
+        ]);
 
         $this->assertStringContainsString($message, $line);
         $this->assertStringContainsString($levelName, $line);

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -13,9 +14,11 @@
  * @package    Log
  * @subpackage UnitTests
  */
+
 namespace Horde\Log\Test\Handler;
-use \PHPUnit\Framework\TestCase;
-use \Horde_Log_Handler_Null;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Log_Handler_Null;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -24,12 +27,13 @@ use \Horde_Log_Handler_Null;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
+ * @coversNothing
  */
 class NullTest extends TestCase
 {
     public function testWrite()
     {
         $handler = new Horde_Log_Handler_Null();
-        $this->assertTrue($handler->write(array('message' => 'foo', 'level' => 42)));
+        $this->assertTrue($handler->write(['message' => 'foo', 'level' => 42]));
     }
 }

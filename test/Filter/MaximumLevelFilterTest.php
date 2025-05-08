@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -22,6 +23,9 @@ use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use TypeError;
 
+/**
+ * @coversNothing
+ */
 class MaximumLevelFilterTest extends TestCase
 {
     public function setUp(): void

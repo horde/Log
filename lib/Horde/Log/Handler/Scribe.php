@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -39,11 +40,11 @@ class Horde_Log_Handler_Scribe extends Horde_Log_Handler_Base
      *
      * @var array
      */
-    protected $_options = array(
+    protected $_options = [
         'addNewline' => false,
         'category'   => 'default',
-        'ident' => ''
-    );
+        'ident' => '',
+    ];
 
     /**
      * Constructor.
@@ -51,9 +52,10 @@ class Horde_Log_Handler_Scribe extends Horde_Log_Handler_Base
      * @param Horde_Scribe_Client $scribe     Scribe client.
      * @param Horde_Log_Formatter $formatter  Log formatter.
      */
-    public function __construct(Horde_Scribe_Client $scribe,
-                                ?Horde_Log_Formatter $formatter = null)
-    {
+    public function __construct(
+        Horde_Scribe_Client $scribe,
+        ?Horde_Log_Formatter $formatter = null
+    ) {
         $this->_formatter = is_null($formatter)
             ? new Horde_Log_Formatter_Simple()
             : $formatter;
@@ -73,9 +75,8 @@ class Horde_Log_Handler_Scribe extends Horde_Log_Handler_Base
             $event['message'] = $this->_options['ident'] . ' ' . $event['message'];
         }
 
-        $category = isset($event['category'])
-            ? $event['category']
-            : $this->_options['category'];
+        $category = $event['category']
+            ?? $this->_options['category'];
 
         $message = $this->_formatter->format($event);
         if (!$this->_options['addNewline']) {

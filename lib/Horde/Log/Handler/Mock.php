@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -29,7 +30,7 @@ class Horde_Log_Handler_Mock extends Horde_Log_Handler_Base
      *
      * @var array
      */
-    public $events = array();
+    public $events = [];
 
     /**
      * Was shutdown called?

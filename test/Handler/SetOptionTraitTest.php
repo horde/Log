@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -27,6 +28,9 @@ class SetOptionsTraitImplementation
     use SetOptionsTrait;
 }
 
+/**
+ * @coversNothing
+ */
 class SetOptionTraitTest extends TestCase
 {
     public function setUp(): void

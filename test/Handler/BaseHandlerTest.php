@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -19,7 +20,8 @@ use Horde\Log\Handler\BaseHandler;
 // To test systems which interact with a handler
 use Horde\Log\Handler\MockHandler;
 use PHPUnit\Framework\TestCase;
-use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;use Horde_Log;
+use PHPUnit\Framework\Attributes\DoesNotPerformAssertions;
+use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde\Log\Filter\ConstraintFilter;
@@ -33,12 +35,15 @@ class BaseHandlerImplementation extends BaseHandler
         return true;
     }
 
-    public function setOption($optionKey, $optionValue): bool 
+    public function setOption($optionKey, $optionValue): bool
     {
         return true;
     }
 }
 
+/**
+ * @coversNothing
+ */
 class BaseHandlerTest extends TestCase
 {
     public function setUp(): void
