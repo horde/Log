@@ -22,6 +22,7 @@ use Horde\Log\LogFilter;
 use Horde\Log\LogHandler;
 use Horde\Log\LogMessage;
 use Horde\Log\LogException;
+use Stringable;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -37,10 +38,8 @@ class MockHandler extends BaseHandler
     private Options $options;
 
 
-    /** Check variables used for testing
-    *  @var mixed;
-    */
-    public $check;
+    /** Check variables used for testing */
+    public string|Stringable $check;
 
     public function __construct(?Options $options = null)
     {

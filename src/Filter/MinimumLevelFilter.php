@@ -44,7 +44,6 @@ class MinimumLevelFilter implements LogFilter
      *
      * @param int $level  Maximum log level to pass through the filter.
      *
-     * @throws InvalidArgumentException
      */
     public function __construct(int $level)
     {

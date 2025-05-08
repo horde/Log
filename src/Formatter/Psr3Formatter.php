@@ -43,8 +43,6 @@ class Psr3Formatter implements LogFormatter
      *
      * @param string[]|Stringable[]|int[]|float[] $defaultContext Defaults hash for missing context values. Key will be the placeholder, value will be the filled in data. Actual context overwrites defaults
      *
-     *
-     * @throws InvalidArgumentException
      */
     public function __construct(array $defaultContext = [])
     {

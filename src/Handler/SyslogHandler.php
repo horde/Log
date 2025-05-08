@@ -20,6 +20,7 @@ use Horde\Log\LogFormatter;
 use Horde\Log\LogHandler;
 use Horde\Log\LogMessage;
 use Horde\Log\LogException;
+use syslog;
 
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
@@ -85,9 +86,7 @@ class SyslogHandler extends BaseHandler
         }
 
         $priority = $event->level()->criticality();
-        if (!syslog($priority, $event->formattedMessage())) {
-            throw new LogException('Unable to log message');
-        }
+        syslog($priority, $event->formattedMessage());
         return true;
     }
 
@@ -104,12 +103,7 @@ class SyslogHandler extends BaseHandler
         if (!is_string($this->lastIdent)) {
             throw new LogException('Please set the indent to a String');
         }
-        if (!is_int($this->options->openLogOptions)) {
-            throw new LogException('Please set the openlogOptions to a log constant with integer value (e.g. LOG_PERROR). For more information look at PHP documentation about openlog() and its options parameter');
-        }
 
-        if (!openlog($this->options->ident, $this->options->openLogOptions, $this->options->facility)) {
-            throw new LogException('Unable to open syslog');
-        }
+        openlog($this->options->ident, $this->options->openLogOptions, $this->options->facility);
     }
 }
