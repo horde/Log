@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -13,10 +14,11 @@
  * @package    Log
  * @subpackage UnitTests
  */
-namespace Horde\Log\Test\Filter;
-use \PHPUnit\Framework\TestCase;
-use \Horde_Log_Filter_Level;
 
+namespace Horde\Log\Test\Filter;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Log_Filter_Level;
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -24,7 +26,10 @@ use \Horde_Log_Filter_Level;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- */
+*/
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class LevelTest extends TestCase
 {
     public function setUp(): void
@@ -35,13 +40,13 @@ class LevelTest extends TestCase
 
     public function testLevelFilterAccept()
     {
-        $this->assertTrue($this->filter->accept(array('message' => '', 'level' => 2)));
-        $this->assertTrue($this->filter->accept(array('message' => '', 'level' => 1)));
+        $this->assertTrue($this->filter->accept(['message' => '', 'level' => 2]));
+        $this->assertTrue($this->filter->accept(['message' => '', 'level' => 1]));
     }
 
     public function testLevelFilterReject()
     {
-        $this->assertFalse($this->filter->accept(array('message' => '', 'level' => 3)));
+        $this->assertFalse($this->filter->accept(['message' => '', 'level' => 3]));
     }
 
     public function testConstructorThrowsOnInvalidLevel()

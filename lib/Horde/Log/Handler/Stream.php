@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -63,9 +64,11 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
      *
      * @throws Horde_Log_Exception
      */
-    public function __construct($streamOrUrl, $mode = 'a+',
-                                ?Horde_Log_Formatter $formatter = null)
-    {
+    public function __construct(
+        $streamOrUrl,
+        $mode = 'a+',
+        ?Horde_Log_Formatter $formatter = null
+    ) {
         $this->_formatter = is_null($formatter)
             ? new Horde_Log_Formatter_Simple()
             : $formatter;
@@ -96,14 +99,14 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
     {
         $streamOrUrl = $this->_streamOrUrl;
         try {
-            $res = $this->_stream = @fopen($streamOrUrl, $this->_mode, false); 
+            $res = $this->_stream = @fopen($streamOrUrl, $this->_mode, false);
         } catch (Throwable $e) {
             if (is_resource($streamOrUrl)) {
                 $streamOrUrl = 'resource';
             } elseif (is_object($streamOrUrl) && !method_exists($streamOrUrl, '__toString')) {
-                    $streamOrUrl = get_class($streamOrUrl);
+                $streamOrUrl = get_class($streamOrUrl);
             } else {
-                    $streamOrUrl = (string) $streamOrUrl;
+                $streamOrUrl = (string) $streamOrUrl;
             }
             throw new Horde_Log_Exception(__CLASS__ . ': "' . $streamOrUrl . '" cannot be opened with mode "' . $this->_mode . '"' . $e->getMessage());
         }
@@ -130,7 +133,7 @@ class Horde_Log_Handler_Stream extends Horde_Log_Handler_Base
         try {
             $res = @fwrite($this->_stream, $line);
         } catch (Throwable $e) {
-                throw new Horde_Log_Exception(__CLASS__ . ': Unable to write to stream: ' . $this->_mode . '"' . $e->getMessage());
+            throw new Horde_Log_Exception(__CLASS__ . ': Unable to write to stream: ' . $this->_mode . '"' . $e->getMessage());
         }
         if (!$res) {
             throw new Horde_Log_Exception(__CLASS__ . ': Unable to write to stream');

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @author     James Pepin <james@jamespepin.com>
  * @category   Horde
@@ -57,7 +58,7 @@ class ConstraintFilter implements LogFilter
      *                                           multiple constraints.
      *                                           Defaults to And.
      */
-    public function __construct(Horde_Constraint_Coupler $coupler = null)
+    public function __construct(?Horde_Constraint_Coupler $coupler = null)
     {
         $this->coupler = is_null($coupler)
             ? new Horde_Constraint_And()

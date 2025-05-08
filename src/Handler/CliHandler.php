@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2013-2017 Horde LLC (http://www.horde.org/)
  *
@@ -51,7 +52,7 @@ class CliHandler extends StreamHandler
      * @param LogFormatter[]|null $formatters  Log formatters.
      * @param Horde_Cli|null $cli CLI Output object.
      */
-    public function __construct(array $formatters = null, Horde_Cli $cli = null, Options $options = null)
+    public function __construct(?array $formatters = null, ?Horde_Cli $cli = null, ?Options $options = null)
     {
         $this->options = $options ?? new Options();
         $this->cli = $cli ?? new Horde_Cli();

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -13,13 +14,13 @@
 namespace Horde\Log\Test;
 
 use PHPUnit\Framework\TestCase;
-
 use Horde\Log\Formatter\Psr3Formatter;
 use Horde\Log\LogLevel;
 use Horde\Log\LogMessage;
-
 use TypeError;
+use PHPUnit\Framework\Attributes\CoversNothing;
 
+#[coversnothing]
 class Psr3FormatterTest extends TestCase
 {
     public function SetUp(): void

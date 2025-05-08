@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -28,12 +29,12 @@ interface Horde_Log_Filter
     /**
      * Accept a message
      */
-    const ACCEPT = true;
+    public const ACCEPT = true;
 
     /**
      * Filter out a message
      */
-    const IGNORE = false;
+    public const IGNORE = false;
 
     /**
      * Returns Horde_Log_Filter::ACCEPT to accept the message,

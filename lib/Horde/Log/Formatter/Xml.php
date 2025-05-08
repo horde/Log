@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -29,20 +30,20 @@ class Horde_Log_Formatter_Xml implements Horde_Log_Formatter
      *
      * @var array
      */
-    protected $_options = array(
+    protected $_options = [
         'elementEntry'     => 'log',
         'elementTimestamp' => 'timestamp',
         'elementMessage'   => 'message',
         'elementLevel'     => 'level',
-        'lineEnding'       => PHP_EOL
-    );
+        'lineEnding'       => PHP_EOL,
+    ];
 
     /**
      * Constructor.
      *
      * TODO
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->_options = array_merge($this->_options, $options);
     }

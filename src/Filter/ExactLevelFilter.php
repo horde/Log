@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package.
  *
@@ -38,7 +39,7 @@ class ExactLevelFilter implements LogFilter
      * @param  int  $level  Log level to pass through the filter
      * @param  string|null $name optionally also check for same level name
      */
-    public function __construct(int $level, string $name = null)
+    public function __construct(int $level, ?string $name = null)
     {
         $this->level = $level;
         $this->name = $name;

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -13,12 +14,13 @@
  * @package    Log
  * @subpackage UnitTests
  */
-namespace Horde\Log\Test\Handler;
-use \PHPUnit\Framework\TestCase;
-use \Horde_Log;
-use \Horde_Log_Handler_Stream;
-use \Horde_Log_Handler_Firebug;
 
+namespace Horde\Log\Test\Handler;
+
+use PHPUnit\Framework\TestCase;
+use Horde_Log;
+use Horde_Log_Handler_Stream;
+use Horde_Log_Handler_Firebug;
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -26,7 +28,10 @@ use \Horde_Log_Handler_Firebug;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- */
+*/
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class FirebugTest extends TestCase
 {
     public function setUp(): void
@@ -46,10 +51,10 @@ class FirebugTest extends TestCase
         ob_start();
 
         $handler = new Horde_Log_Handler_Firebug();
-        $handler->write(array('message' => $message = 'message-to-log',
-                              'level' => $level = Horde_Log::ALERT,
-                              'levelName' => $levelName = 'ALERT',
-                              'timestamp' => date('c')));
+        $handler->write(['message' => $message = 'message-to-log',
+            'level' => $level = Horde_Log::ALERT,
+            'levelName' => $levelName = 'ALERT',
+            'timestamp' => date('c')]);
 
         $contents = ob_get_clean();
 

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -8,25 +9,29 @@
  * @package    Log
  * @subpackage UnitTests
  */
-namespace Horde\Log\Test\Filter;
-Use \Horde_Test_Case;
-use \Horde_Log_Filter_Constraint;
-use \Horde_Constraint_AlwaysFalse;
 
+namespace Horde\Log\Test\Filter;
+
+use Horde_Log_Filter_Constraint;
+use Horde_Constraint_AlwaysFalse;
+use PHPUnit\Framework\TestCase;
 /**
  * @author     James Pepin <james@jamespepin.com>
  * @category   Horde
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- */
-class ConstraintTest extends Horde_Test_Case
+*/
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
+class ConstraintTest extends TestCase
 {
     public function testFilterDoesNotAcceptWhenRequiredFieldIsMissing()
     {
-        $event = array(
+        $event = [
             'someotherfield' => 'other value',
-        );
+        ];
         $filterator = new Horde_Log_Filter_Constraint();
         $filterator->addRequiredField('required_field');
 
@@ -35,10 +40,10 @@ class ConstraintTest extends Horde_Test_Case
 
     public function testFilterAcceptsWhenRequiredFieldisPresent()
     {
-        $event = array(
+        $event = [
             'required_field' => 'somevalue',
             'someotherfield' => 'other value',
-        );
+        ];
         $filterator = new Horde_Log_Filter_Constraint();
         $filterator->addRequiredField('required_field');
 
@@ -47,10 +52,10 @@ class ConstraintTest extends Horde_Test_Case
 
     public function testFilterAcceptsWhenRegexMatchesField()
     {
-        $event = array(
+        $event = [
             'regex_field'    => 'somevalue',
             'someotherfield' => 'other value',
-        );
+        ];
         $filterator = new Horde_Log_Filter_Constraint();
         $filterator->addRegex('regex_field', '/somevalue/');
 
@@ -59,10 +64,10 @@ class ConstraintTest extends Horde_Test_Case
 
     public function testFilterAcceptsWhenRegex_DOESNOT_MatcheField()
     {
-        $event = array(
+        $event = [
             'regex_field'    => 'somevalue',
             'someotherfield' => 'other value',
-        );
+        ];
         $filterator = new Horde_Log_Filter_Constraint();
         $filterator->addRegex('regex_field', '/someothervalue/');
 
@@ -71,10 +76,10 @@ class ConstraintTest extends Horde_Test_Case
 
     private function getConstraintMock($returnVal)
     {
-        $const = $this->getMockBuilder('Horde_Constraint', array('evaluate'))->getMock();
+        $const = $this->getMockBuilder('Horde_Constraint', ['evaluate'])->getMock();
         $const->expects($this->once())
             ->method('evaluate')
-            ->will($this->returnValue($returnVal));
+            ->willReturn($returnVal);
         return $const;
     }
 
@@ -84,7 +89,7 @@ class ConstraintTest extends Horde_Test_Case
         $filterator->addConstraint('fieldname', $this->getConstraintMock(true));
         $filterator->addConstraint('fieldname', $this->getConstraintMock(true));
 
-        $filterator->accept(array('fieldname' => 'foo'));
+        $filterator->accept(['fieldname' => 'foo']);
     }
 
     public function testFilterStopsWhenItFindsAFalseCondition()
@@ -94,22 +99,22 @@ class ConstraintTest extends Horde_Test_Case
         $filterator->addConstraint('fieldname', $this->getConstraintMock(true));
         $filterator->addConstraint('fieldname', new Horde_Constraint_AlwaysFalse());
 
-        $const = $this->getMockBuilder('Horde_Constraint', array('evaluate'))->getMock();
+        $const = $this->getMockBuilder('Horde_Constraint', ['evaluate'])->getMock();
         $const->expects($this->never())
             ->method('evaluate');
         $filterator->addConstraint('fieldname', $const);
-        $filterator->accept(array('fieldname' => 'foo'));
+        $filterator->accept(['fieldname' => 'foo']);
 
     }
 
     public function testFilterAcceptCallsConstraintOnNullWhenFieldDoesnotExist()
     {
         $filterator = new Horde_Log_Filter_Constraint();
-        $const = $this->getMockBuilder('Horde_Constraint', array('evaluate'))->getMock();
+        $const = $this->getMockBuilder('Horde_Constraint', ['evaluate'])->getMock();
         $const->expects($this->once())
             ->method('evaluate')
             ->with(null);
         $filterator->addConstraint('fieldname', $const);
-        $filterator->accept(array('someotherfield' => 'foo'));
+        $filterator->accept(['someotherfield' => 'foo']);
     }
 }

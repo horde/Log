@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -22,7 +23,9 @@ use Horde\Log\LogException;
 use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
+use PHPUnit\Framework\Attributes\CoversNothing;
 
+#[coversnothing]
 class SyslogHandlerTest extends TestCase
 {
     public function setUp(): void
@@ -80,11 +83,5 @@ class SyslogHandlerTest extends TestCase
         $this->syshandler->setOption('ident', 'some error message');
         $this->syshandler->setOption('openlogOptions', 'this should be a log constant or at least an integer');
         $this->syshandler->write($this->logMessage1);
-    }
-
-    # I have not found a way to make the function syslog() throw errors (it is located within the if-satement of the write()-method...). That would be needed to test the errormessages
-    public function testSysLogErrorThrows()
-    {
-        $this->markTestSkipped('should be revisited?');
     }
 }

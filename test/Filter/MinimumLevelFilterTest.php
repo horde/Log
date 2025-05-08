@@ -1,9 +1,10 @@
 <?php
+
 /**
  * Horde Log package.
  *
  * This package is based on Zend_Log from the Zend Framework
- * (http://framework.zend.com). The package is written by Mike 
+ * (http://framework.zend.com). The package is written by Mike
  * Naberezny and Chuck Hagenbuchhis.
  * The Package got changed from Moritz Reiter.
  *
@@ -21,7 +22,9 @@ use Horde\Log\Filter\MinimumLevelFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use TypeError;
+use PHPUnit\Framework\Attributes\CoversNothing;
 
+#[coversnothing]
 class MinimumLevelFilterTest extends TestCase
 {
     public function setUp(): void
@@ -40,7 +43,7 @@ class MinimumLevelFilterTest extends TestCase
         $this->assertFalse($this->filter->accept($logMessage1));
         $this->assertTrue($this->filter->accept($logMessage2));
     }
-    
+
     public function testLevelFilterReject()
     {
         $level = new LogLevel(5, 'testName2');

@@ -64,7 +64,7 @@ class FirebugHandler extends BaseHandler
      * @param null|FirebugOptions $options  Log options.
      * @param LogFormatter[]      $formatters  Log formatter.
      */
-    public function __construct(?FirebugOptions $options = null, array $formatters = null)
+    public function __construct(?FirebugOptions $options = null, ?array $formatters = null)
     {
         $this->options = $options ?? new FirebugOptions();
         $this->formatters = is_null($formatters)

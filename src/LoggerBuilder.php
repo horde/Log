@@ -1,12 +1,15 @@
 <?php
+
 declare(strict_types=1);
+
 namespace Horde\Log;
+
 /**
  * Iteratively configure a logger
- * 
+ *
  * Use this to allow creating complex logger setups
  * from a config file or similar source.
- * 
+ *
  * @author   Ralf Lang <lang@b1-systems.de>
  * @category Horde
  * @license  http://www.horde.org/licenses/bsd BSD
@@ -17,15 +20,15 @@ class LoggerBuilder
     private LogLevels $loglevels;
     private Logger $logger;
 
-    public function __construct(LogLevels $loglevels = null)
+    public function __construct(?LogLevels $loglevels = null)
     {
         $this->reset($loglevels);
     }
     /**
      * Create an all-new logger instance without any handler or filter
-     * 
+     *
      */
-    public function reset(LogLevels $loglevels = null): self
+    public function reset(?LogLevels $loglevels = null): self
     {
         $this->loglevels = $loglevels ?? LogLevels::initWithCanonicalLevels();
         $this->logger = new Logger([], $loglevels);
@@ -62,7 +65,7 @@ class LoggerBuilder
 
     /**
      * Return a logger
-     * 
+     *
      * Resets the builder to default state
      *
      * @return Logger

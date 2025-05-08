@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package.
  *
@@ -43,14 +44,9 @@ class MinimumLevelFilter implements LogFilter
      *
      * @param int $level  Maximum log level to pass through the filter.
      *
-     * @throws InvalidArgumentException
      */
     public function __construct(int $level)
     {
-        if (!is_integer($level)) {
-            throw new InvalidArgumentException('Level must be an integer');
-        }
-
         $this->level = $level;
     }
 

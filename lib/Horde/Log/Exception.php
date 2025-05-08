@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -20,6 +21,4 @@
  * @license  http://www.horde.org/licenses/bsd BSD
  * @package  Log
  */
-class Horde_Log_Exception extends Horde_Exception_Wrapped
-{
-}
+class Horde_Log_Exception extends Horde_Exception_Wrapped {}

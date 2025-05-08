@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Wrap any PSR-3 logger as a Handler for the Horde Logger
  *
@@ -97,7 +98,6 @@ final class LoggerInterfaceHandler implements LogHandler
      * @param mixed $optionValue  New value to assign to the option
      *
      * @return bool  True.
-     * @throws LogException
      */
     public function setOption($optionKey, $optionValue): bool
     {

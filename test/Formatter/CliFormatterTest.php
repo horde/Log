@@ -16,13 +16,13 @@
 namespace Horde\Log\Test\Formatter;
 
 use PHPUnit\Framework\TestCase;
-
 use Horde_Cli;
 use Horde\Log\Formatter\CliFormatter;
-
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
+use PHPUnit\Framework\Attributes\CoversNothing;
 
+#[coversnothing]
 class CliFormatterTest extends TestCase
 {
     public function setUp(): void

@@ -21,8 +21,8 @@ authors:
     role: lead
   -
     name: Ralf Lang
-    user: lang
-    email: lang@b1-systems.de
+    user: rlang
+    email: ralf.lang@ralf-lang.de
     active: true
     role: maintainer
 version:
@@ -44,13 +44,15 @@ dependencies:
       horde/util: ^3
   dev:
     composer:
-      horde/test: ^3
+    composer:
+      phpunit/phpunit: ^12
+      friendsofphp/php-cs-fixer: ^3
+      phpstan/phpstan: ^2
       horde/cli: ^3
       horde/scribe: ^3
   optional:
     composer:
       horde/cli: ^3
       horde/scribe: ^3
-      horde/test: ^3
     ext:
       dom: '*'

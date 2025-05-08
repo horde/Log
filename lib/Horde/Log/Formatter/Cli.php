@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright 2013-2017 Horde LLC (http://www.horde.org/)
  *
@@ -46,28 +47,28 @@ class Horde_Log_Formatter_Cli implements Horde_Log_Formatter
      */
     public function format($event)
     {
-        $flag = '['. str_pad($event['levelName'], 7, ' ', STR_PAD_BOTH) . '] ';
+        $flag = '[' . str_pad($event['levelName'], 7, ' ', STR_PAD_BOTH) . '] ';
 
         switch ($event['level']) {
-        case Horde_Log::EMERG:
-        case Horde_Log::ALERT:
-        case Horde_Log::CRIT:
-        case Horde_Log::ERR:
-            $type_message = $this->_cli->red($flag);
-            break;
+            case Horde_Log::EMERG:
+            case Horde_Log::ALERT:
+            case Horde_Log::CRIT:
+            case Horde_Log::ERR:
+                $type_message = $this->_cli->red($flag);
+                break;
 
-        case Horde_Log::WARN:
-        case Horde_Log::NOTICE:
-            $type_message = $this->_cli->yellow($flag);
-            break;
+            case Horde_Log::WARN:
+            case Horde_Log::NOTICE:
+                $type_message = $this->_cli->yellow($flag);
+                break;
 
-        case Horde_Log::INFO:
-        case Horde_Log::DEBUG:
-            $type_message = $this->_cli->blue($flag);
-            break;
+            case Horde_Log::INFO:
+            case Horde_Log::DEBUG:
+                $type_message = $this->_cli->blue($flag);
+                break;
 
-        default:
-            $type_message = $flag;
+            default:
+                $type_message = $flag;
         }
 
         return $type_message . $event['message'];

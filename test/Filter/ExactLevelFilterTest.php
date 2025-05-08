@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -15,13 +16,13 @@
  */
 
 namespace Horde\Log\Test\Filter;
+
 use PHPUnit\Framework\TestCase;
 use Horde\Log\Filter\ExactLevelFilter;
 use Horde\Log\LogFilter;
 use Horde\Log\LogLevel;
 use Horde\Log\LogMessage;
 use TypeError;
-
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -29,7 +30,10 @@ use TypeError;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
- */
+*/
+use PHPUnit\Framework\Attributes\CoversNothing;
+
+#[coversnothing]
 class ExactLevelFilterTest extends TestCase
 {
     public function setUp(): void
@@ -63,6 +67,6 @@ class ExactLevelFilterTest extends TestCase
     public function testConstructorThrowsOnInvalidLevel()
     {
         $this->expectException(TypeError::class);
-        new ExactLevelFilter('foo','bar');
+        new ExactLevelFilter('foo', 'bar');
     }
 }

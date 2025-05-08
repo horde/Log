@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -20,44 +21,44 @@
 class Horde_Log
 {
     /** Emergency: system is unusable */
-    const EMERG = 0;
+    public const EMERG = 0;
 
     /** Emergency: system is unusable */
-    const EMERGENCY = 0;
+    public const EMERGENCY = 0;
 
     /** Alert: action must be taken immediately */
-    const ALERT = 1;
+    public const ALERT = 1;
 
     /** Critical: critical conditions */
-    const CRIT = 2;
+    public const CRIT = 2;
 
     /** Critical: critical conditions */
-    const CRITICAL = 2;
+    public const CRITICAL = 2;
 
     /** Error: error conditions */
-    const ERR = 3;
+    public const ERR = 3;
 
     /** Error: error conditions */
-    const ERROR = 3;
+    public const ERROR = 3;
 
     /** Warning: warning conditions */
-    const WARN = 4;
+    public const WARN = 4;
 
     /** Warning: warning conditions */
-    const WARNING = 4;
+    public const WARNING = 4;
 
     /** Notice: normal but significant condition */
-    const NOTICE = 5;
+    public const NOTICE = 5;
 
     /** Informational: informational messages */
-    const INFO = 6;
+    public const INFO = 6;
 
     /** Informational: informational messages */
-    const INFORMATION = 6;
+    public const INFORMATION = 6;
 
     /** Informational: informational messages */
-    const INFORMATIONAL = 6;
+    public const INFORMATIONAL = 6;
 
     /** Debug: debug-level messages */
-    const DEBUG = 7;
+    public const DEBUG = 7;
 }

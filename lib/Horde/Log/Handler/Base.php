@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Horde Log package
  *
@@ -29,16 +30,16 @@ abstract class Horde_Log_Handler_Base
      *
      * @var array
      */
-    protected $_options = array(
-        'ident' => ''
-    );
+    protected $_options = [
+        'ident' => '',
+    ];
 
     /**
      * List of filter objects.
      *
      * @var array
      */
-    protected $_filters = array();
+    protected $_filters = [];
 
     /**
      * Add a filter specific to this handler.
