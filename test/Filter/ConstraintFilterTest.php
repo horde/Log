@@ -17,7 +17,6 @@ use Horde\Log\Filter\ConstraintFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde_Constraint_AlwaysFalse;
-
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

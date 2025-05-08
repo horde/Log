@@ -21,7 +21,6 @@ use PHPUnit\Framework\TestCase;
 use Horde_Log_Handler_Stream;
 use Horde_Log;
 use Horde_Log_Logger;
-
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>

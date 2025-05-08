@@ -22,7 +22,6 @@ use Horde\Log\LogException;
 use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
-
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

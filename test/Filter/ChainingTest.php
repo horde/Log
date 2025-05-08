@@ -22,6 +22,7 @@ use Horde_Log;
 use Horde_Log_Logger;
 use Horde_Log_Handler_Stream;
 use PHPUnit\Framework\Attributes\CoversNothing;
+
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>

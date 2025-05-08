@@ -18,7 +18,6 @@ use Horde\Log\Formatter\Psr3Formatter;
 use Horde\Log\LogLevel;
 use Horde\Log\LogMessage;
 use TypeError;
-
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

@@ -21,7 +21,6 @@ use PHPUnit\Framework\TestCase;
 use Horde_Log;
 use Horde_Log_Handler_Stream;
 use Horde_Log_Handler_Firebug;
-
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -29,7 +28,7 @@ use Horde_Log_Handler_Firebug;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
-*/ 
+*/
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

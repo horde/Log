@@ -23,7 +23,6 @@ use Horde\Log\LogFilter;
 use Horde\Log\LogLevel;
 use Horde\Log\LogMessage;
 use TypeError;
-
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -31,7 +30,7 @@ use TypeError;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
-*/ 
+*/
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

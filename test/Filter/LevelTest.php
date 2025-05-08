@@ -19,7 +19,6 @@ namespace Horde\Log\Test\Filter;
 
 use PHPUnit\Framework\TestCase;
 use Horde_Log_Filter_Level;
-
 /**
  * @author     Mike Naberezny <mike@maintainable.com>
  * @author     Chuck Hagenbuch <chuck@horde.org>
@@ -27,7 +26,7 @@ use Horde_Log_Filter_Level;
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
-*/ 
+*/
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

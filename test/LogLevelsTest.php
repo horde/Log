@@ -19,7 +19,6 @@ use Horde\Log\LogLevel;
 use Psr\Log\LoggerInterface;
 use Horde\Log\LogLevels;
 use Horde_Log;
-
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

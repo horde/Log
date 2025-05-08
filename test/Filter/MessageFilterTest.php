@@ -20,7 +20,6 @@ use PHPUnit\Framework\TestCase;
 use Horde\Log\Filter\MessageFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
-
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

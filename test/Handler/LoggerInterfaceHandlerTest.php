@@ -24,7 +24,6 @@ use Horde\Log\Logger;
 use Horde\Log\LogLevels;
 use InvalidArgumentException;
 use Horde_Log;
-
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

@@ -18,14 +18,13 @@ namespace Horde\Log\Test\Formatter;
 
 use PHPUnit\Framework\TestCase;
 use Horde_Log_Formatter_Xml;
-
 /**
  * @author   Mike Naberezny <mike@maintainable.com>
  * @author   Chuck Hagenbuch <chuck@horde.org>
  * @category Horde
  * @license  http://www.horde.org/licenses/bsd BSD
  * @package  Log
-*/ 
+*/
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

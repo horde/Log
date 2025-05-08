@@ -20,7 +20,6 @@ use Horde_Cli;
 use Horde\Log\Formatter\CliFormatter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
-
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

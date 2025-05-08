@@ -22,7 +22,6 @@ use Horde\Log\Filter\MaximumLevelFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use TypeError;
-
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]

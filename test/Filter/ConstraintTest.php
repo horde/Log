@@ -15,14 +15,13 @@ namespace Horde\Log\Test\Filter;
 use Horde_Log_Filter_Constraint;
 use Horde_Constraint_AlwaysFalse;
 use PHPUnit\Framework\TestCase;
-
 /**
  * @author     James Pepin <james@jamespepin.com>
  * @category   Horde
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
  * @subpackage UnitTests
-*/ 
+*/
 use PHPUnit\Framework\Attributes\CoversNothing;
 
 #[coversnothing]
