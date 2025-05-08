@@ -9,9 +9,10 @@
  * @subpackage UnitTests
  */
 namespace Horde\Log\Test\Filter;
-Use \Horde_Test_Case;
 use \Horde_Log_Filter_Constraint;
 use \Horde_Constraint_AlwaysFalse;
+use PHPUnit\Framework\TestCase;
+
 
 /**
  * @author     James Pepin <james@jamespepin.com>
@@ -20,7 +21,7 @@ use \Horde_Constraint_AlwaysFalse;
  * @package    Log
  * @subpackage UnitTests
  */
-class ConstraintTest extends Horde_Test_Case
+class ConstraintTest extends TestCase
 {
     public function testFilterDoesNotAcceptWhenRequiredFieldIsMissing()
     {

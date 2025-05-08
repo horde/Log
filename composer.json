@@ -1,5 +1,4 @@
 {
-    "minimum-stability": "dev",
     "name": "horde/log",
     "description": "Logging library",
     "type": "library",
@@ -18,11 +17,12 @@
         },
         {
             "name": "Ralf Lang",
-            "email": "lang@b1-systems.de",
+            "email": "ralf.lang@ralf-lang.de",
             "role": "maintainer"
         }
     ],
-    "time": "2025-04-30",
+    "time": "2025-05-08",
+    "repositories": [],
     "require": {
         "php": "^8",
         "psr/log": "^1 || ^2 || ^3",
@@ -31,14 +31,15 @@
         "horde/util": "^3 || dev-FRAMEWORK_6_0"
     },
     "require-dev": {
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
+        "phpunit/phpunit": "^12",
+        "friendsofphp/php-cs-fixer": "^3",
+        "phpstan/phpstan": "^2",
         "horde/cli": "^3 || dev-FRAMEWORK_6_0",
         "horde/scribe": "^3 || dev-FRAMEWORK_6_0"
     },
     "suggest": {
         "horde/cli": "^3 || dev-FRAMEWORK_6_0",
         "horde/scribe": "^3 || dev-FRAMEWORK_6_0",
-        "horde/test": "^3 || dev-FRAMEWORK_6_0",
         "ext-dom": "*"
     },
     "autoload": {
@@ -55,8 +56,8 @@
         }
     },
     "config": {
-        "allow-plugins": {
-            "horde/horde-installer-plugin": true
-        }
-    }
+        "allow-plugins": {}
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
