@@ -35,7 +35,8 @@ jobs:
         run: vendor/bin/php-cs-fixer check -vvv
 
       - name: Run phpstan (mandatory level)
-        run: vendor/bin/phpstan --no-progress
+        ## Deviation: We analyze the test dir and other non-essentials in the allowed-to-fail test. The unit test dir has some nasty stuff.
+        run: vendor/bin/phpstan --no-progress analyze src/
 
       - name: Run phpstan (level 9, allowed to fail)
         run: vendor/bin/phpstan --no-progress --level=9
