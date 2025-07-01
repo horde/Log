@@ -21,7 +21,7 @@
             "role": "maintainer"
         }
     ],
-    "time": "2025-05-08",
+    "time": "2025-07-01",
     "repositories": [],
     "require": {
         "php": "^8",
@@ -57,5 +57,13 @@
     },
     "config": {
         "allow-plugins": {}
+    },
+    "provide": {
+        "psr/log-implementation": "3.0.0"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-FRAMEWORK_6_0": "3.x-dev"
+        }
     }
 }

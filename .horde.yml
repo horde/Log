@@ -34,6 +34,9 @@ state:
 license:
   identifier: BSD-2-Clause
   uri: http://www.horde.org/licenses/bsd
+provides:
+  psr/log-implementation: 3.0.0
+
 dependencies:
   required:
     php: ^8
