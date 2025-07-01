@@ -26,7 +26,7 @@ authors:
     active: true
     role: maintainer
 version:
-  release: 3.0.0-alpha9
+  release: 3.0.0-beta1
   api: 3.0.0alpha1
 state:
   release: alpha
@@ -36,7 +36,6 @@ license:
   uri: http://www.horde.org/licenses/bsd
 provides:
   psr/log-implementation: 3.0.0
-
 dependencies:
   required:
     php: ^8
