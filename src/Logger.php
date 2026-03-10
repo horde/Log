@@ -148,7 +148,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function emergency($message, array $context = []): void
+    public function emergency(string|Stringable|LogMessage $message, array $context = []): void
     {
         $this->log(LogLevel::EMERGENCY, $message, $context);
     }
@@ -164,7 +164,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function alert($message, array $context = []): void
+    public function alert(string|Stringable|LogMessage $message, array $context = []): void
     {
         $this->log(LogLevel::ALERT, $message, $context);
     }
@@ -179,7 +179,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function critical($message, array $context = []): void
+    public function critical(string|Stringable|LogMessage $message, array $context = []): void
     {
         $this->log(LogLevel::CRITICAL, $message, $context);
     }
@@ -193,7 +193,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function error($message, array $context = []): void
+    public function error(string|Stringable|LogMessage $message, array $context = []): void
     {
         $this->log(LogLevel::ERROR, $message, $context);
     }
@@ -209,7 +209,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function warning($message, array $context = []): void
+    public function warning(string|Stringable|LogMessage $message, array $context = []): void
     {
         $this->log(LogLevel::WARNING, $message, $context);
     }
@@ -222,7 +222,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function notice($message, array $context = []): void
+    public function notice(string|Stringable|LogMessage $message, array $context = []): void
     {
         $this->log(LogLevel::NOTICE, $message, $context);
     }
@@ -237,7 +237,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      */
-    public function info($message, array $context = []): void
+    public function info(string|Stringable|LogMessage $message, array $context = []): void
     {
         $this->log(LogLevel::INFO, $message, $context);
     }
@@ -245,12 +245,12 @@ class Logger implements LoggerInterface
     /**
      * Detailed debug information.
      *
-     * @param string $message
+     * @param string|Stringable|LogMessage $message
      * @param mixed[]  $context
      *
      * @return void
      */
-    public function debug($message, array $context = []): void
+    public function debug(string|Stringable|LogMessage $message, array $context = []): void
     {
         $this->log(LogLevel::DEBUG, $message, $context);
     }
@@ -265,7 +265,7 @@ class Logger implements LoggerInterface
      *
      * @throws \Psr\Log\InvalidArgumentException
      */
-    public function log($level, $message, array $context = []): void
+    public function log(mixed $level, string|Stringable|LogMessage $message, array $context = []): void
     {
         $loglevel = null;
         // Error if the requested level is not present

@@ -25,7 +25,7 @@
     "repositories": [],
     "require": {
         "php": "^8",
-        "psr/log": "^1 || ^2 || ^3",
+        "psr/log": "^3",
         "horde/constraint": "^3 || dev-FRAMEWORK_6_0",
         "horde/exception": "^3 || dev-FRAMEWORK_6_0",
         "horde/util": "^3 || dev-FRAMEWORK_6_0"

@@ -40,7 +40,7 @@ dependencies:
   required:
     php: ^8
     composer:
-      psr/log: ^1 || ^2 || ^3
+      psr/log: ^3
       horde/constraint: ^3
       horde/exception: ^3
       horde/util: ^3
