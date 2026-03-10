@@ -32,6 +32,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 #[coversnothing]
 class SuppressTest extends TestCase
 {
+    private Horde_Log_Filter_Suppress $filter;
+
     public function setUp(): void
     {
         $this->filter = new Horde_Log_Filter_Suppress();

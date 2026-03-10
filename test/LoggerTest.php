@@ -32,11 +32,22 @@ use Horde_Log;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde\Log\LogLevels;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-#[coversnothing]
+#[CoversClass(Logger::class)]
 class LoggerTest extends TestCase
 {
+    private LogLevel $level1;
+    private string $message1;
+    private string $message2;
+    private LogMessage $logMessage1;
+    private LogMessage $logMessage2;
+    private LogLevels $loglevelsss;
+    private array $messagefilter = [];
+    private MockHandler $mockhandler1;
+    private array $handlers = [];
+    private Logger $logging;
+
     public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
@@ -212,5 +223,260 @@ class LoggerTest extends TestCase
     {
         $this->expectException(InvalidArgumentException::class);
         $this->logging->log("nonexistant level", $this->message1);
+    }
+
+    public function testConstructorWithEmptyHandlers(): void
+    {
+        $logger = new Logger([]);
+        $this->assertInstanceOf(Logger::class, $logger);
+    }
+
+    public function testConstructorWithMultipleHandlers(): void
+    {
+        $handler1 = new MockHandler();
+        $handler2 = new MockHandler();
+        $logger = new Logger([$handler1, $handler2]);
+
+        // Log a message and verify both handlers received it
+        $logger->info('test message');
+
+        $this->assertInstanceOf(LogMessage::class, $handler1->check);
+        $this->assertInstanceOf(LogMessage::class, $handler2->check);
+        $this->assertEquals('test message', $handler1->check->message());
+        $this->assertEquals('test message', $handler2->check->message());
+    }
+
+    public function testConstructorWithCustomLevels(): void
+    {
+        $customLevels = new LogLevels();
+        $logger = new Logger([], $customLevels);
+        $this->assertInstanceOf(Logger::class, $logger);
+    }
+
+    public function testAddHandlerAcceptsLogHandler(): void
+    {
+        $logger = new Logger();
+        $handler = new MockHandler();
+        $logger->addHandler($handler);
+
+        $logger->info('test');
+        $this->assertEquals('test', $handler->check->message());
+    }
+
+    public function testAddFilterAcceptsLogFilter(): void
+    {
+        $logger = new Logger([new MockHandler()]);
+        $filter = new MessageFilter('/blocked/');
+        $logger->addFilter($filter);
+
+        $this->assertInstanceOf(Logger::class, $logger);
+    }
+
+    public function testLogWithIntegerLevel(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->log(Horde_Log::INFO, 'info message');
+
+        $this->assertEquals('info message', $handler->check->message());
+        $this->assertEquals('info', $handler->check->level()->name());
+    }
+
+    public function testLogWithStringLevel(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->log('warning', 'warning message');
+
+        $this->assertEquals('warning message', $handler->check->message());
+        $this->assertEquals('warning', $handler->check->level()->name());
+    }
+
+    public function testLogWithLogLevelObject(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+        $level = new LogLevel(Horde_Log::ERROR, 'error');
+
+        $logger->log($level, 'error message');
+
+        $this->assertEquals('error message', $handler->check->message());
+        $this->assertEquals('error', $handler->check->level()->name());
+    }
+
+    public function testLogWithStringableMessage(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $stringable = new class implements Stringable {
+            public function __toString(): string
+            {
+                return 'stringable message';
+            }
+        };
+
+        $logger->info($stringable);
+
+        $this->assertEquals('stringable message', $handler->check->message());
+    }
+
+    public function testLogWithLogMessageObject(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $level = new LogLevel(Horde_Log::NOTICE, 'notice');
+        $logMessage = new LogMessage($level, 'original message', ['key' => 'value']);
+
+        $logger->log($level, $logMessage);
+
+        $this->assertEquals('original message', $handler->check->message());
+        $this->assertEquals('notice', $handler->check->level()->name());
+    }
+
+    public function testLogDelegatesToAllHandlers(): void
+    {
+        $handler1 = new MockHandler();
+        $handler2 = new MockHandler();
+        $handler3 = new MockHandler();
+        $logger = new Logger([$handler1, $handler2, $handler3]);
+
+        $logger->debug('debug message');
+
+        $this->assertEquals('debug message', $handler1->check->message());
+        $this->assertEquals('debug message', $handler2->check->message());
+        $this->assertEquals('debug message', $handler3->check->message());
+    }
+
+    public function testFiltersRejectMessages(): void
+    {
+        $handler = new MockHandler();
+        $filter = new MessageFilter('/accept/');
+        $logger = new Logger([$handler], null, [$filter]);
+
+        // This message should be filtered out - handler's events should be empty
+        $logger->info('reject this message');
+        $this->assertEmpty($handler->events);
+
+        // This message should pass the filter
+        $logger->info('accept this message');
+        $this->assertCount(1, $handler->events);
+        $this->assertEquals('accept this message', $handler->events[0]->message());
+    }
+
+    public function testContextMergingWithLogMessage(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $level = new LogLevel(Horde_Log::INFO, 'info');
+        $logMessage = new LogMessage($level, 'message', ['key1' => 'value1']);
+
+        // Additional context should be merged
+        $logger->log($level, $logMessage, ['key2' => 'value2']);
+
+        $context = $handler->check->context();
+        $this->assertArrayHasKey('key1', $context);
+        $this->assertArrayHasKey('key2', $context);
+    }
+
+    public function testInvalidLevelTypeThrowsException(): void
+    {
+        $logger = new Logger([new MockHandler()]);
+
+        $this->expectException(InvalidArgumentException::class);
+        $logger->log([], 'message');  // Array is not valid level type
+    }
+
+    public function testPsr3EmergencyMethod(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->emergency('emergency message', ['context' => 'value']);
+
+        $this->assertEquals('emergency message', $handler->check->message());
+        $this->assertEquals('emergency', $handler->check->level()->name());
+        $this->assertArrayHasKey('context', $handler->check->context());
+    }
+
+    public function testPsr3AlertMethod(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->alert('alert message');
+
+        $this->assertEquals('alert message', $handler->check->message());
+        $this->assertEquals('alert', $handler->check->level()->name());
+    }
+
+    public function testPsr3CriticalMethod(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->critical('critical message');
+
+        $this->assertEquals('critical message', $handler->check->message());
+        $this->assertEquals('critical', $handler->check->level()->name());
+    }
+
+    public function testPsr3ErrorMethod(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->error('error message');
+
+        $this->assertEquals('error message', $handler->check->message());
+        $this->assertEquals('error', $handler->check->level()->name());
+    }
+
+    public function testPsr3WarningMethod(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->warning('warning message');
+
+        $this->assertEquals('warning message', $handler->check->message());
+        $this->assertEquals('warning', $handler->check->level()->name());
+    }
+
+    public function testPsr3NoticeMethod(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->notice('notice message');
+
+        $this->assertEquals('notice message', $handler->check->message());
+        $this->assertEquals('notice', $handler->check->level()->name());
+    }
+
+    public function testPsr3InfoMethod(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->info('info message');
+
+        $this->assertEquals('info message', $handler->check->message());
+        $this->assertEquals('info', $handler->check->level()->name());
+    }
+
+    public function testPsr3DebugMethod(): void
+    {
+        $handler = new MockHandler();
+        $logger = new Logger([$handler]);
+
+        $logger->debug('debug message');
+
+        $this->assertEquals('debug message', $handler->check->message());
+        $this->assertEquals('debug', $handler->check->level()->name());
     }
 }

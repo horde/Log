@@ -22,11 +22,13 @@ use Horde\Log\Filter\MaximumLevelFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use TypeError;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-#[coversnothing]
+#[CoversClass(MaximumLevelFilter::class)]
 class MaximumLevelFilterTest extends TestCase
 {
+    private MaximumLevelFilter $filter;
+
     public function setUp(): void
     {
         $this->filter = new MaximumLevelFilter(2);

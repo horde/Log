@@ -42,10 +42,25 @@ class BaseHandlerImplementation extends BaseHandler
 }
 
 /**
- * @coversNothing
+ * @author     Rafael te Boekhorst <boekhorstb1@b1-systems.de>
+ * @category   Horde
+ * @license    http://www.horde.org/licenses/bsd BSD
+ * @package    Log
+ * @subpackage UnitTests
  */
+use PHPUnit\Framework\Attributes\CoversClass;
+
+#[CoversClass(BaseHandler::class)]
 class BaseHandlerTest extends TestCase
 {
+    private BaseHandler $baseHandlerMock;
+    private MockHandler $mockhandler;
+    private LogLevel $level1;
+    private string $message1;
+    private LogMessage $logMessage1;
+    private ConstraintFilter $constraintFilter;
+    private LogLevel $level2;
+
     public function setUp(): void
     {
         # Bult in Mock for abstract classes (in phpunit)

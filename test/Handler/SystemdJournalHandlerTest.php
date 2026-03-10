@@ -292,4 +292,29 @@ class SystemdJournalHandlerTest extends TestCase
         $result = $this->handler->write($message);
         $this->assertTrue($result);
     }
+
+    public function testSetOption(): void
+    {
+        $handler = new SystemdJournalHandler();
+
+        // Test setOption with valid option
+        $result = $handler->setOption('ident', 'TEST-APP');
+        $this->assertTrue($result);
+    }
+
+    public function testSetOptionWithInvalidOption(): void
+    {
+        $this->expectException(LogException::class);
+
+        $handler = new SystemdJournalHandler();
+        $handler->setOption('invalidOption', 'value');
+    }
+
+    public function testConstructorWithFormattersAndFilters(): void
+    {
+        $options = new SystemdJournalOptions();
+        $handler = new SystemdJournalHandler($options, [], []);
+
+        $this->assertInstanceOf(SystemdJournalHandler::class, $handler);
+    }
 }

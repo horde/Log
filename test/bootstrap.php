@@ -13,7 +13,7 @@ foreach ($candidates as $candidate) {
         break;
     }
 }
-// Try to run without horde/test if it is not there.
+// Use horde/test Bootstrap if available (optional dependency)
 if (class_exists(Bootstrap::class)) {
     Bootstrap::bootstrap(dirname(__FILE__));
 }

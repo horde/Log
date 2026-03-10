@@ -17,11 +17,24 @@ use Horde\Log\Filter\ConstraintFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde_Constraint_AlwaysFalse;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-#[coversnothing]
+#[CoversClass(ConstraintFilter::class)]
 class ConstraintFilterTest extends TestCase
 {
+    private LogLevel $level1;
+    private LogLevel $level2;
+    private LogLevel $level3;
+    private LogLevel $level4;
+    private string $message1;
+    private string $message2;
+    private string $message3;
+    private string $message4;
+    private LogMessage $logMessage1;
+    private LogMessage $logMessage2;
+    private LogMessage $logMessage3;
+    private LogMessage $logMessage4;
+
     public function setUp(): void
     {
         $this->level1 = new LogLevel(1, 'testName1');

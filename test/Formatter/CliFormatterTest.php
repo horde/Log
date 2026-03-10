@@ -25,6 +25,20 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 #[coversnothing]
 class CliFormatterTest extends TestCase
 {
+    private Horde_Cli $cli;
+    private LogLevel $level1;
+    private LogLevel $level2;
+    private LogLevel $level3;
+    private LogLevel $level4;
+    private string $message1;
+    private string $message2;
+    private string $message3;
+    private string $message4;
+    private LogMessage $logMessage1;
+    private LogMessage $logMessage2;
+    private LogMessage $logMessage3;
+    private LogMessage $logMessage4;
+
     public function setUp(): void
     {
         $this->cli = new Horde_Cli();

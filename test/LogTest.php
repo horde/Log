@@ -34,6 +34,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 #[coversnothing]
 class LogTest extends TestCase
 {
+    private $log;
+    private Horde_Log_Handler_Stream $handler;
+
     public function setUp(): void
     {
         date_default_timezone_set('America/New_York');

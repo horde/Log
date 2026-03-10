@@ -32,6 +32,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 #[coversnothing]
 class LevelTest extends TestCase
 {
+    private Horde_Log_Filter_Level $filter;
+
     public function setUp(): void
     {
         // accept at or below level 2

@@ -20,11 +20,18 @@ use PHPUnit\Framework\TestCase;
 use Horde\Log\Filter\MessageFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-#[coversnothing]
+#[CoversClass(MessageFilter::class)]
 class MessageFilterTest extends TestCase
 {
+    private LogLevel $level1;
+    private LogLevel $level2;
+    private string $message1;
+    private string $message2;
+    private LogMessage $logMessage1;
+    private LogMessage $logMessage2;
+
     public function setUp(): void
     {
         $this->level1 = new LogLevel(1, 'testName1');

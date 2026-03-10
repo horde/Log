@@ -22,11 +22,13 @@ use Horde\Log\Filter\MinimumLevelFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use TypeError;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-#[coversnothing]
+#[CoversClass(MinimumLevelFilter::class)]
 class MinimumLevelFilterTest extends TestCase
 {
+    private MinimumLevelFilter $filter;
+
     public function setUp(): void
     {
         $this->filter = new MinimumLevelFilter(2);

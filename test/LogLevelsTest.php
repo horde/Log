@@ -19,11 +19,19 @@ use Horde\Log\LogLevel;
 use Psr\Log\LoggerInterface;
 use Horde\Log\LogLevels;
 use Horde_Log;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
+use Psr\Log\InvalidArgumentException;
 
-#[coversnothing]
+#[CoversClass(LogLevels::class)]
+#[CoversClass(LogLevel::class)]
 class LogLevelsTest extends TestCase
 {
+    private LogLevel $level1;
+    private string $message1;
+    private LogMessage $logMessage1;
+    private array $loadlevels = [];
+    private LogLevels $loglevels;
+
     public function setUp(): void
     {
         date_default_timezone_set('America/New_York');
@@ -123,5 +131,96 @@ class LogLevelsTest extends TestCase
 
         // checking that all the aliases are passed through the function
         $this->assertEquals(count($levelNamesAliases), $count);
+    }
+
+    public function testGetByLevelNameThrowsExceptionForInvalidLevel(): void
+    {
+        $levels = LogLevels::initWithCanonicalLevels();
+
+        $this->expectException(InvalidArgumentException::class);
+        $levels->getByLevelName('nonexistent');
+    }
+
+    public function testGetByCriticalityThrowsExceptionForInvalidLevel(): void
+    {
+        $levels = LogLevels::initWithCanonicalLevels();
+
+        $this->expectException(InvalidArgumentException::class);
+        $levels->getByCriticality(999);
+    }
+
+    public function testLogLevelName(): void
+    {
+        $level = new LogLevel(Horde_Log::WARNING, 'warning');
+        $this->assertEquals('warning', $level->name());
+    }
+
+    public function testLogLevelCriticality(): void
+    {
+        $level = new LogLevel(Horde_Log::ERROR, 'error');
+        $this->assertEquals(Horde_Log::ERROR, $level->criticality());
+    }
+
+    public function testCanonicalLevelsContainsAllPsr3Levels(): void
+    {
+        $levels = LogLevels::initWithCanonicalLevels();
+
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('emergency'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('alert'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('critical'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('error'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('warning'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('notice'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('info'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('debug'));
+    }
+
+    public function testAliasLevelsContainsAliases(): void
+    {
+        $levels = LogLevels::initWithAliasLevels();
+
+        // Test that aliases work
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('emerg'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('crit'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('err'));
+        $this->assertInstanceOf(LogLevel::class, $levels->getByLevelName('warn'));
+    }
+
+    public function testLevelNameIsCaseInsensitive(): void
+    {
+        $levels = LogLevels::initWithCanonicalLevels();
+
+        $lower = $levels->getByLevelName('warning');
+        $upper = $levels->getByLevelName('WARNING');
+        $mixed = $levels->getByLevelName('WaRnInG');
+
+        $this->assertEquals($lower->criticality(), $upper->criticality());
+        $this->assertEquals($lower->criticality(), $mixed->criticality());
+    }
+
+    public function testRegisterAllowsCustomLevels(): void
+    {
+        $levels = new LogLevels();
+        $customLevel = new LogLevel(42, 'custom');
+
+        $levels->register($customLevel);
+
+        $retrieved = $levels->getByLevelName('custom');
+        $this->assertEquals(42, $retrieved->criticality());
+        $this->assertEquals('custom', $retrieved->name());
+    }
+
+    public function testCriticalityValuesMatchHordeLogConstants(): void
+    {
+        $levels = LogLevels::initWithCanonicalLevels();
+
+        $this->assertEquals(Horde_Log::EMERG, $levels->getByLevelName('emergency')->criticality());
+        $this->assertEquals(Horde_Log::ALERT, $levels->getByLevelName('alert')->criticality());
+        $this->assertEquals(Horde_Log::CRIT, $levels->getByLevelName('critical')->criticality());
+        $this->assertEquals(Horde_Log::ERR, $levels->getByLevelName('error')->criticality());
+        $this->assertEquals(Horde_Log::WARN, $levels->getByLevelName('warning')->criticality());
+        $this->assertEquals(Horde_Log::NOTICE, $levels->getByLevelName('notice')->criticality());
+        $this->assertEquals(Horde_Log::INFO, $levels->getByLevelName('info')->criticality());
+        $this->assertEquals(Horde_Log::DEBUG, $levels->getByLevelName('debug')->criticality());
     }
 }

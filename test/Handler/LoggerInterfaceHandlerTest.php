@@ -29,6 +29,12 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 #[coversnothing]
 class LoggerInterfaceHandlerTest extends TestCase
 {
+    private LogLevel $level1;
+    private string $message1;
+    private LogMessage $logMessage1;
+    private Logger $logging;
+    private LoggerInterfaceHandler $loggerinterfacehandler;
+
     public function setUp(): void
     {
         date_default_timezone_set('America/New_York');

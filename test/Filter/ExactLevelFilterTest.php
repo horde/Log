@@ -23,19 +23,21 @@ use Horde\Log\LogFilter;
 use Horde\Log\LogLevel;
 use Horde\Log\LogMessage;
 use TypeError;
-/**
- * @author     Mike Naberezny <mike@maintainable.com>
- * @author     Chuck Hagenbuch <chuck@horde.org>
- * @category   Horde
- * @license    http://www.horde.org/licenses/bsd BSD
- * @package    Log
- * @subpackage UnitTests
-*/
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-#[coversnothing]
+#[CoversClass(ExactLevelFilter::class)]
 class ExactLevelFilterTest extends TestCase
 {
+    private LogLevel $messageLogLevel1;
+    private LogLevel $messageLogLevel2;
+    private LogLevel $messageLogLevel3;
+    private LogMessage $messageLvl3;
+    private LogMessage $messageLvl2;
+    private LogMessage $messageLvl1;
+    private ExactLevelFilter $filter;
+    private ExactLevelFilter $filter2;
+    private ExactLevelFilter $filter3;
+
     public function setUp(): void
     {
         // accept at and only at level 2

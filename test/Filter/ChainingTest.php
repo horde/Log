@@ -34,6 +34,9 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 #[CoversNothing]
 class ChainingTest extends TestCase
 {
+    private $log;
+    private Horde_Log_Logger $logger;
+
     public function setUp(): void
     {
         date_default_timezone_set('America/New_York');

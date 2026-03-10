@@ -26,6 +26,8 @@ use Horde\Log\Handler\SetOptionsTrait;
 class SetOptionsTraitImplementation
 {
     use SetOptionsTrait;
+
+    public Options $options;
 }
 
 use PHPUnit\Framework\Attributes\CoversNothing;
@@ -33,6 +35,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 #[coversnothing]
 class SetOptionTraitTest extends TestCase
 {
+    private SetOptionsTraitImplementation $setOptionsTrait;
+
     public function setUp(): void
     {
         $this->setOptionsTrait = new SetOptionsTraitImplementation();

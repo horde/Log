@@ -33,6 +33,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 #[coversnothing]
 class ExactLevelTest extends TestCase
 {
+    private Horde_Log_Filter_ExactLevel $filter;
+
     public function setUp(): void
     {
         // accept at and only at level 2

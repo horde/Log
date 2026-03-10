@@ -20,11 +20,22 @@ use PHPUnit\Framework\TestCase;
 use Horde\Log\Filter\SuppressFilter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
-use PHPUnit\Framework\Attributes\CoversNothing;
+use PHPUnit\Framework\Attributes\CoversClass;
 
-#[coversnothing]
+#[CoversClass(SuppressFilter::class)]
 class SuppressFilterTest extends TestCase
 {
+    private SuppressFilter $filter;
+    private LogLevel $level1;
+    private LogLevel $level2;
+    private LogLevel $level3;
+    private string $message1;
+    private string $message2;
+    private string $message3;
+    private LogMessage $logMessage1;
+    private LogMessage $logMessage2;
+    private LogMessage $logMessage3;
+
     public function setUp(): void
     {
         $this->filter = new SuppressFilter();
