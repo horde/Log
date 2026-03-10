@@ -60,6 +60,9 @@ class CliHandlerTest extends TestCase
         $this->assertInstanceOf(CliHandler::class, $handler);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testWriteOutputsMessage(): void
     {
         $handler = new CliHandler();
@@ -69,6 +72,9 @@ class CliHandlerTest extends TestCase
         $this->assertTrue($result);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testWriteAllLogLevels(): void
     {
         $handler = new CliHandler();
@@ -92,6 +98,9 @@ class CliHandlerTest extends TestCase
         }
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testWriteWithCustomFormatter(): void
     {
         $formatter = new class implements \Horde\Log\LogFormatter {
@@ -127,6 +136,9 @@ class CliHandlerTest extends TestCase
         $this->assertTrue(true);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testLogWithAcceptingFilter(): void
     {
         $handler = new CliHandler();
@@ -144,6 +156,9 @@ class CliHandlerTest extends TestCase
         $this->assertTrue(true);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testMultipleWrites(): void
     {
         $handler = new CliHandler();
