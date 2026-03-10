@@ -65,7 +65,12 @@ class CliHandlerTest extends TestCase
      */
     public function testWriteOutputsMessage(): void
     {
-        $handler = new CliHandler();
+        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli->expects($this->once())
+                ->method('writeln')
+                ->with($this->stringContains('test message'));
+
+        $handler = new CliHandler(null, $mockCli);
         $result = $handler->write($this->logMessage);
 
         // Just verify write returns true - output goes to CLI
@@ -77,7 +82,11 @@ class CliHandlerTest extends TestCase
      */
     public function testWriteAllLogLevels(): void
     {
-        $handler = new CliHandler();
+        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli->expects($this->exactly(8))
+                ->method('writeln');
+
+        $handler = new CliHandler(null, $mockCli);
 
         $levels = [
             Horde_Log::EMERG => 'emergency',
@@ -103,6 +112,11 @@ class CliHandlerTest extends TestCase
      */
     public function testWriteWithCustomFormatter(): void
     {
+        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli->expects($this->once())
+                ->method('writeln')
+                ->with($this->stringContains('[FORMATTED] custom message'));
+
         $formatter = new class implements \Horde\Log\LogFormatter {
             public function format(\Horde\Log\LogMessage $event): string
             {
@@ -110,7 +124,7 @@ class CliHandlerTest extends TestCase
             }
         };
 
-        $handler = new CliHandler([$formatter]);
+        $handler = new CliHandler([$formatter], $mockCli);
         $message = new LogMessage($this->level, 'custom message');
         $message->formatMessage([$formatter]);
 
@@ -141,7 +155,11 @@ class CliHandlerTest extends TestCase
      */
     public function testLogWithAcceptingFilter(): void
     {
-        $handler = new CliHandler();
+        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli->expects($this->once())
+                ->method('writeln');
+
+        $handler = new CliHandler(null, $mockCli);
 
         // Add filter that accepts everything
         $filter = new class implements \Horde\Log\LogFilter {
@@ -161,7 +179,11 @@ class CliHandlerTest extends TestCase
      */
     public function testMultipleWrites(): void
     {
-        $handler = new CliHandler();
+        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli->expects($this->exactly(5))
+                ->method('writeln');
+
+        $handler = new CliHandler(null, $mockCli);
 
         for ($i = 0; $i < 5; $i++) {
             $message = new LogMessage($this->level, "Message $i");

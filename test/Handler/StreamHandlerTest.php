@@ -110,6 +110,9 @@ class StreamHandlerTest extends TestCase
         $handler->write($this->logMessage1);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testWriteToPhpOutput(): void
     {
         $handler = new StreamHandler('php://output');
@@ -121,6 +124,9 @@ class StreamHandlerTest extends TestCase
         $this->assertStringContainsString($this->message1, $output);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testWriteToPhpStderr(): void
     {
         $handler = new StreamHandler('php://stderr');
@@ -152,6 +158,9 @@ class StreamHandlerTest extends TestCase
         $this->assertStringContainsString('third message', $contents);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testWriteWithCustomFormatter(): void
     {
         $stream = fopen('php://memory', 'a');
@@ -175,6 +184,9 @@ class StreamHandlerTest extends TestCase
         $this->assertStringContainsString($this->message1, $contents);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testWriteAppliesFilters(): void
     {
         $stream = fopen('php://memory', 'a');
@@ -199,6 +211,9 @@ class StreamHandlerTest extends TestCase
         $this->assertEmpty($contents);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testStreamResourceIsPreserved(): void
     {
         $stream = fopen('php://memory', 'a');
@@ -215,6 +230,9 @@ class StreamHandlerTest extends TestCase
         fclose($stream);
     }
 
+    /**
+     * @outputBuffering disabled
+     */
     public function testWakeupReopensStream(): void
     {
         // Create handler with URL (not resource)
