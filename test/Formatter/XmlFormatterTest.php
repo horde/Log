@@ -172,8 +172,11 @@ class XmlFormatterTest extends TestCase
             $output = $formatter->format($message);
 
             // Level names are lowercase in XML
-            $this->assertStringContainsString('<level>' . $name . '</level>', $output,
-                "Level name $name should appear in XML output");
+            $this->assertStringContainsString(
+                '<level>' . $name . '</level>',
+                $output,
+                "Level name $name should appear in XML output"
+            );
         }
     }
 

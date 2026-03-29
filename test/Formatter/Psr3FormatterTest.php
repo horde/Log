@@ -80,7 +80,7 @@ class Psr3FormatterTest extends TestCase
         $formatter = new Psr3Formatter([
             'user_id' => '42',
             'user.name' => 'John Doe',
-            'item123' => 'widget'
+            'item123' => 'widget',
         ]);
         $formatted = $message->formatMessage([$formatter]);
 
@@ -165,7 +165,7 @@ class Psr3FormatterTest extends TestCase
         $formatter = new Psr3Formatter([
             'valid' => 'ok',
             'array' => [1, 2, 3],
-            'object' => new \stdClass()
+            'object' => new \stdClass(),
         ]);
         $formatted = $message->formatMessage([$formatter]);
 

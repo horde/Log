@@ -282,7 +282,7 @@ class SystemdJournalHandlerTest extends TestCase
                 'float' => 3.14,
                 'bool' => true,
                 'array' => ['should', 'be', 'ignored'],
-                'object' => (object)['should' => 'be ignored'],
+                'object' => (object) ['should' => 'be ignored'],
                 'null' => null,
             ]
         );

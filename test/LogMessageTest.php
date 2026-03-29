@@ -160,7 +160,7 @@ class LogMessageTest extends TestCase
         };
 
         $message->formatMessage([$formatter]);
-        $this->assertEquals('STRINGABLE: test message', (string)$message);
+        $this->assertEquals('STRINGABLE: test message', (string) $message);
     }
 
     public function testContextCanContainArrays(): void
@@ -168,7 +168,7 @@ class LogMessageTest extends TestCase
         $context = [
             'simple' => 'value',
             'array' => [1, 2, 3],
-            'nested' => ['key' => 'value']
+            'nested' => ['key' => 'value'],
         ];
 
         $message = new LogMessage($this->level, 'test message', $context);

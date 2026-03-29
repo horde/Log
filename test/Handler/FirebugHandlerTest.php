@@ -151,8 +151,11 @@ class FirebugHandlerTest extends TestCase
             $handler->write($message);
             $output = ob_get_clean();
 
-            $this->assertStringContainsString($expectedMethod, $output,
-                "Priority $priority should map to $expectedMethod");
+            $this->assertStringContainsString(
+                $expectedMethod,
+                $output,
+                "Priority $priority should map to $expectedMethod"
+            );
         }
     }
 
