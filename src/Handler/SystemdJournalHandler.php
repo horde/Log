@@ -181,6 +181,19 @@ class SystemdJournalHandler extends BaseHandler
 
         // Add context fields from the log message
         foreach ($event->context() as $key => $value) {
+            // Handle exception objects per PSR-3 specification
+            if ($key === 'exception' && $value instanceof \Throwable) {
+                // Extract exception metadata for journal fields
+                $payload .= 'EXCEPTION_CLASS=' . get_class($value) . "\n";
+                $payload .= 'EXCEPTION_MESSAGE=' . $value->getMessage() . "\n";
+                $payload .= 'EXCEPTION_CODE=' . $value->getCode() . "\n";
+                $payload .= 'EXCEPTION_FILE=' . $value->getFile() . "\n";
+                $payload .= 'EXCEPTION_LINE=' . $value->getLine() . "\n";
+
+                // Skip to next context item (exception object itself can't be serialized)
+                continue;
+            }
+
             // Convert context keys to journal field names
             $fieldName = $this->contextKeyToFieldName($key);
 

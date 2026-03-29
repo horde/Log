@@ -107,9 +107,9 @@ class Logger implements LoggerInterface
         }
 
         $data = @unserialize($data);
-        if (!is_array($data) ||
-            !isset($data[0]) ||
-            ($data[0] != self::VERSION)) {
+        if (!is_array($data)
+            || !isset($data[0])
+            || ($data[0] != self::VERSION)) {
             throw new LogException('Cache version change');
         }
 

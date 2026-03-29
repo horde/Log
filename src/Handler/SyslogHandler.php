@@ -79,8 +79,8 @@ class SyslogHandler extends BaseHandler
      */
     public function write(LogMessage $event): bool
     {
-        if (($this->options->ident !== $this->lastIdent) ||
-            ($this->options->facility !== $this->lastFacility)
+        if (($this->options->ident !== $this->lastIdent)
+            || ($this->options->facility !== $this->lastFacility)
         ) {
             $this->initializeSyslog();
         }
