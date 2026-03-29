@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface as PsrLoggerInterface;
  * See https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
  * for the full interface specification.
  *
- * @author Ralf Lang <lang@b1-systems.de>
+ * @author Ralf Lang <ralf.lang@ralf-lang.de>
  */
 interface LoggerInterface extends PsrLoggerInterface
 {

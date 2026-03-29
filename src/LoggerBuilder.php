@@ -10,7 +10,7 @@ namespace Horde\Log;
  * Use this to allow creating complex logger setups
  * from a config file or similar source.
  *
- * @author   Ralf Lang <lang@b1-systems.de>
+ * @author   Ralf Lang <ralf.lang@ralf-lang.de>
  * @category Horde
  * @license  http://www.horde.org/licenses/bsd BSD
  * @package  Log

@@ -7,7 +7,7 @@
  * exception context contains a Throwable object, and handle
  * string exceptions appropriately.
  *
- * @author     Ralf Lang <lang@b1-systems.de>
+ * @author     Ralf Lang <ralf.lang@ralf-lang.de>
  * @category   Horde
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log

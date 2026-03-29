@@ -7,7 +7,7 @@
  * 1. Full exception object in 'exception' key (PSR-3 standard)
  * 2. Exception message string in 'exception' key (legacy fallback)
  *
- * @author     Ralf Lang <lang@b1-systems.de>
+ * @author     Ralf Lang <ralf.lang@ralf-lang.de>
  * @category   Horde
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log

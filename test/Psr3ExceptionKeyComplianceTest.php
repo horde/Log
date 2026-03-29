@@ -8,7 +8,7 @@
  * - Handlers should extract stack trace from exception object
  * - 'exception_class' is NOT part of PSR-3 spec (handler-specific metadata)
  *
- * @author     Ralf Lang <lang@b1-systems.de>
+ * @author     Ralf Lang <ralf.lang@ralf-lang.de>
  * @category   Horde
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log

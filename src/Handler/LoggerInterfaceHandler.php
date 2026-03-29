@@ -3,7 +3,7 @@
 /**
  * Wrap any PSR-3 logger as a Handler for the Horde Logger
  *
- * @author     Ralf Lang <lang@b1-systems.de>
+ * @author     Ralf Lang <ralf.lang@ralf-lang.de>
  * @category   Horde
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log
@@ -23,7 +23,7 @@ use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 
 /**
- * @author     Ralf Lang <lang@b1-systems.de>
+ * @author     Ralf Lang <ralf.lang@ralf-lang.de>
  * @category   Horde
  * @license    http://www.horde.org/licenses/bsd BSD
  * @package    Log

@@ -9,7 +9,7 @@
  *
  * @category Horde
  * @package  Log
- * @author   Ralf Lang <lang@b1-systems.de>
+ * @author   Ralf Lang <ralf.lang@ralf-lang.de>
  * @license  http://www.horde.org/licenses/bsd BSD
  */
 declare(strict_types=1);
@@ -23,7 +23,7 @@ use Horde\Util\HordeString;
  *
  * @category Horde
  * @package  Log
- * @author   Ralf Lang <lang@b1-systems.de>
+ * @author   Ralf Lang <ralf.lang@ralf-lang.de>
  * @license  http://www.horde.org/licenses/bsd BSD
  */
 interface LogHandler

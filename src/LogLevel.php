@@ -9,7 +9,7 @@
  *
  * @category Horde
  * @package  Log
- * @author  Ralf Lang <lang@b1-systems.de>
+ * @author  Ralf Lang <ralf.lang@ralf-lang.de>
  * @license  http://www.horde.org/licenses/bsd BSD
  */
 declare(strict_types=1);
@@ -24,7 +24,7 @@ use Psr\Log\LogLevel as PsrLogLevel;
  *
  * @category Horde
  * @package  Log
- * @author  Ralf Lang <lang@b1-systems.de>
+ * @author  Ralf Lang <ralf.lang@ralf-lang.de>
  * @license  http://www.horde.org/licenses/bsd BSD
  */
 class LogLevel extends PsrLogLevel
