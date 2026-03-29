@@ -74,8 +74,8 @@ class Horde_Log_Handler_Syslog extends Horde_Log_Handler_Base
      */
     public function write($event)
     {
-        if (($this->_options['ident'] !== $this->_lastIdent) ||
-            ($this->_options['facility'] !== $this->_lastFacility)) {
+        if (($this->_options['ident'] !== $this->_lastIdent)
+            || ($this->_options['facility'] !== $this->_lastFacility)) {
             $this->_initializeSyslog();
         }
 

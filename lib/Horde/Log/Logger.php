@@ -110,9 +110,9 @@ class Horde_Log_Logger implements Serializable
     public function unserialize($data)
     {
         $data = @unserialize($data);
-        if (!is_array($data) ||
-            !isset($data[0]) ||
-            ($data[0] != self::VERSION)) {
+        if (!is_array($data)
+            || !isset($data[0])
+            || ($data[0] != self::VERSION)) {
             throw new Exception('Cache version change');
         }
 
@@ -131,9 +131,9 @@ class Horde_Log_Logger implements Serializable
      */
     public function __unserialize(array $data): void
     {
-        if (!is_array($data) ||
-            !isset($data[0]) ||
-            ($data[0] != self::VERSION)) {
+        if (!is_array($data)
+            || !isset($data[0])
+            || ($data[0] != self::VERSION)) {
             throw new Exception('Cache version change');
         }
 
