@@ -58,3 +58,8 @@ dependencies:
     ext:
       dom: '*'
 vendor: horde
+keywords: []
+
+quality:
+  phpstan:
+    level: 2
