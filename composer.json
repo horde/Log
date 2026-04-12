@@ -21,7 +21,7 @@
             "role": "maintainer"
         }
     ],
-    "time": "2026-03-29",
+    "time": "2026-04-12",
     "repositories": [],
     "require": {
         "php": "^8",
