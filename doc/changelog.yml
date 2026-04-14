@@ -1,4 +1,15 @@
 ---
+3.0.0-beta6:
+  api: 3.0.0-beta6
+  state:
+    release: beta
+    api: beta
+  date: 2026-04-14
+  license:
+    identifier: BSD-2-Clause
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: |-
+    feat: journald formatter for parseable, structured logging
 3.0.0-beta5:
   api: 3.0.0-beta5
   state:
