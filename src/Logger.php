@@ -126,7 +126,7 @@ class Logger implements LoggerInterface
      * </pre>.
      *
      * @param string $method  Log level name.
-     * @param string|object|stringable $params  Message to log.
+     * @param string|object|Stringable $params  Message to log.
      * @param array  $context The context for the message.
      */
     /*    public function __call($method, $params)
@@ -263,7 +263,7 @@ class Logger implements LoggerInterface
      *
      * @return void
      *
-     * @throws \Psr\Log\InvalidArgumentException
+     * @throws InvalidArgumentException
      */
     public function log(mixed $level, string|Stringable|LogMessage $message, array $context = []): void
     {

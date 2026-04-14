@@ -22,6 +22,8 @@ use Horde\Log\LogMessage;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
+use Stringable;
+use stdClass;
 
 #[CoversClass(JsonContextFormatter::class)]
 class JsonContextFormatterTest extends TestCase
@@ -122,7 +124,7 @@ class JsonContextFormatterTest extends TestCase
                 'valid_int' => 42,
                 'resource' => $stream,
                 'closure' => $closure,
-                'object' => new \stdClass(),
+                'object' => new stdClass(),
             ]
         );
         $message->formatMessage([]);
@@ -142,7 +144,7 @@ class JsonContextFormatterTest extends TestCase
 
     public function testStringableObjectsConvertedToString(): void
     {
-        $stringable = new class implements \Stringable {
+        $stringable = new class implements Stringable {
             public function __toString(): string
             {
                 return 'I am stringable';

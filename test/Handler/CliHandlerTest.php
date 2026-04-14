@@ -50,7 +50,7 @@ class CliHandlerTest extends TestCase
     public function testConstructorWithCustomFormatters(): void
     {
         $formatter = new class implements \Horde\Log\LogFormatter {
-            public function format(\Horde\Log\LogMessage $event): string
+            public function format(LogMessage $event): string
             {
                 return '[CUSTOM] ' . $event->message();
             }
@@ -65,7 +65,7 @@ class CliHandlerTest extends TestCase
      */
     public function testWriteOutputsMessage(): void
     {
-        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli = $this->createMock(Horde_Cli::class);
         $mockCli->expects($this->once())
                 ->method('writeln')
                 ->with($this->stringContains('test message'));
@@ -82,7 +82,7 @@ class CliHandlerTest extends TestCase
      */
     public function testWriteAllLogLevels(): void
     {
-        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli = $this->createMock(Horde_Cli::class);
         $mockCli->expects($this->exactly(8))
                 ->method('writeln');
 
@@ -112,13 +112,13 @@ class CliHandlerTest extends TestCase
      */
     public function testWriteWithCustomFormatter(): void
     {
-        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli = $this->createMock(Horde_Cli::class);
         $mockCli->expects($this->once())
                 ->method('writeln')
                 ->with($this->stringContains('[FORMATTED] custom message'));
 
         $formatter = new class implements \Horde\Log\LogFormatter {
-            public function format(\Horde\Log\LogMessage $event): string
+            public function format(LogMessage $event): string
             {
                 return '[FORMATTED] ' . $event->message();
             }
@@ -138,7 +138,7 @@ class CliHandlerTest extends TestCase
 
         // Add filter that rejects everything
         $filter = new class implements \Horde\Log\LogFilter {
-            public function accept(\Horde\Log\LogMessage $event): bool
+            public function accept(LogMessage $event): bool
             {
                 return false;
             }
@@ -155,7 +155,7 @@ class CliHandlerTest extends TestCase
      */
     public function testLogWithAcceptingFilter(): void
     {
-        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli = $this->createMock(Horde_Cli::class);
         $mockCli->expects($this->once())
                 ->method('writeln');
 
@@ -163,7 +163,7 @@ class CliHandlerTest extends TestCase
 
         // Add filter that accepts everything
         $filter = new class implements \Horde\Log\LogFilter {
-            public function accept(\Horde\Log\LogMessage $event): bool
+            public function accept(LogMessage $event): bool
             {
                 return true;
             }
@@ -179,7 +179,7 @@ class CliHandlerTest extends TestCase
      */
     public function testMultipleWrites(): void
     {
-        $mockCli = $this->createMock(\Horde_Cli::class);
+        $mockCli = $this->createMock(Horde_Cli::class);
         $mockCli->expects($this->exactly(5))
                 ->method('writeln');
 

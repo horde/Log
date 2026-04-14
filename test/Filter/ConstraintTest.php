@@ -24,7 +24,7 @@ use PHPUnit\Framework\TestCase;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class ConstraintTest extends TestCase
 {
     public function testFilterDoesNotAcceptWhenRequiredFieldIsMissing()

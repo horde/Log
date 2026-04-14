@@ -22,7 +22,7 @@ use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class CliFormatterTest extends TestCase
 {
     private Horde_Cli $cli;

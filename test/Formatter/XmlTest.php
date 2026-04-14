@@ -27,7 +27,7 @@ use Horde_Log_Formatter_Xml;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class XmlTest extends TestCase
 {
     public function setUp(): void

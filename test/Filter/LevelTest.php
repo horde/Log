@@ -29,7 +29,7 @@ use Horde_Log_Filter_Level;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class LevelTest extends TestCase
 {
     private Horde_Log_Filter_Level $filter;

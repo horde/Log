@@ -26,7 +26,7 @@ use InvalidArgumentException;
 use Horde_Log;
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class LoggerInterfaceHandlerTest extends TestCase
 {
     private LogLevel $level1;

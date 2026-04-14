@@ -29,7 +29,7 @@ use Horde_Log_Filter_Suppress;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class SuppressTest extends TestCase
 {
     private Horde_Log_Filter_Suppress $filter;

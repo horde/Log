@@ -33,6 +33,8 @@ use PHPUnit\Framework\Attributes\CoversNothing;
 use PHPUnit\Framework\TestCase;
 use ReflectionMethod;
 use RuntimeException;
+use ReflectionProperty;
+use Throwable;
 
 /**
  * Integration-style tests for the bootstrap error logging scenario.
@@ -284,7 +286,7 @@ class BootstrapErrorLoggingTest extends TestCase
         $this->assertEquals('error', $event->level()->name());
         $this->assertStringContainsString('DI autowiring failed', $event->message());
         $context = $event->context();
-        $this->assertInstanceOf(\Throwable::class, $context['exception']);
+        $this->assertInstanceOf(Throwable::class, $context['exception']);
         $this->assertEquals('FooController', $context['requested_class']);
         $this->assertEquals('controller_resolution', $context['bootstrap_phase']);
 
@@ -360,7 +362,7 @@ class BootstrapErrorLoggingTest extends TestCase
         $this->assertTrue($handler->write($message2));
 
         // Verify same handler is reused via reflection
-        $reflection = new \ReflectionProperty($handler, 'syslogFallbackHandler');
+        $reflection = new ReflectionProperty($handler, 'syslogFallbackHandler');
         $reflection->setAccessible(true);
         $fallbackHandler = $reflection->getValue($handler);
 
@@ -433,11 +435,11 @@ class BootstrapErrorLoggingTest extends TestCase
         $handler->write($message);
 
         // Check the fallback handler's options via reflection
-        $handlerReflection = new \ReflectionProperty($handler, 'syslogFallbackHandler');
+        $handlerReflection = new ReflectionProperty($handler, 'syslogFallbackHandler');
         $handlerReflection->setAccessible(true);
         $fallback = $handlerReflection->getValue($handler);
 
-        $optionsReflection = new \ReflectionProperty(SyslogHandler::class, 'options');
+        $optionsReflection = new ReflectionProperty(SyslogHandler::class, 'options');
         $optionsReflection->setAccessible(true);
         $syslogOpts = $optionsReflection->getValue($fallback);
 

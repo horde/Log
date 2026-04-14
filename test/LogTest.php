@@ -31,7 +31,7 @@ use Horde_Log_Logger;
  */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class LogTest extends TestCase
 {
     private $log;

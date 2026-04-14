@@ -29,7 +29,7 @@ use Horde_Log_Filter_Message;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class MessageTest extends TestCase
 {
     public function testMessageFilterRecognizesInvalidRegularExpression()

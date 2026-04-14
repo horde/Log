@@ -29,7 +29,7 @@ use Horde_Log_Handler_Null;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class NullTest extends TestCase
 {
     public function testWrite()

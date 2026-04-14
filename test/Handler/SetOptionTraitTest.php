@@ -32,7 +32,7 @@ class SetOptionsTraitImplementation
 
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class SetOptionTraitTest extends TestCase
 {
     private SetOptionsTraitImplementation $setOptionsTrait;

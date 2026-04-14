@@ -168,7 +168,7 @@ class SyslogHandlerTest extends TestCase
 
         // Add a filter that rejects everything
         $filter = new class implements \Horde\Log\LogFilter {
-            public function accept(\Horde\Log\LogMessage $event): bool
+            public function accept(LogMessage $event): bool
             {
                 return false;
             }
@@ -183,7 +183,7 @@ class SyslogHandlerTest extends TestCase
     public function testWriteWithFormatters(): void
     {
         $formatter = new class implements \Horde\Log\LogFormatter {
-            public function format(\Horde\Log\LogMessage $event): string
+            public function format(LogMessage $event): string
             {
                 return '[FORMATTED] ' . $event->message();
             }

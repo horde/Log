@@ -19,6 +19,9 @@ use Horde\Log\LogLevel;
 use Horde\Log\LogMessage;
 use TypeError;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Exception;
+use Stringable;
+use stdClass;
 
 #[CoversClass(Psr3Formatter::class)]
 class Psr3FormatterTest extends TestCase
@@ -112,7 +115,7 @@ class Psr3FormatterTest extends TestCase
 
     public function testStringableObjectsInPlaceholders(): void
     {
-        $stringable = new class implements \Stringable {
+        $stringable = new class implements Stringable {
             public function __toString(): string
             {
                 return 'stringable_value';
@@ -139,7 +142,7 @@ class Psr3FormatterTest extends TestCase
 
     public function testObjectsNotImplementingStringableIgnored(): void
     {
-        $object = new \stdClass();
+        $object = new stdClass();
         $object->property = 'value';
 
         $message = new LogMessage($this->messageLog, 'Object: {obj}');
@@ -165,7 +168,7 @@ class Psr3FormatterTest extends TestCase
         $formatter = new Psr3Formatter([
             'valid' => 'ok',
             'array' => [1, 2, 3],
-            'object' => new \stdClass(),
+            'object' => new stdClass(),
         ]);
         $formatted = $message->formatMessage([$formatter]);
 
@@ -177,7 +180,7 @@ class Psr3FormatterTest extends TestCase
     {
         // PSR-3 specifies 'exception' key should contain Exception objects
         // Exception implements Stringable, so it will be interpolated
-        $exception = new \Exception('Test error');
+        $exception = new Exception('Test error');
         $message = new LogMessage(
             $this->messageLog,
             'Error occurred: {exception}',

@@ -30,7 +30,7 @@ use Horde_Log_Formatter_Simple;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class SimpleTest extends TestCase
 {
     public function testConstructorThrowsOnBadFormatString()

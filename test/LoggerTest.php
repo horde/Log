@@ -33,6 +33,7 @@ use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde\Log\LogLevels;
 use PHPUnit\Framework\Attributes\CoversClass;
+use Throwable;
 
 #[CoversClass(Logger::class)]
 class LoggerTest extends TestCase
@@ -124,7 +125,7 @@ class LoggerTest extends TestCase
         foreach ($data as $value) {
             try {
                 $this->logging->unserialize($value);
-            } catch (\Throwable $th) {
+            } catch (Throwable $th) {
                 $count++;
                 $this->assertInstanceOf(LogException::class, $th);
             }

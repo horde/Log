@@ -30,7 +30,7 @@ use Horde_Log_Filter_ExactLevel;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class ExactLevelTest extends TestCase
 {
     private Horde_Log_Filter_ExactLevel $filter;

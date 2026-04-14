@@ -23,6 +23,7 @@ use Horde\Log\LogFormatter;
 use Horde\Log\LogHandler;
 use Horde\Log\LogMessage;
 use Horde\Log\LogException;
+use Throwable;
 
 /**
  * SystemdJournalHandler - Write logs directly to systemd journal socket
@@ -223,7 +224,7 @@ class SystemdJournalHandler extends BaseHandler
         // Add context fields from the log message
         foreach ($event->context() as $key => $value) {
             // Handle exception objects per PSR-3 specification
-            if ($key === 'exception' && $value instanceof \Throwable) {
+            if ($key === 'exception' && $value instanceof Throwable) {
                 // Extract exception metadata for journal fields
                 $payload .= 'EXCEPTION_CLASS=' . get_class($value) . "\n";
                 $payload .= 'EXCEPTION_MESSAGE=' . $value->getMessage() . "\n";

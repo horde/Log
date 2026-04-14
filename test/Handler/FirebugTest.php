@@ -31,7 +31,7 @@ use Horde_Log_Handler_Firebug;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class FirebugTest extends TestCase
 {
     public function setUp(): void

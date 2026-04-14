@@ -18,6 +18,7 @@ use Horde\Log\LogFormatter;
 use Horde_Log;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
+use stdClass;
 
 #[CoversClass(LogMessage::class)]
 class LogMessageTest extends TestCase
@@ -180,13 +181,13 @@ class LogMessageTest extends TestCase
 
     public function testContextCanContainObjects(): void
     {
-        $object = new \stdClass();
+        $object = new stdClass();
         $object->property = 'value';
 
         $message = new LogMessage($this->level, 'test message', ['object' => $object]);
         $context = $message->context();
 
-        $this->assertInstanceOf(\stdClass::class, $context['object']);
+        $this->assertInstanceOf(stdClass::class, $context['object']);
         $this->assertEquals('value', $context['object']->property);
     }
 

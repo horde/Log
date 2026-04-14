@@ -30,7 +30,7 @@ use Horde_Log;
 */
 use PHPUnit\Framework\Attributes\CoversNothing;
 
-#[coversnothing]
+#[CoversNothing]
 class StreamTest extends TestCase
 {
     public function setUp(): void
