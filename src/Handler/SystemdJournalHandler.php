@@ -79,6 +79,11 @@ class SystemdJournalHandler extends BaseHandler
     private $socket = null;
 
     /**
+     * Lazy-initialized syslog fallback handler
+     */
+    private ?SyslogHandler $syslogFallbackHandler = null;
+
+    /**
      * Class Constructor
      *
      * @param null|SystemdJournalOptions $options     Log options
@@ -109,14 +114,20 @@ class SystemdJournalHandler extends BaseHandler
     /**
      * Write a message to the systemd journal
      *
+     * When journal is unavailable and syslogFallback is enabled in options,
+     * delegates to a SyslogHandler instead of throwing LogException.
+     *
      * @param LogMessage $event  Log event
      *
      * @return bool  True on success
-     * @throws LogException If journal is not available or write fails
+     * @throws LogException If journal is not available and fallback is disabled
      */
     public function write(LogMessage $event): bool
     {
         if (!$this->isAvailable()) {
+            if ($this->options->syslogFallback) {
+                return $this->writeToSyslogFallback($event);
+            }
             throw new LogException(
                 'Systemd journal socket not available at ' . $this->options->socketPath
             );
@@ -145,6 +156,36 @@ class SystemdJournalHandler extends BaseHandler
             $error = socket_strerror(socket_last_error($this->socket));
             throw new LogException('Failed to write to journal: ' . $error);
         }
+
+        return true;
+    }
+
+    /**
+     * Delegate to the syslog fallback handler.
+     *
+     * Lazily creates a SyslogHandler with the configured fallback options
+     * and formatters. Calls log() on the fallback handler so its own
+     * formatter chain processes the message.
+     *
+     * @param LogMessage $event Log event
+     *
+     * @return bool True on success
+     */
+    private function writeToSyslogFallback(LogMessage $event): bool
+    {
+        if ($this->syslogFallbackHandler === null) {
+            $syslogOptions = $this->options->syslogOptions;
+            if ($syslogOptions === null) {
+                $syslogOptions = new SyslogOptions();
+                $syslogOptions->ident = $this->options->ident;
+            }
+            $this->syslogFallbackHandler = new SyslogHandler(
+                $syslogOptions,
+                $this->options->fallbackFormatters,
+            );
+        }
+
+        $this->syslogFallbackHandler->log($event);
 
         return true;
     }

@@ -18,6 +18,8 @@ declare(strict_types=1);
 
 namespace Horde\Log\Handler;
 
+use Horde\Log\LogFormatter;
+
 /**
  * Configuration options for SystemdJournalHandler
  *
@@ -47,4 +49,33 @@ class SystemdJournalOptions extends Options
      * @var array<string, string>
      */
     public array $additionalFields = [];
+
+    /**
+     * Fall back to syslog when journal socket is unavailable.
+     *
+     * When true, write() delegates to an internal SyslogHandler instead
+     * of throwing LogException. This is useful for environments where
+     * systemd journal may or may not be present (e.g., containers).
+     */
+    public bool $syslogFallback = false;
+
+    /**
+     * SyslogOptions for the fallback handler.
+     *
+     * If null, defaults are created using $ident as the syslog identifier.
+     */
+    public ?SyslogOptions $syslogOptions = null;
+
+    /**
+     * Formatters for the fallback SyslogHandler.
+     *
+     * Since syslog has no native structured-data support, the fallback
+     * handler typically needs formatters that serialize context into the
+     * message string (e.g., JsonContextFormatter).
+     *
+     * If empty, the fallback handler uses SyslogHandler's defaults.
+     *
+     * @var LogFormatter[]
+     */
+    public array $fallbackFormatters = [];
 }
