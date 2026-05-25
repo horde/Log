@@ -77,6 +77,11 @@ class SimpleFormatter implements LogFormatter
     {
         $output = $this->format;
         $context = $event->context();
+        if (isset($context['timestamp']) && is_numeric($context['timestamp'])) {
+            $context['timestamp'] = date('c', (int) $context['timestamp']);
+        }
+        $context['level'] = $event->level()->criticality();
+        $context['levelName'] = $event->level()->name();
         $context['message'] = $event->formattedMessage();
         foreach ($context as $name => $value) {
             $output = str_replace("%$name%", (string) $value, $output);
