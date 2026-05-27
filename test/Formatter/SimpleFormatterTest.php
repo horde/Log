@@ -15,6 +15,7 @@ namespace Horde\Log\Test\Formatter;
 use Horde\Log\Formatter\SimpleFormatter;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
+use DateTimeImmutable;
 use Horde_Log;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -58,19 +59,20 @@ class SimpleFormatterTest extends TestCase
     public function testDefaultFormatOutput(): void
     {
         $formatter = new SimpleFormatter();
-        $message = new LogMessage($this->level, 'test message', ['timestamp' => '2026-03-10T10:00:00']);
+        $ts = new DateTimeImmutable('2026-03-10T10:00:00+00:00');
+        $message = new LogMessage($this->level, 'test message', ['timestamp' => $ts]);
         $message->formatMessage([]);
 
         $output = $formatter->format($message);
 
-        $this->assertStringContainsString('2026-03-10T10:00:00', $output);
+        $this->assertStringContainsString('2026-03-10T10:00:00+00:00', $output);
         $this->assertStringContainsString('test message', $output);
     }
 
     public function testCustomFormatWithLevelName(): void
     {
-        $formatter = new SimpleFormatter('[%level%] %message%');
-        $message = new LogMessage($this->level, 'custom message', ['level' => 'info']);
+        $formatter = new SimpleFormatter('[%levelName%] %message%');
+        $message = new LogMessage($this->level, 'custom message');
         $message->formatMessage([]);
 
         $output = $formatter->format($message);
@@ -131,8 +133,21 @@ class SimpleFormatterTest extends TestCase
 
         $output = $formatter->format($message);
 
-        // Should have a timestamp (auto-added by LogMessage)
-        $this->assertMatchesRegularExpression('/\d+/', $output);
+        // Record timestamp is always ISO 8601
+        $this->assertMatchesRegularExpression('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/', $output);
+    }
+
+    public function testNumericContextTimestampDoesNotAffectFormattedDate(): void
+    {
+        $formatter = new SimpleFormatter('%timestamp% %message%');
+        $message = new LogMessage($this->level, 'test', ['timestamp' => 1716825600]);
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        // The %timestamp% placeholder shows the record's DateTimeImmutable, not the raw int
+        $this->assertMatchesRegularExpression('/\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/', $output);
+        $this->assertStringNotContainsString('1716825600', $output);
     }
 
     public function testFormatAllLogLevels(): void

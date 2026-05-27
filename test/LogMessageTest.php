@@ -15,6 +15,8 @@ namespace Horde\Log\Test;
 use Horde\Log\LogMessage;
 use Horde\Log\LogLevel;
 use Horde\Log\LogFormatter;
+use DateTimeImmutable;
+use DateTimeInterface;
 use Horde_Log;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
@@ -54,20 +56,30 @@ class LogMessageTest extends TestCase
 
     public function testConstructorAddsTimestampIfMissing(): void
     {
+        $before = new DateTimeImmutable();
         $message = new LogMessage($this->level, 'test message');
-        $context = $message->context();
+        $after = new DateTimeImmutable();
 
-        $this->assertArrayHasKey('timestamp', $context);
-        $this->assertIsInt($context['timestamp']);
+        $this->assertInstanceOf(DateTimeImmutable::class, $message->timestamp());
+        $this->assertGreaterThanOrEqual($before, $message->timestamp());
+        $this->assertLessThanOrEqual($after, $message->timestamp());
     }
 
-    public function testConstructorPreservesExistingTimestamp(): void
+    public function testConstructorPromotesDateTimeInterfaceTimestamp(): void
     {
-        $customTimestamp = 1234567890;
-        $message = new LogMessage($this->level, 'test message', ['timestamp' => $customTimestamp]);
-        $context = $message->context();
+        $dt = new DateTimeImmutable('2025-06-15T12:00:00+00:00');
+        $message = new LogMessage($this->level, 'test message', ['timestamp' => $dt]);
 
-        $this->assertEquals($customTimestamp, $context['timestamp']);
+        $this->assertEquals($dt, $message->timestamp());
+        $this->assertArrayNotHasKey('timestamp', $message->context());
+    }
+
+    public function testConstructorIgnoresNonDateTimeInterfaceTimestamp(): void
+    {
+        $message = new LogMessage($this->level, 'test message', ['timestamp' => 1716825600]);
+
+        $this->assertInstanceOf(DateTimeImmutable::class, $message->timestamp());
+        $this->assertEquals(1716825600, $message->context()['timestamp']);
     }
 
     public function testMergeContextAddsNewKeys(): void
@@ -196,8 +208,7 @@ class LogMessageTest extends TestCase
         $message = new LogMessage($this->level, 'test message', []);
         $context = $message->context();
 
-        // Should only have timestamp added automatically
-        $this->assertCount(1, $context);
-        $this->assertArrayHasKey('timestamp', $context);
+        $this->assertCount(0, $context);
+        $this->assertInstanceOf(DateTimeImmutable::class, $message->timestamp());
     }
 }

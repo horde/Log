@@ -71,7 +71,7 @@ class XmlFormatter implements LogFormatter
         $dom = new DOMDocument();
 
         $elt = $dom->appendChild(new DOMElement($this->options['elementEntry']));
-        $elt->appendChild(new DOMElement($this->options['elementTimestamp'], date('c')));
+        $elt->appendChild(new DOMElement($this->options['elementTimestamp'], $event->timestamp()->format('c')));
         $elt->appendChild(new DOMElement($this->options['elementMessage'], $message));
         $elt->appendChild(new DOMElement($this->options['elementLevel'], $level));
 
