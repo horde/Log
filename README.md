@@ -93,10 +93,32 @@ $logger->err('Authentication failed for bob');
 
 | Formatter | Legacy (lib/) | Modern (src/) | Notes |
 |-----------|---------------|---------------|-------|
-| Simple | `Horde_Log_Formatter_Simple` | `SimpleFormatter` | Basic text formatting |
-| PSR-3 | - | `Psr3Formatter` | **Modern only** - PSR-3 standard format with context |
+| Simple | `Horde_Log_Formatter_Simple` | `SimpleFormatter` | Template-based text formatting |
+| PSR-3 | - | `Psr3Formatter` | **Modern only** - PSR-3 `{placeholder}` interpolation |
+| JSON Context | - | `JsonContextFormatter` | **Modern only** - Append JSON-encoded context to message |
+| Journald | - | `JournaldContextFormatter` | **Modern only** - Systemd journal KEY=value fields |
 | XML | `Horde_Log_Formatter_Xml` | `XmlFormatter` | XML structured output |
 | CLI | `Horde_Log_Formatter_Cli` | `CliFormatter` | Colored terminal output |
+
+### Timestamps
+
+Each `LogMessage` carries a `DateTimeImmutable` record timestamp, accessible via
+`$message->timestamp()`. Formatters use this typed property directly:
+
+- `SimpleFormatter` renders `%timestamp%` as ISO 8601.
+- `XmlFormatter` writes the `<timestamp>` element from the record timestamp.
+- `JournaldContextFormatter` excludes timestamp from fields (journal adds its own).
+
+To control the record timestamp, pass a `DateTimeInterface` in context:
+
+```php
+$logger->info('Event occurred', [
+    'timestamp' => new DateTimeImmutable('2025-06-15T12:00:00Z'),
+]);
+```
+
+Non-`DateTimeInterface` values (integers, strings) in `context['timestamp']` are
+treated as opaque user data and do not affect the record time.
 
 ## Upgrading
 

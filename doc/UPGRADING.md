@@ -1,5 +1,55 @@
 # Upgrading Horde Log
 
+## Upgrading from 3.0.0-beta6
+
+### Timestamp is now a first-class DateTimeImmutable property
+
+`LogMessage` no longer stores the timestamp as a unix integer in the context array.
+Instead it holds a typed `DateTimeImmutable` property accessible via `$event->timestamp()`.
+
+**What changed:**
+
+- If you pass `context['timestamp']` as a `DateTimeInterface`, it is promoted to the
+  record timestamp and removed from context.
+- Any other type (int, string) stays in context as user data but does not affect
+  the record timestamp. A fresh `DateTimeImmutable` is generated automatically.
+- `SimpleFormatter` always renders `%timestamp%` as ISO 8601 from the record property.
+- `XmlFormatter` uses the record timestamp instead of generating a new one at format time.
+
+**Before:**
+```php
+// Timestamp was a unix int in context
+$msg = new LogMessage($level, 'hello');
+$msg->context()['timestamp']; // 1716825600 (int)
+```
+
+**After:**
+```php
+use DateTimeImmutable;
+
+// Record timestamp is a typed property
+$msg = new LogMessage($level, 'hello');
+$msg->timestamp(); // DateTimeImmutable
+
+// Pass a DateTimeInterface to control the record time
+$msg = new LogMessage($level, 'hello', [
+    'timestamp' => new DateTimeImmutable('2025-06-15T12:00:00Z'),
+]);
+$msg->timestamp()->format('c'); // "2025-06-15T12:00:00+00:00"
+
+// Non-DateTimeInterface values stay in context as user data
+$msg = new LogMessage($level, 'hello', ['timestamp' => 1716825600]);
+$msg->context()['timestamp']; // 1716825600 (unchanged)
+$msg->timestamp();            // auto-generated DateTimeImmutable (current time)
+```
+
+**If you relied on `context['timestamp']` being an integer:**
+
+Replace `$event->context()['timestamp']` with `$event->timestamp()->getTimestamp()`
+for a unix integer, or `$event->timestamp()->format('c')` for ISO 8601.
+
+---
+
 ## Upgrading from Horde_Log_Logger
 
 The PSR-0 legacy API (`Horde_Log_*` in `lib/`) remains fully functional for now but is in bugfix-only mode.

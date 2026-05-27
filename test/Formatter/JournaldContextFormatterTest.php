@@ -185,7 +185,9 @@ class JournaldContextFormatterTest extends TestCase
         $message = new LogMessage(
             $this->errorLevel,
             'Test',
-            ['callback' => function () { return 'x'; }, 'valid' => 'yes'],
+            ['callback' => function () {
+                return 'x';
+            }, 'valid' => 'yes'],
         );
         $message->formatMessage([]);
 
