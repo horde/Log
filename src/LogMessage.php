@@ -16,6 +16,8 @@ declare(strict_types=1);
 
 namespace Horde\Log;
 
+use DateTimeImmutable;
+use DateTimeInterface;
 use Horde\Util\HordeString;
 use Stringable;
 
@@ -31,6 +33,7 @@ class LogMessage implements Stringable
 {
     private string $message;
     private LogLevel $level;
+    private DateTimeImmutable $timestamp;
     /**
      * Context may be a hash of anything, but only primitives and Stringables are expanded.
      *
@@ -50,11 +53,13 @@ class LogMessage implements Stringable
     {
         $this->message = $message;
         $this->level = $level;
-        $this->context = $context;
-        // We cannot safely assume timestamp is any specific format
-        if (!isset($this->context['timestamp'])) {
-            $this->context['timestamp'] = time();
+        if (isset($context['timestamp']) && $context['timestamp'] instanceof DateTimeInterface) {
+            $this->timestamp = DateTimeImmutable::createFromInterface($context['timestamp']);
+            unset($context['timestamp']);
+        } else {
+            $this->timestamp = new DateTimeImmutable();
         }
+        $this->context = $context;
     }
 
     /**
@@ -118,6 +123,11 @@ class LogMessage implements Stringable
     public function level(): LogLevel
     {
         return $this->level;
+    }
+
+    public function timestamp(): DateTimeImmutable
+    {
+        return $this->timestamp;
     }
 
     public function __toString(): string
