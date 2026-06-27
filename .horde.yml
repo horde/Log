@@ -7,20 +7,17 @@ list: dev
 type: library
 homepage: https://www.horde.org/libraries/Horde_Log
 authors:
-  -
-    name: Mike Naberezny
+  - name: Mike Naberezny
     user: mnaberez
     email: mike@maintainable.com
     active: false
     role: lead
-  -
-    name: Chuck Hagenbuch
+  - name: Chuck Hagenbuch
     user: chuck
     email: chuck@horde.org
     active: false
     role: lead
-  -
-    name: Ralf Lang
+  - name: Ralf Lang
     user: rlang
     email: ralf.lang@ralf-lang.de
     active: true
@@ -62,3 +59,104 @@ keywords: []
 quality:
   phpstan:
     level: 2
+ci-platform:
+  '8.0':
+    - php: ^8.1
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-phar
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.1':
+    - php: ^8.1
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-phar
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.2':
+    - php: ^8.1
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-phar
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.3':
+    - php: ^8.1
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-phar
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.4':
+    - php: ^8.1
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-phar
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.5':
+    - php: ^8.1
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-phar
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+  '8.6':
+    - php: ^8.1
+    - ext-ctype
+    - ext-dom
+    - ext-filter
+    - ext-hash
+    - ext-iconv
+    - ext-json
+    - ext-libxml
+    - ext-mbstring
+    - ext-phar
+    - ext-tokenizer
+    - ext-xml
+    - ext-xmlwriter
+ci-platform-flags:
+  needs_installer_plugin: false
