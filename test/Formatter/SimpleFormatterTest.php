@@ -241,4 +241,19 @@ class SimpleFormatterTest extends TestCase
         // Should convert boolean to string
         $this->assertStringContainsString('Value: 1', $output);
     }
+
+    public function testFormatWithArrayContextValueDoesNotWarn(): void
+    {
+        $formatter = new SimpleFormatter('Extra: %extra%');
+        $message = new LogMessage(
+            $this->level,
+            'test',
+            ['extra' => ['foo' => 'bar']]
+        );
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        $this->assertStringContainsString('Extra: {"foo":"bar"}', $output);
+    }
 }
