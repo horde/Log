@@ -82,6 +82,9 @@ class SimpleFormatter implements LogFormatter
         $context['levelName'] = $event->level()->name();
         $context['message'] = $event->formattedMessage();
         foreach ($context as $name => $value) {
+            if (is_array($value) || is_object($value)) {
+                $value = json_encode($value);
+            }
             $output = str_replace("%$name%", (string) $value, $output);
         }
         return $output;
