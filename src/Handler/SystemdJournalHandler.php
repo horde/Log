@@ -73,11 +73,14 @@ class SystemdJournalHandler extends BaseHandler
     protected SystemdJournalOptions $options;
 
     /**
-     * Socket resource for journal communication
+     * Socket for journal communication. `null` before the first
+     * successful `write()`; a live `\Socket` afterwards. PHP 8+
+     * models the AF_UNIX/SOCK_DGRAM handle as a `\Socket` object
+     * rather than the pre-8.0 `resource`.
      *
-     * @var resource|null
+     * @var \Socket|null
      */
-    private $socket = null;
+    private ?\Socket $socket = null;
 
     /**
      * Lazy-initialized syslog fallback handler
@@ -136,17 +139,17 @@ class SystemdJournalHandler extends BaseHandler
 
         // Lazy socket initialization
         if ($this->socket === null) {
-            $this->socket = socket_create(AF_UNIX, SOCK_DGRAM, 0);
-            if ($this->socket === false) {
+            $socket = socket_create(AF_UNIX, SOCK_DGRAM, 0);
+            if ($socket === false) {
                 throw new LogException('Failed to create socket: ' . socket_strerror(socket_last_error()));
             }
 
-            if (!socket_connect($this->socket, $this->options->socketPath)) {
-                $error = socket_strerror(socket_last_error($this->socket));
-                socket_close($this->socket);
-                $this->socket = null;
+            if (!socket_connect($socket, $this->options->socketPath)) {
+                $error = socket_strerror(socket_last_error($socket));
+                socket_close($socket);
                 throw new LogException('Failed to connect to journal socket: ' . $error);
             }
+            $this->socket = $socket;
         }
 
         // Build message payload in systemd journal format
