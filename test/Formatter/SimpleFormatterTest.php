@@ -20,6 +20,9 @@ use Horde_Log;
 use PHPUnit\Framework\TestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use InvalidArgumentException;
+use RuntimeException;
+use Stringable;
+use stdClass;
 
 #[CoversClass(SimpleFormatter::class)]
 class SimpleFormatterTest extends TestCase
@@ -255,5 +258,173 @@ class SimpleFormatterTest extends TestCase
         $output = $formatter->format($message);
 
         $this->assertStringContainsString('Extra: {"foo":"bar"}', $output);
+    }
+
+    public function testUnreferencedArrayContextDoesNotWarn(): void
+    {
+        // Regression for the imp#88 scenario: the *template* only
+        // renders %message%, but the caller carries additional array
+        // context (e.g. structured `exception` details). The
+        // unreferenced entry must not cast-to-string, or PHP emits an
+        // "Array to string conversion" warning while the log line is
+        // being written.
+        $formatter = new SimpleFormatter('%message%');
+        $message = new LogMessage(
+            $this->level,
+            'Login failure',
+            [
+                // Deliberately non-scalar and not referenced by the
+                // template. The pre-fix code path would still cast it.
+                'attempt' => ['user' => 'jan', 'ip' => '10.0.0.1'],
+                'extras' => (object) ['a' => 1],
+            ]
+        );
+        $message->formatMessage([]);
+
+        // Fail if a warning is emitted while formatting.
+        set_error_handler(static function (int $errno, string $errstr): bool {
+            throw new RuntimeException(
+                sprintf('Unexpected PHP notice/warning during format(): [%d] %s', $errno, $errstr),
+            );
+        }, E_WARNING | E_NOTICE);
+        try {
+            $output = $formatter->format($message);
+        } finally {
+            restore_error_handler();
+        }
+
+        $this->assertStringContainsString('Login failure', $output);
+        // Unreferenced placeholders were never in the template — they
+        // do not appear in the output.
+        $this->assertStringNotContainsString('attempt', $output);
+        $this->assertStringNotContainsString('extras', $output);
+    }
+
+    public function testFormatWithReferencedExceptionRendersHumanReadable(): void
+    {
+        // The PSR-3 reserved 'exception' key is rendered via a
+        // dedicated Throwable-aware path, so a template referencing
+        // %exception% gets a readable summary rather than either a
+        // json_encode() of the object graph or the raw
+        // Throwable::__toString() (which drops the class and code).
+        $formatter = new SimpleFormatter('%message%: %exception%');
+        $ex = new RuntimeException('boom', 42);
+        $message = new LogMessage(
+            $this->level,
+            'operation failed',
+            ['exception' => $ex]
+        );
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        $this->assertStringContainsString('operation failed:', $output);
+        $this->assertStringContainsString('RuntimeException(42): boom at ', $output);
+        $this->assertStringContainsString(__FILE__, $output);
+    }
+
+    public function testFormatWithReferencedExceptionKeyNotThrowableFallsBack(): void
+    {
+        // PSR-3 says the 'exception' key MAY still contain non-Throwable
+        // values (leniency). When it does, the formatter must fall
+        // through to the generic stringify path — not throw, and not
+        // try to call Throwable methods on the value.
+        $formatter = new SimpleFormatter('exc=%exception%');
+        $message = new LogMessage(
+            $this->level,
+            'test',
+            ['exception' => ['not' => 'a throwable']]
+        );
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        $this->assertStringContainsString('exc={"not":"a throwable"}', $output);
+    }
+
+    public function testFormatWithStringableObjectContext(): void
+    {
+        $formatter = new SimpleFormatter('val=%val%');
+        $stringable = new class implements Stringable {
+            public function __toString(): string
+            {
+                return 'stringable-value';
+            }
+        };
+        $message = new LogMessage($this->level, 'test', ['val' => $stringable]);
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        $this->assertStringContainsString('val=stringable-value', $output);
+    }
+
+    public function testFormatWithNonStringableObjectContext(): void
+    {
+        // A plain object without __toString() is not treated as an
+        // array (per the user's design decision: JSON only for true
+        // arrays; objects go through the Stringable-or-fallback path).
+        // The rendering is a safe type marker, matching Symfony's
+        // HttpKernel Logger convention.
+        $formatter = new SimpleFormatter('val=%val%');
+        $obj = new stdClass();
+        $obj->foo = 'bar';
+        $message = new LogMessage($this->level, 'test', ['val' => $obj]);
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        $this->assertStringContainsString('val=[object stdClass]', $output);
+    }
+
+    public function testFormatWithResourceContext(): void
+    {
+        $formatter = new SimpleFormatter('val=%val%');
+        $resource = fopen('php://memory', 'r');
+        $this->assertIsResource($resource);
+        $message = new LogMessage($this->level, 'test', ['val' => $resource]);
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+        fclose($resource);
+
+        $this->assertMatchesRegularExpression('/val=\[resource\([^)]+\)\]/', $output);
+    }
+
+    public function testFormatWithNullContextValue(): void
+    {
+        $formatter = new SimpleFormatter('before[%val%]after');
+        $message = new LogMessage($this->level, 'test', ['val' => null]);
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        $this->assertStringContainsString('before[]after', $output);
+    }
+
+    public function testFormatIgnoresLiteralPercentPairsWithoutPlaceholderName(): void
+    {
+        // A `%%` pair (or any %<non-identifier>% sequence) must be
+        // left alone — the regex only matches identifiers.
+        $formatter = new SimpleFormatter('100%% done: %message%');
+        $message = new LogMessage($this->level, 'ok');
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        $this->assertStringContainsString('100%% done: ok', $output);
+    }
+
+    public function testFormatWithRepeatedPlaceholder(): void
+    {
+        // The same %name% appearing twice in the template both get
+        // substituted with the same value.
+        $formatter = new SimpleFormatter('%message%/%message%');
+        $message = new LogMessage($this->level, 'hi');
+        $message->formatMessage([]);
+
+        $output = $formatter->format($message);
+
+        $this->assertStringContainsString('hi/hi', $output);
     }
 }
