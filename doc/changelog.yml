@@ -1,4 +1,14 @@
 ---
+3.0.1:
+  api: 3.0.1
+  state:
+    release: stable
+    api: stable
+  date: 2026-07-18
+  license:
+    identifier: BSD-2-Clause
+    uri: https://spdx.org/licenses/BSD-2-Clause.html
+  notes: "fix(log): type SystemdJournalHandler::$socket as \\Socket for PHP 8+\nfix(log): only stringify context values that the template references\nfix(log): avoid Array to string conversion warning in SimpleFormatter"
 3.0.0:
   api: 3.0.0
   state:
